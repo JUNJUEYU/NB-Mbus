@@ -1,11 +1,11 @@
 /*
 *********************************************************************************************************
 *
-*	ģ������ : �����ж�+FIFO����ģ��
-*	�ļ����� : bsp_uart_fifo.h
-*	˵    �� : ͷ�ļ�
+*	妯″潡鍚嶇О : 涓插彛涓柇+FIFO椹卞姩妯″潡
+*	鏂囦欢鍚嶇О : bsp_uart_fifo.h
+*	璇�    鏄� : 澶存枃浠�
 *
-*	Copyright (C), 2015-2020, ���������� www.armfly.com
+*	Copyright (C), 2015-2020, 瀹夊瘜鑾辩數瀛� www.armfly.com
 *
 *********************************************************************************************************
 */
@@ -14,21 +14,21 @@
 #define _BSP_USART_FIFO_H_
 
 /*
-	�����Ҫ���Ĵ��ڶ�Ӧ�Ĺܽţ��������޸� bsp_uart_fifo.c�ļ��е� static void InitHardUart(void)����
+	濡傛灉闇€瑕佹洿鏀逛覆鍙ｅ搴旂殑绠¤剼锛岃鑷淇敼 bsp_uart_fifo.c鏂囦欢涓殑 static void InitHardUart(void)鍑芥暟
 */
 
 
 /*
-    ������STM32-V5 ���ڷ��䣺
-    ������1�� RS232 оƬ��1·��
-        PB6/USART1_TX	  --- ��ӡ���Կ�
+    瀹夊瘜鑾盨TM32-V5 涓插彛鍒嗛厤锛�
+    銆愪覆鍙�1銆� RS232 鑺墖绗�1璺€�
+        PB6/USART1_TX	  --- 鎵撳嵃璋冭瘯鍙�
         PB7/USART1_RX
 
-    ������2�� PA2 �ܽ�������̫���� RX�ܽ����ڽ���GPS�ź�
+    銆愪覆鍙�2銆� PA2 绠¤剼鐢ㄤ簬浠ュお缃戯紱 RX绠¤剼鐢ㄤ簬鎺ユ敹GPS淇″彿
         PA2/USART2_TX   
-        PA3/USART2_RX	;��GPSģ�����
+        PA3/USART2_RX	;鎺PS妯″潡杈撳嚭
 
-    ������3�� RS485 ͨ�� - TTL ���� �� ����
+    銆愪覆鍙�3銆� RS485 閫氫俊 - TTL 璺崇嚎 鍜� 鎺掗拡
         PB10/USART3_TX
         PB11/USART3_RX
 */
@@ -40,7 +40,7 @@
 #define	UART5_FIFO_EN	0
 #define	UART6_FIFO_EN	0
 
-/* RS485оƬ����ʹ��GPIO, PB2 */
+/* RS485鑺墖鍙戦€佷娇鑳紾PIO, PB2 */
 #define RCC_RS485_TXEN      RCC_AHBPeriph_GPIOB
 #define PORT_RS485_TXEN     GPIOB
 #define PIN_RS485_TXEN	    GPIO_Pin_0
@@ -49,18 +49,18 @@
 #define RS485_TX_EN()	    PORT_RS485_TXEN->BSRRL = PIN_RS485_TXEN
 
 
-/* ����˿ں� */
+/* 瀹氫箟绔彛鍙� */
 typedef enum
 {
-	COM1 = 0,	/* USART1  PA9, PA10 ��  PB6, PB7*/
-	COM2 = 1,	/* USART2, PD5,PD6 �� PA2, PA3 */
+	COM1 = 0,	/* USART1  PA9, PA10 鎴�  PB6, PB7*/
+	COM2 = 1,	/* USART2, PD5,PD6 鎴� PA2, PA3 */
 	COM3 = 2,	/* USART3, PB10, PB11 */
 	COM4 = 3,	/* UART4, PC10, PC11 */
 	COM5 = 4,	/* UART5, PC12, PD2 */
 	COM6 = 5	/* USART6, PC6, PC7 */
 }COM_PORT_E;
 
-/* ���崮�ڲ����ʺ�FIFO��������С����Ϊ���ͻ������ͽ��ջ�����, ֧��ȫ˫�� */
+/* 瀹氫箟涓插彛娉㈢壒鐜囧拰FIFO缂撳啿鍖哄ぇ灏忥紝鍒嗕负鍙戦€佺紦鍐插尯鍜屾帴鏀剁紦鍐插尯, 鏀寔鍏ㄥ弻宸� */
 #if UART1_FIFO_EN == 1
 	#define UART1_BAUD			2400
 	#define UART1_TX_BUF_SIZE	1*512
@@ -97,25 +97,25 @@ typedef enum
 	#define UART6_RX_BUF_SIZE	1*1024
 #endif
 
-/* �����豸�ṹ�� */
+/* 涓插彛璁惧缁撴瀯浣� */
 typedef struct
 {
-	USART_TypeDef *uart;		/* STM32�ڲ������豸ָ�� */
-	uint8_t *pTxBuf;			/* ���ͻ����� */
-	uint8_t *pRxBuf;			/* ���ջ����� */
-	uint16_t usTxBufSize;		/* ���ͻ�������С */
-	uint16_t usRxBufSize;		/* ���ջ�������С */
-	__IO uint16_t usTxWrite;	/* ���ͻ�����дָ�� */
-	__IO uint16_t usTxRead;		/* ���ͻ�������ָ�� */
-	__IO uint16_t usTxCount;	/* �ȴ����͵����ݸ��� */
+	USART_TypeDef *uart;		/* STM32鍐呴儴涓插彛璁惧鎸囬拡 */
+	uint8_t *pTxBuf;			/* 鍙戦€佺紦鍐插尯 */
+	uint8_t *pRxBuf;			/* 鎺ユ敹缂撳啿鍖� */
+	uint16_t usTxBufSize;		/* 鍙戦€佺紦鍐插尯澶у皬 */
+	uint16_t usRxBufSize;		/* 鎺ユ敹缂撳啿鍖哄ぇ灏� */
+	__IO uint16_t usTxWrite;	/* 鍙戦€佺紦鍐插尯鍐欐寚閽� */
+	__IO uint16_t usTxRead;		/* 鍙戦€佺紦鍐插尯璇绘寚閽� */
+	__IO uint16_t usTxCount;	/* 绛夊緟鍙戦€佺殑鏁版嵁涓暟 */
 
-	__IO uint16_t usRxWrite;	/* ���ջ�����дָ�� */
-	__IO uint16_t usRxRead;		/* ���ջ�������ָ�� */
-	__IO uint16_t usRxCount;	/* ��δ��ȡ�������ݸ��� */
+	__IO uint16_t usRxWrite;	/* 鎺ユ敹缂撳啿鍖哄啓鎸囬拡 */
+	__IO uint16_t usRxRead;		/* 鎺ユ敹缂撳啿鍖鸿鎸囬拡 */
+	__IO uint16_t usRxCount;	/* 杩樻湭璇诲彇鐨勬柊鏁版嵁涓暟 */
 
-	void (*SendBefor)(void); 	/* ��ʼ����֮ǰ�Ļص�����ָ�루��Ҫ����RS485�л�������ģʽ�� */
-	void (*SendOver)(void); 	/* ������ϵĻص�����ָ�루��Ҫ����RS485������ģʽ�л�Ϊ����ģʽ�� */
-	void (*ReciveNew)(uint8_t _byte);	/* �����յ����ݵĻص�����ָ�� */
+	void (*SendBefor)(void); 	/* 寮€濮嬪彂閫佷箣鍓嶇殑鍥炶皟鍑芥暟鎸囬拡锛堜富瑕佺敤浜嶳S485鍒囨崲鍒板彂閫佹ā寮忥級 */
+	void (*SendOver)(void); 	/* 鍙戦€佸畬姣曠殑鍥炶皟鍑芥暟鎸囬拡锛堜富瑕佺敤浜嶳S485灏嗗彂閫佹ā寮忓垏鎹负鎺ユ敹妯″紡锛� */
+	void (*ReciveNew)(uint8_t _byte);	/* 涓插彛鏀跺埌鏁版嵁鐨勫洖璋冨嚱鏁版寚閽� */
 }UART_T;
 
 void bsp_InitUart(void);
@@ -135,7 +135,7 @@ void RS485_SetBaud(uint32_t _baud);
 
 //--------------------------------------------------//
 /*
-wubo:��ӵ�3������
+wubo:鍚庡姞鐨�3涓嚱鏁�
 */
 void UartTxd(uint8_t *pch,uint16_t n);
 
@@ -145,4 +145,4 @@ uint16_t comMemCpy(COM_PORT_E _ucPort,uint8_t *_pByte);
 //--------------------------------------------------//
 #endif
 
-/***************************** ���������� www.armfly.com (END OF FILE) *********************************/
+/***************************** 瀹夊瘜鑾辩數瀛� www.armfly.com (END OF FILE) *********************************/

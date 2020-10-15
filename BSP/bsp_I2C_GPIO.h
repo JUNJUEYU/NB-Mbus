@@ -2,7 +2,7 @@
 *********************************************************************************************************
 *                                    STM32F4 Driver Platform
 *
-*                             (c) Copyright 2015; À³¿Ë¿Æ¼¼·¢Õ¹ÓĞÏŞ¹«Ë¾
+*                             (c) Copyright 2015; é‘¾åå ç»‰æˆå¦§é™æˆçéˆå¤æªºéî„€å¾ƒ
 *
 *                   All rights reserved.  Protected by international copyright laws.
 *                   Knowledge of the source code may not be used to write a similar
@@ -28,8 +28,8 @@
 
 #include <stdint.h>
 
-#define I2C_WR	0		/* Ğ´¿ØÖÆbit */
-#define I2C_RD	1		/* ¶Á¿ØÖÆbit */
+#define I2C_WR	0		/* éæ¬å¸¶é’ç¦¸it */
+#define I2C_RD	1		/* ç’‡ç»˜å¸¶é’ç¦¸it */
 
 void bsp_InitI2C(void);
 void i2C_Reset(void);
