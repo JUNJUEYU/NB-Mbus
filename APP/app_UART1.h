@@ -23,11 +23,11 @@
 // ?NB???
 typedef struct 
 {   
-    uint8_t     m1Head;     // Í·  
-    uint8_t     m1Len;      // ³¤¶È   
+    uint8_t     m1Head;     // å¤´  
+    uint8_t     m1Len;      // é•¿åº¦   
     
-    uint8_t     m1Cmd;      // ÃüÁî×Ö      
-    uint8_t     m1Check;    // Ğ£ÑéºÍ
+    uint8_t     m1Cmd;      // å‘½ä»¤å­—      
+    uint8_t     m1Check;    // æ ¡éªŒå’Œ
 }STUPARARD;
 
 
@@ -35,25 +35,25 @@ typedef struct
 #pragma pack (1)					                    // ????	
 typedef struct
 {
-    uint8_t     mu1Head;	//Í·
-    uint8_t     mu1Len;  	//³¤¶È
+    uint8_t     mu1Head;	//å¤´
+    uint8_t     mu1Len;  	//é•¿åº¦
 //----------------------------------//    
     uint8_t		IP_ADDR[4];		    // IP         
-    uint16_t    mu2Port;            // ¶Ë¿ÚºÅ    
+    uint16_t    mu2Port;            // ç«¯å£å·    
 //----------------------------------//----------------------//8bytes       
-    uint8_t     mu1Imsi[8];         // SIM¿¨ºÅ
+    uint8_t     mu1Imsi[8];         // SIMå¡å·
 //----------------------------------//----------------------//16bytes           
     uint32_t    mu4NbID;           // nbID
     uint16_t    mu2DtuID;         // DTUID
-    uint16_t    mu2CjbID;          // ²É¼¯°åID
+    uint16_t    mu2CjbID;          // é‡‡é›†æ¿ID
  //----------------------------------//----------------------//
-	uint8_t	   mu1FlowMax;		//×î´óË®±íÊı
-    uint8_t     mu1FlowAddr[70];         // Ë®±íµØÖ·
+	uint8_t	   mu1FlowMax;		//æœ€å¤§æ°´è¡¨æ•°
+    uint8_t     mu1FlowAddr[70];         // æ°´è¡¨åœ°å€
 //----------------------------------//----------------------//28bytes          
-    uint8_t     mu1Type;            // Ë®±íÀàĞÍ
-    uint8_t     mu1TxMax;           // ×î´ó´«Êä´ÎÊı    
-    uint8_t     mu1Csq;             // CSQÖµ
-    uint8_t     mu1Check; 	        // Ğ£ÑéºÍ---------------//32bytes     
+    uint8_t     mu1Type;            // æ°´è¡¨ç±»å‹
+    uint8_t     mu1TxMax;           // æœ€å¤§ä¼ è¾“æ¬¡æ•°    
+    uint8_t     mu1Csq;             // CSQå€¼
+    uint8_t     mu1Check; 	        // æ ¡éªŒå’Œ---------------//32bytes     
 }STUNBSET;
 #pragma pack ()
 

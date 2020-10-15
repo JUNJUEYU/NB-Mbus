@@ -119,7 +119,7 @@ int main( void )
     Delay_ms(200);                     
     
 	InitUserConfig();
-    // gstuMbusFlowData.flow_addr[1][0] = 0X10;
+    gstuMbusFlowData.flow_addr[1][0] = 0X10;
 	LED_ON();
 	          
     gstuFlag.mbAlmF = 1;                //闹钟唤醒标志
@@ -215,7 +215,7 @@ int main( void )
 			else if(gstuFlag.mbWorkF == IDLING)	//系统空闲
 			{
 				gu2IdlCnt += 1;
-				if(gu2IdlCnt > 100)					//空闲超时，进入睡眠
+				if(gu2IdlCnt > 100)				   //空闲超时，进入睡眠
 				{
 					gu2IdlCnt = 0;
 					gstuFlag.mbWorkF = SLEEP;

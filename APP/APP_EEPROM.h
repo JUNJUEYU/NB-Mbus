@@ -4,25 +4,59 @@
 #include "stm32l1xx.h"
 
 
+#define     DEF_TR_CNT              (24)        // ??x??,??NB????
+#define     DEF_DEV_ID              (1)         // RS485_????
 
-#define DEF_WM_NUM              (190923001UL) 
-#define DEF_DTU_ID              (9200UL)
-#define DEF_TR_CNT              (6)             // 间隔6小时，通过NB上传一次
+#define     IP_DEF_0                (192)
+#define     IP_DEF_1                (168)
+#define     IP_DEF_2                (110)
+#define     IP_DEF_3                (60)
 
+#if 0
+#define     DEF_DTU_ID              (9200)      // ???
+#define     PORT_DEF                (8112)      // ????
+#else
+#define     DEF_WM_NUM              (180808001) // ???
+#define     PORT_DEF                (8111)      // ????
+#endif
+#define     MARK_CODE               0x55
+//----------------------------------------------------------------------------//
+#define     ADDR_START              (0)         // ????
+
+#define     ADDR_PAGE0              (ADDR_START + 0x00)     
+#define     ADDR_PAGE4              (ADDR_START + 0x400)
+
+#define     ADDR_PAGE1              (ADDR_START + 0x100)     
+#define     ADDR_PAGE5              (ADDR_START + 0x500)
+
+#define     ADDR_PAGE2              (ADDR_START + 0x200)     
+#define     ADDR_PAGE6              (ADDR_START + 0x600)
+
+#define     ADDR_PAGE3              (ADDR_START + 0x300)
+#define     ADDR_PAGE7              (ADDR_START + 0x700)     
+//----------------------------------------------------------------------------//    
+#define     RCRD_ADR2               (2*1024)     
+#define     RCRD_ADR3               (3*1024)     
+#define     RCRD_ADR4               (4*1024)     
+#define     RCRD_ADR5               (5*1024)     
+#define     RCRD_ADR6               (6*1024)     
+#define     RCRD_ADR7               (7*1024)  
+//----------------------------------------------------------------------------//
 
 /*
-水表累计流量
+??????
 */
-#pragma pack (1)					                    // 字节对齐		
-typedef struct                                        // 单位0.01
+#pragma pack (1)					                    // ????		
+typedef struct                                        // ??0.01
 {                        
-      uint32_t  mu4TotVal;                              // 累计水量 
-      uint32_t  mu4Pulse1;                              // 1#脉冲值
-      uint32_t  mu4Pulse2;                              // 2#脉冲值
-      //-------------------------------------------------------//  8 bytes   
-      uint8_t   mu1Rsv[2];                              // 保留字节
-      uint8_t   mu1Check;                               // 校验           
-      uint8_t   mu1Mark;                                // 标注(放在最后，才能说明flash写完了)
+      uint32_t  mu4TotVal;                              // ???? 
+      uint32_t  mu4Pulse1;                              // 1#???
+      uint32_t  mu4Pulse2;                              // 2#???
+      //---------------------------------------------   ----------//  8 bytes   
+      uint8_t   mu1Err;                                 // ????
+      uint8_t   mu1Rsv;                                 // ????
+      uint8_t   mu1Check;                               // ??           
+      uint8_t   mu1Mark;                                // ??(????,????flash???)
       //-------------------------------------------------------//  16 bytes   
 }STRWMTOT;
 #pragma pack ()
@@ -31,50 +65,50 @@ typedef struct                                        // 单位0.01
 
 
 /*
-水表参数设置
+??????
 */
-#pragma pack (1)					// 字节对齐		
+#pragma pack (1)					                    // �ֽڶ���		
 typedef struct 
-{             
-    uint8_t   mu1Rf_Chn;                              // 信道:1~40      
-    uint8_t   mu1Rf_Frq;                              // 频段:1~4
-    uint8_t   mu1Rf_Bps;                              // 速率:0~9
-    uint8_t   mu1Rf_Pow;                              // 功率:0~7
-    //-------------------------------------------------------//       
-    uint32_t  mu4InitVal;                             // 初始水量      
-    uint32_t  mu4Net_Id;                              // 网络ID     
-    //-------------------------------------------------------//  12 bytes
-    uint32_t  mu4DtuId;                               // dtu_id  
-    uint32_t  mu4WaterNum;                            // 9位水表序号（占用4个字节）      
-
-    uint8_t   mu1Tr_Cnt;                              // 传输时钟间隔计数
-    uint8_t   mu1Tr_Ho;                               // 传输时间(时钟)
-    uint8_t   mu1Tr_Mi;                               // 传输时间(分钟)
-    uint8_t   mu1Tr_Se;                               // 传输时间(秒钟)
-    //-------------------------------------------------------//  24 bytes
-    uint32_t    mu4Rsv[4];                              // 保留
-    //-------------------------------------------------------//  40bytes 
-    uint32_t  mu4TotVal;                              // 水表指针流量             // 只读参数
-    uint32_t  mu4Pulse1;                              // 1#脉冲值
-    uint32_t  mu4Pulse2;                              // 2#脉冲值
-    //-------------------------------------------------------//
-    uint8_t   mu1Rsv[2];                              // 保留字节
-    uint8_t   mu1Check;                               // 校验           
-    uint8_t   mu1Mark;                                // 标注(放在最后，才能说明flash写完了)
-    //-------------------------------------------------------//  56 bytes   
+{       
+    //-------------------------------------------------------// 		
+    uint8_t   mu1Tr_Cnt;                               // ����ʱ�Ӽ������
+    uint8_t   mu1Tr_Ho;                                // ����ʱ�䣨hour��
+    uint8_t   mu1Tr_Mi;                                // ����ʱ�䣨min��
+    uint8_t   mu1Tr_Se;                               // ����ʱ�䣨sec��
+	//-------------------------------------------------------// 	
+	uint16_t  mu2DtuID;                              //DTUID
+    uint16_t  mu2CjbID;                              //CJBID
+    //-------------------------------------------------------//      
+    uint8_t	  IP_ADDR[4];		                   // ip         
+    uint16_t  mu2Port;                                // �˿ں�
+#if 0	
+    //-------------------------------------------------------//    
+    uint8_t   mu1FlowAddr[70];					   //ˮ����ַ
+	//-------------------------------------------------------// 
+#endif
+	uint8_t   mu1TxMax;                             //��������
+	//-------------------------------------------------------// 
+	uint8_t   mu1Check;                              //�ۼӺ�
+    //-------------------------------------------------------//    
+	uint8_t   mu1Mark;								   //��ɱ�־
 }STRWMPARA;
-#pragma pack ()
+#pragma pack ()                                      //Ĭ�϶���
 
 
 
-extern uint32_t                 gu4Pulse1;
-extern uint32_t                 gu4Pulse2;
+extern STRWMTOT                 gstuWmTot;              // ????
+extern STRWMPARA                gstuWmPara;             // ????
 
-extern STRWMTOT                 gstuWmTot;              // 累计流量
-extern STRWMPARA                gstuWmPara;             // 水表参数
+extern  uint8_t                 isEEPRomOK;
         
-void InitUserData(void);
+void InitUserConfig(void);
 void ClearTotFlow(void);
+
+
+uint32_t EepWr(uint32_t addr, uint8_t *pch, uint16_t n);
+uint32_t EepRd(uint32_t addr, uint8_t *pch, uint16_t n);
+
+void TestErom(void);
 
 void SaveWMPara(STRWMPARA *pstu);
 void SaveTotFlow(STRWMTOT *pstu);       

@@ -18,18 +18,18 @@
 
 
 const       uint8_t     NBACK[][16] =   {
-                                            "+CSCON",       // 淇″彿閫氭柇鐘舵€�                                                                          
-                                            "+CEREG",       // 鑱旂綉鎴愬姛涓庡惁                         
-                                            "+CGATT",       // 妯″潡婵€娲讳笌鍚�
-                                            "+NSOCLI",      // 鍏抽棴SOCKET淇℃伅
-                                            "CONNECT OK",   // 杩滅▼杩炴帴鎴愬姛
-                                            "+CME ERROR",   // 妯″潡鎶ラ敊                          
-                                            "ERROR",        // 鎸囦护鍑洪敊                                  
-                                            "+NSOSTR",      // 鏁版嵁鍙戦€佹垚鍔�
-                                            "+NSORF",       // 鏁版嵁鎺ユ敹鎴愬姛                                
-                                            "+CSQ",         // 淇″彿璐ㄩ噺
-                                            "+CCLK",        // 淇″彿鏁版嵁
-                                            "460"          // ISMI鍙�                    
+                                            "+CSCON",       // 娣団€冲娇闁碍鏌囬悩鑸碘偓锟�                                                                          
+                                            "+CEREG",       // 閼辨梻缍夐幋鎰娑撳骸鎯�                         
+                                            "+CGATT",       // 濡€虫健濠碘偓濞茶绗岄崥锟�
+                                            "+NSOCLI",      // 閸忔娊妫碨OCKET娣団剝浼�
+                                            "CONNECT OK",   // 鏉╂粎鈻兼潻鐐村复閹存劕濮�
+                                            "+CME ERROR",   // 濡€虫健閹躲儵鏁�                          
+                                            "ERROR",        // 閹稿洣鎶ら崙娲晩                                  
+                                            "+NSOSTR",      // 閺佺増宓侀崣鎴︹偓浣瑰灇閸旓拷
+                                            "+NSORF",       // 閺佺増宓侀幒銉︽暪閹存劕濮�                                
+                                            "+CSQ",         // 娣団€冲娇鐠愩劑鍣�
+                                            "+CCLK",        // 娣団€冲娇閺佺増宓�
+                                            "460"          // ISMI閸欙拷                    
                                         };    
                                 
 
@@ -278,7 +278,7 @@ static uint16_t  MsgDecode(uint8_t *pch,uint16_t c)
         switch(row)
         {
             case 0: //"+CSCON",        
-                uct = pch[c-5];                 // ??鎻瑀\n锟�,???5???
+                uct = pch[c-5];                 // ??閹荤憖\n閿燂拷,???5???
                 if(uct == '1' ) 
                 {                    
                     gstuNbSta.cnnct = 1;        // ???(?????)
@@ -292,7 +292,7 @@ static uint16_t  MsgDecode(uint8_t *pch,uint16_t c)
                 break;
                                  
             case 1: //"+CEREG",   
-                uct = pch[c-3];                 // ??鎻瑀\n锟�,???3???
+                uct = pch[c-3];                 // ??閹荤憖\n閿燂拷,???3???
                 if(uct == '1' || uct == '5') {
                     gstuNbSta.cereg = 1;        // ????
                 }
@@ -302,7 +302,7 @@ static uint16_t  MsgDecode(uint8_t *pch,uint16_t c)
                 break;
                                   
             case 2: //"+CGATT",
-                 uct = pch[c-3];                // ??鎻瑀\n锟�,???3???
+                 uct = pch[c-3];                // ??閹荤憖\n閿燂拷,???3???
                 if(uct == '1')  {
                     gstuNbSta.cgatt = 1;        // ????
                 }
@@ -311,20 +311,20 @@ static uint16_t  MsgDecode(uint8_t *pch,uint16_t c)
                 }
                 break;
             
-            case 3: //"+NSOCLI"                 // NB妯″潡鎻愮ずsocket,琛ㄧず鏃犳硶杩炴帴杩滅▼IP绔彛                     
+            case 3: //"+NSOCLI"                 // NB濡€虫健閹绘劗銇歴ocket,鐞涖劎銇氶弮鐘崇《鏉╃偞甯存潻婊呪柤IP缁旑垰褰�                     
                 gstuNbSta.nsocl = 1;            // ??
                 break;
             
             case 4: //"CONNECT OK"                               
-                gstuNbSta.nsoco = 1;            // 杩滅▼杩炴帴鎴愬姛         
+                gstuNbSta.nsoco = 1;            // 鏉╂粎鈻兼潻鐐村复閹存劕濮�         
                 break;
             
-            case 5: //"+CME ERROR"              // 鎶ラ敊   
-                gstuNbSta.nsocl = 1;            // 閲嶅惎
-                gstuNbSta.ackerr = 1;           // err搴旂瓟                        
+            case 5: //"+CME ERROR"              // 閹躲儵鏁�   
+                gstuNbSta.nsocl = 1;            // 闁插秴鎯�
+                gstuNbSta.ackerr = 1;           // err鎼存梻鐡�                        
                 break;            
             
-            case 6: //"ERROR"                   // 鎸囦护鍑洪敊鎴栭噸澶�          
+            case 6: //"ERROR"                   // 閹稿洣鎶ら崙娲晩閹存牠鍣告径锟�          
                 gstuNbSta.ackerr = 1;         
                 break;
                  

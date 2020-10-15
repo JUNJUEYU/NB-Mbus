@@ -13,8 +13,8 @@
 #include "includes.h"
 
 
-#define     HAIFENG             (1)                 // º£·åÁ÷Á¿¼Æ  
-#define     FLOW_INVAL          (0xffffffffUL)      // ÎŞĞ§Á÷Á¿
+#define     HAIFENG             (1)                 // æµ·å³°æµé‡è®¡  
+#define     FLOW_INVAL          (0xffffffffUL)      // æ— æ•ˆæµé‡
 
 
 const uint8_t auchCRCHi[]=
@@ -104,13 +104,13 @@ STUNBFLOWDATA           gstuNbFlowData;
 STUSERCOMDATA           gstuMbusFlowData; 
 //----------------------------------------------------------------------------//
 static  STUSERCOMDATA   gstuSerComData;
-//static  uint32_t        gu4FlowTot      = 0;    // ¾»Á÷Á¿    
+//static  uint32_t        gu4FlowTot      = 0;    // å‡€æµé‡    
 static  uint8_t         gucUartBuf[256] = {0};  
 static  uint16_t        uart3_len1,uart3_len2;
 //----------------------------------------------------------------------------//
 /*******************************************************************************
 * Function Name  : GetFlowRecord
-* Description    : µÃµ½Õı¡¢¸º¡¢¾»Á÷Á¿Öµ
+* Description    : å¾—åˆ°æ­£ã€è´Ÿã€å‡€æµé‡å€¼
 * Input          : None
 * Output         : None
 * Return         : None
@@ -119,49 +119,49 @@ static  uint16_t        uart3_len1,uart3_len2;
 //{    
 //    uint32_t ultmp = 0;
 //#if HAIFENG == 1 
-//    // wubo: ÌÒÉ½¶ş´Î´Î±í¶ÔÓ¦µÄĞ­Òé¡£
-//    // Ğ¡¶ËÄ£Ê½:¸ßµØÎ»½»»»
-//    if(id == 1)         // Õı ÀÛ¼ÆÁ÷Á¿
+//    // wubo: æ¡ƒå±±äºŒæ¬¡æ¬¡è¡¨å¯¹åº”çš„åè®®ã€‚
+//    // å°ç«¯æ¨¡å¼:é«˜åœ°ä½äº¤æ¢
+//    if(id == 1)         // æ­£ ç´¯è®¡æµé‡
 //    {
-//        ultmp = gstuSerComData.u2Reg10;     // ¸ß16Î»
+//        ultmp = gstuSerComData.u2Reg10;     // é«˜16ä½
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg09;    // µÍ16Î»   
+//        ultmp += gstuSerComData.u2Reg09;    // ä½16ä½   
 //    }  
-//    else if(id == 2)    // ¸º ÀÛ¼ÆÁ÷Á¿
+//    else if(id == 2)    // è´Ÿ ç´¯è®¡æµé‡
 //    {
-//        ultmp = gstuSerComData.u2Reg14;     // ¸ß16Î»
+//        ultmp = gstuSerComData.u2Reg14;     // é«˜16ä½
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg13;    // µÍ16Î»   
+//        ultmp += gstuSerComData.u2Reg13;    // ä½16ä½   
 //    }
-//    else if(id == 3)    // ¾» ÀÛ¼ÆÁ÷Á¿
+//    else if(id == 3)    // å‡€ ç´¯è®¡æµé‡
 //    {
-//        ultmp = gstuSerComData.u2Reg26;     // ¸ß16Î»
+//        ultmp = gstuSerComData.u2Reg26;     // é«˜16ä½
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg25;    // µÍ16Î»      
+//        ultmp += gstuSerComData.u2Reg25;    // ä½16ä½      
 //    }
 //    else
 //    {
 //    }    
 //#else
-//    // wubo: ÌÒÉ½Ò»´Î±í¶ÔÓ¦µÄĞ­Òé¡£
-//    // ´ó¶ËÄ£Ê½£º¸ßµØÎ»²»ÓÃ½»»»
-//    if(id == 1)         // Õı ÀÛ¼ÆÁ÷Á¿
+//    // wubo: æ¡ƒå±±ä¸€æ¬¡è¡¨å¯¹åº”çš„åè®®ã€‚
+//    // å¤§ç«¯æ¨¡å¼ï¼šé«˜åœ°ä½ä¸ç”¨äº¤æ¢
+//    if(id == 1)         // æ­£ ç´¯è®¡æµé‡
 //    {
-//        ultmp = gstuSerComData.u2Reg09;     // ¸ß16Î»
+//        ultmp = gstuSerComData.u2Reg09;     // é«˜16ä½
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg10;    // µÍ16Î»   
+//        ultmp += gstuSerComData.u2Reg10;    // ä½16ä½   
 //    }  
-//    else if(id == 2)    // ¸º ÀÛ¼ÆÁ÷Á¿
+//    else if(id == 2)    // è´Ÿ ç´¯è®¡æµé‡
 //    {
-//        ultmp = gstuSerComData.u2Reg13;     // ¸ß16Î»
+//        ultmp = gstuSerComData.u2Reg13;     // é«˜16ä½
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg14;    // µÍ16Î»   
+//        ultmp += gstuSerComData.u2Reg14;    // ä½16ä½   
 //    }
-//    else if(id == 3)    // ¾» ÀÛ¼ÆÁ÷Á¿(Ö±½ÓÓÃÕı Á÷Á¿È¡´ú)
+//    else if(id == 3)    // å‡€ ç´¯è®¡æµé‡(ç›´æ¥ç”¨æ­£ æµé‡å–ä»£)
 //    {
-//        ultmp = gstuSerComData.u2Reg09;     // ¸ß16Î»
+//        ultmp = gstuSerComData.u2Reg09;     // é«˜16ä½
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg10;    // µÍ16Î»     
+//        ultmp += gstuSerComData.u2Reg10;    // ä½16ä½     
 //    }
 //    else
 //    {
@@ -173,7 +173,7 @@ static  uint16_t        uart3_len1,uart3_len2;
 
 /*******************************************************************************
 * Function Name  : FillFlowData
-* Description    : Ìî³äÁ÷Á¿¶ÓÁĞÊı¾İ
+* Description    : å¡«å……æµé‡é˜Ÿåˆ—æ•°æ®
 * Input          : None
 * Output         : None
 * Return         : None
@@ -212,7 +212,7 @@ void FillFlowData(STUNBFLOWDATA *pstu)
     //----------------------------------------------//    
     pstu->mu4WaterNum = DEF_WM_NUM; //gstuWmPara.mu4WaterNum;   
     //----------------------------------------------//    
-    ReadRtcTime(&mRtc);     // Ê±ÖÓÊı¾İ         
+    ReadRtcTime(&mRtc);     // æ—¶é’Ÿæ•°æ®         
     pstu->mu1Rtc[0] = mRtc.year;  
     pstu->mu1Rtc[1] = mRtc.month;  
     pstu->mu1Rtc[2] = mRtc.day;  
@@ -220,19 +220,19 @@ void FillFlowData(STUNBFLOWDATA *pstu)
     pstu->mu1Rtc[4] = mRtc.minutes;  
     pstu->mu1Rtc[5] = mRtc.seconds;  
 
-	pstu->mu1DevTyp   = 0x85;                         // Mbus×ÜÏß±í
+	pstu->mu1DevTyp   = 0x85;                         // Mbusæ€»çº¿è¡¨
     //----------------------------------------------//        
 	for(i=0; i<20; i++)
 	{
-		pstu->mu1DevBat    = CalBatPer();                  // µçÁ¿°Ù·Ö±
+		pstu->mu1DevBat    = CalBatPer();                  // ç”µé‡ç™¾åˆ†ï¿½
 		Delay_ms(5);
 	}
     //----------------------------------------------//        
-    // 24Ğ¡Ê±Á÷Á¿¼ÇÂ¼  
+    // 24å°æ—¶æµé‡è®°å½•  
 
     //----------------------------------------------//    
     for(i = 0; i < 8; i++) {
-        pstu->mu1Hold[i] = 0;                         // ±£Áô×Ö½Ú
+        pstu->mu1Hold[i] = 0;                         // ä¿ç•™å­—èŠ‚
     }
     //----------------------------------------------//
 
@@ -240,7 +240,7 @@ void FillFlowData(STUNBFLOWDATA *pstu)
 
 /*******************************************************************************
 * Function Name  : FillFlowTail
-* Description    : Ìî³äÁ÷Á¿¶ÓÁĞÊı¾İ
+* Description    : å¡«å……æµé‡é˜Ÿåˆ—æ•°æ®
 * Input          : None
 * Output         : None
 * Return         : None
@@ -254,15 +254,15 @@ void FillFlowTail(STUNBFLOWDATA *pstu)
 
 
 /*******************************************************************************
-*	º¯ Êı Ãû: InitFlowData
-*	¹¦ÄÜËµÃ÷: ³õÊ¼»¯Ê±£¬Á÷Á¿Êı¾İÎŞĞ§
-*	ĞÎ    ²Î: ÎŞ
-*	·µ »Ø Öµ: ÎŞ  
+*	å‡½ æ•° å: InitFlowData
+*	åŠŸèƒ½è¯´æ˜: åˆå§‹åŒ–æ—¶ï¼Œæµé‡æ•°æ®æ— æ•ˆ
+*	å½¢    å‚: æ— 
+*	è¿” å› å€¼: æ—   
 *******************************************************************************/
 //void InitFlowData(void)
 //{
 //    uint16_t i ,j;
-//    // Á÷Á¿³õÖµÈ«¶¼ÎŞĞ§
+//    // æµé‡åˆå€¼å…¨éƒ½æ— æ•ˆ
 //    for(i = 0; i < MEMBER_MAX; i++) 
 //	{        
 //        gstuNbFlowData.mu1AddrNData[i][7] = 0x75;    
@@ -273,12 +273,12 @@ void FillFlowTail(STUNBFLOWDATA *pstu)
 //    }
 //    
 
-//    FillFlowData(&gstuNbFlowData);  // Ìî³äÁ÷Á¿Êı¾İ   
+//    FillFlowData(&gstuNbFlowData);  // å¡«å……æµé‡æ•°æ®   
 //}  
 
 /*******************************************************************************
 * Function Name  : MODBUS_CRC16
-* Description    : modbus Ğ£Ñé
+* Description    : modbus æ ¡éªŒ
 * Input          : None
 * Output         : None
 * Return         : None
@@ -302,7 +302,7 @@ static uint16_t MODBUS_CRC16(uint8_t *updata,uint16_t len)
 
 /*******************************************************************************
 * Function Name  : Modbus_3
-* Description    : modbus ¶Á·µ»Ø
+* Description    : modbus è¯»è¿”å›
 * Input          : None
 * Output         : None
 * Return         : None
@@ -312,20 +312,20 @@ int16_t Modbus_3(void)
     uint16_t    i,reg_num;            
     uint8_t     *pchar;
     
-    // ³¬¹ı×î´ó125¸ö¼Ä´æÆ÷    
+    // è¶…è¿‡æœ€å¤§125ä¸ªå¯„å­˜å™¨    
     reg_num = gucUartBuf[2];          
        
     if(reg_num == 0 || reg_num > 250) {
         return(-1);
     }
-    // ³¬¹ı½ÓÊÕ½á¹¹ÌåµÄ³¤¶È 
+    // è¶…è¿‡æ¥æ”¶ç»“æ„ä½“çš„é•¿åº¦ 
     if(reg_num > sizeof(STUSERCOMDATA)) {
         return(-1);
     } 
 
     pchar = (uint8_t *)&gstuSerComData;    		
   
-    // ¸ßµÍÎ»½»»»(½âÂë½ÓÊÕµÄÊı¾İ) 
+    // é«˜ä½ä½äº¤æ¢(è§£ç æ¥æ”¶çš„æ•°æ®) 
     for(i = 0; i < reg_num; i += 2)
     {	
         pchar[i]      = gucUartBuf[i + 4];
@@ -345,7 +345,7 @@ static uint16_t gucTxd3Cnt = 0;
 static uint16_t gucRxd3Cnt = 0;
 /*******************************************************************************
 * Function Name  : Flow_Data_Rec
-* Description    : ´¦Àí´ÓCOM3»Ø´«µÄÊı¾İ
+* Description    : å¤„ç†ä»COM3å›ä¼ çš„æ•°æ®
 * Input          : None
 * Output         : None
 * Return         : None
@@ -354,18 +354,18 @@ void Flow_Data_Rec(void)
 {
     uint16_t    ret = 0;    	
     uint16_t    cnt = 0;  
-    // ¿½±´´®¿Ú½ÓÊÕµÄÊı¾İ
+    // æ‹·è´ä¸²å£æ¥æ”¶çš„æ•°æ®
     cnt =  comMemCpy(COM3,(uint8_t *)gucUartBuf);                                        
-    // ¶Á2¸ö¼Ä´æÆ÷·µ»ØµÄ³¤¶È
+    // è¯»2ä¸ªå¯„å­˜å™¨è¿”å›çš„é•¿åº¦
     if(cnt >= 15)                           
     {     		
         ret = MODBUS_CRC16((uint8_t *)gucUartBuf, cnt);  
-        if(ret == 0)    // Ğ£ÑéÕıÈ·
+        if(ret == 0)    // æ ¡éªŒæ­£ç¡®
         {           
             if(gucUartBuf[0] == 0x68 && gucUartBuf[34] == 0x16)
             {            
                 ret = Modbus_3();     
-                if(ret == 0)        // ¶Á³É¹¦
+                if(ret == 0)        // è¯»æˆåŠŸ
                 {                  
                     gucRxd3Cnt += 1;                        
                 }
@@ -376,7 +376,7 @@ void Flow_Data_Rec(void)
 
 /*******************************************************************************
 * Function Name  : ProcUart3Rec
-* Description    : ´¦Àí´ÓCOM3»Ø´«µÄÊı¾İ
+* Description    : å¤„ç†ä»COM3å›ä¼ çš„æ•°æ®
 * Input          : None
 * Output         : None
 * Return         : None
@@ -386,7 +386,7 @@ void ProcUart3Rec(void)
     uart3_len2 = GetRxCount(COM3);                           
     if((uart3_len1 > 0) && (uart3_len1 == uart3_len2))	    
     {									
-        if(uart3_len1 <= UART3_RX_BUF_SIZE)         // ×Ö·û´®³¤¶ÈÏŞÖÆ
+        if(uart3_len1 <= UART3_RX_BUF_SIZE)         // å­—ç¬¦ä¸²é•¿åº¦é™åˆ¶
         {	                      
             Flow_Data_Rec();									           
         }													
@@ -395,17 +395,17 @@ void ProcUart3Rec(void)
 }
 
 
-// ¶ÁÁ÷Á¿Öµ
-#if HAIFENG == 1    // Mbus×ÜÏß±í
+// è¯»æµé‡å€¼
+#if HAIFENG == 1    // Mbusæ€»çº¿è¡¨
 static uint8_t TxdBuf3[22] = {0xFE,0xFE,0xFE,0xFE,0xFE,0xFE
                                 ,0X68,0X10,0X10,0X01,0X40,0X30,0X01,0X33,0X78,0X01,0x03,0x1F,0X90,0X00,0X58,0X16};
-#else               // ÌìĞÅµç´ÅÒÇ±í
+#else               // å¤©ä¿¡ç”µç£ä»ªè¡¨
 static uint8_t TxdBuf3[16] = {0x08, 0x04, 0x10, 0x18, 0x00, 0x14, 0x74, 0x5B};
 #endif
 
 /*******************************************************************************
 * Function Name  : FlowConnect
-* Description    : ¶ÁÁ÷Á¿¼ÆÊı¾İ(01 03 00 08 00 14 C4 07)  
+* Description    : è¯»æµé‡è®¡æ•°æ®(01 03 00 08 00 14 C4 07)  
 * Input          : None
 * Output         : None
 * Return         : None
@@ -417,14 +417,14 @@ uint8_t FlowConnect(void)
     uint8_t     i; 
     uint8_t     cnt;    
     //-----------------------------------------//     
-    // Èç¹ûÄÖÖÓ±êÖ¾±»¸´Î»£¬ËµÃ÷¿ÉÒÔ½øÈë´ı»ú×´Ì¬ÁË£¬²»ÒªÖ´ĞĞ´Ë³ÌĞòÁË;
+    // å¦‚æœé—¹é’Ÿæ ‡å¿—è¢«å¤ä½ï¼Œè¯´æ˜å¯ä»¥è¿›å…¥å¾…æœºçŠ¶æ€äº†ï¼Œä¸è¦æ‰§è¡Œæ­¤ç¨‹åºäº†;
     if(gstuFlag.mbAlmF == 0) 
     {
         gucTxd3Cnt = 0;
         gucRxd3Cnt = 0;
         return 0;
     }   
-    // Èç¹ûÒÑ¾­Ê¹ÄÜNB·¢ËÍ£¬ËµÃ÷485×ÜÏßÊı¾İÒÑ¶ÁÈ¡ÁË,²»ÒªÖ´ĞĞ´Ë³ÌĞòÁË;
+    // å¦‚æœå·²ç»ä½¿èƒ½NBå‘é€ï¼Œè¯´æ˜485æ€»çº¿æ•°æ®å·²è¯»å–äº†,ä¸è¦æ‰§è¡Œæ­¤ç¨‹åºäº†;
     if(gstuFlag.mbNbEn > 0) 
     {
         gucTxd3Cnt = 0;
@@ -433,14 +433,14 @@ uint8_t FlowConnect(void)
     }  
     //-----------------------------------------//       
   
-    if(gucRxd3Cnt > 0)          // Ö»Òª½ÓÊÕ³É¹¦1´Î£¬¼´¿ÉÍË³ö
+    if(gucRxd3Cnt > 0)          // åªè¦æ¥æ”¶æˆåŠŸ1æ¬¡ï¼Œå³å¯é€€å‡º
     {
         ret = 1;
     }
     else
     {
         gucTxd3Cnt += 1;        
-        if(gucTxd3Cnt <= 3)     // ×î¶à·¢ËÍ3´Î
+        if(gucTxd3Cnt <= 3)     // æœ€å¤šå‘é€3æ¬¡
         {
             gucRxd3Cnt = 0;
             cnt = gstuMbusFlowData.flow_cnt;
@@ -453,16 +453,16 @@ uint8_t FlowConnect(void)
         else
         {   
             ret = 1;            
-//            gu4FlowTot = FLOW_INVAL;    // ÎŞĞ§Êı¾İ                    
+//            gu4FlowTot = FLOW_INVAL;    // æ— æ•ˆæ•°æ®                    
         }
     }
     //-----------------------------------------//
-    if(ret > 0)                 // ½ÓÊÕÍê±Ï
+    if(ret > 0)                 // æ¥æ”¶å®Œæ¯•
     {               
         gucTxd3Cnt = 0;
         gucRxd3Cnt = 0;
         gstuMbusFlowData.flow_cnt += 1;
-        // Ìî³äÊı¾İ
+        // å¡«å……æ•°æ®
         FillFlowData(&gstuNbFlowData);    
     }   
         
