@@ -1,0 +1,271 @@
+
+#include "bsp.h"
+
+
+void EXTI_Cfg(void)
+{
+    NVIC_InitTypeDef NVIC_InitStructure;
+    EXTI_InitTypeDef EXTI_InitStructure;
+    	    
+    /* Enable SYSCFG clock */
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);              // 外部中断需要使能
+    
+    /* Connect EXTI15 Line to Pb15 pin */    
+    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource15);      // DIO_0:连接外部中断    
+        
+    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource10);      // 连接外部中断
+    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource11);      // 连接外部中断
+    
+    /* Configure EXTI0 line */
+    EXTI_InitStructure.EXTI_Line        = EXTI_Line15;                  //中断线0
+    EXTI_InitStructure.EXTI_Mode        = EXTI_Mode_Interrupt;          //外部中断
+    EXTI_InitStructure.EXTI_Trigger     = EXTI_Trigger_Rising;          //上升沿触发 
+    EXTI_InitStructure.EXTI_LineCmd     = ENABLE;                       
+    EXTI_Init(&EXTI_InitStructure);                                     //初始化       
+    
+#if 1
+    EXTI_InitStructure.EXTI_Line        = EXTI_Line10;                  //中断线0      
+    EXTI_InitStructure.EXTI_Trigger     = EXTI_Trigger_Falling;          //上升沿触发 
+    EXTI_Init(&EXTI_InitStructure);                                     //初始化       
+    
+    EXTI_InitStructure.EXTI_Line        = EXTI_Line11;                  //中断线0        
+    EXTI_InitStructure.EXTI_Trigger     = EXTI_Trigger_Falling;          //上升沿触发 
+    EXTI_Init(&EXTI_InitStructure);                                     //初始化    
+#endif    
+    
+    /*EXTI*/
+    NVIC_InitStructure.NVIC_IRQChannel = EXTI15_10_IRQn;  
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x05;    
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;      
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;      
+    NVIC_Init(&NVIC_InitStructure);     
+}
+
+
+void RTC_EXIT(void)
+{
+    NVIC_InitTypeDef NVIC_InitStructure; 
+    EXTI_InitTypeDef EXTI_InitStructure;
+    
+    //-----------------------------------------------------//    
+    /* EXTI configuration */
+    EXTI_ClearITPendingBit(EXTI_Line20);
+    EXTI_InitStructure.EXTI_Line = EXTI_Line20;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure);
+
+    /* Enable the RTC Wakeup Interrupt */
+    NVIC_InitStructure.NVIC_IRQChannel = RTC_WKUP_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 10;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+    //-----------------------------------------------------//
+     
+    //Alarm必须配置EXTI_Line17中断 
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt; 
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE; 
+    EXTI_InitStructure.EXTI_Line = EXTI_Line17; 
+    EXTI_Init(&EXTI_InitStructure); 
+    
+    
+    /*使能 RTC Wakeup Interrupt */
+    NVIC_InitStructure.NVIC_IRQChannel = RTC_Alarm_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 9;           // 要高于Wakeup中断
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+    //-----------------------------------------------------//       
+}
+     
+void Gpio_Cfg(void)
+{   
+    GPIO_InitTypeDef   GPIO_InitStructure;     
+ 
+#if 1   // 省电                 
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOH, ENABLE); 
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;
+
+    GPIO_InitStructure.GPIO_Speed       = GPIO_Speed_400KHz;   
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_0 | GPIO_Pin_1;
+    GPIO_Init(GPIOH, &GPIO_InitStructure);                      // 晶振设为普通IO
+    
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOH, DISABLE);             
+#endif  
+//--------------------------------------------------------------//          
+    /* Enable GPIO clock */
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB | RCC_AHBPeriph_GPIOC, ENABLE);    
+//--------------------------------------------------------------//      
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;
+    GPIO_InitStructure.GPIO_OType       = GPIO_OType_PP;  
+    GPIO_InitStructure.GPIO_Speed       = GPIO_Speed_400KHz;          
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_13;          
+    GPIO_Init(GPIOC,&GPIO_InitStructure);                       // 配置PC13为输入脚
+//--------------------------------------------------------------//    
+#if 1    
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;   
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;       
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_0;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);                      // PA0
+#endif  
+   
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;   
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;         
+    GPIO_InitStructure.GPIO_Pin         = 0x9fff;               // PA13.PA14为SWD接口
+    GPIO_Init(GPIOA,&GPIO_InitStructure);  
+//--------------------------------------------------------------//       
+#if 1  // 设置上拉后，停机状态下可省电2.5uA
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;   
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;         
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_2;     
+    GPIO_Init(GPIOB, &GPIO_InitStructure);                      // PB2: BOOT1       
+#endif    
+//--------------------------------------------------------------//  
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;   
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;   
+    GPIO_InitStructure.GPIO_Pin         = 0xffff;          
+    GPIO_Init(GPIOB,&GPIO_InitStructure);                       // 配置PB10为输入脚
+//--------------------------------------------------------------//          
+} 
+
+/*
+低功耗管脚配置
+*/
+void Gpio_LpCfg(void)
+{  
+    GPIO_InitTypeDef   GPIO_InitStructure;        
+//--------------------------------------------------------------//   
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN; 
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;    
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_8;                   // PA8:发送控制
+    GPIO_Init(GPIOA,&GPIO_InitStructure);       
+    
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;                     
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;                
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_9;          
+    GPIO_Init(GPIOA,&GPIO_InitStructure);                               // PA9:RESET        
+//--------------------------------------------------------------//      
+                  
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;         //GPIO_Mode_AN; 
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;         //GPIO_PuPd_NOPULL;      
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5;
+    GPIO_Init(GPIOB,&GPIO_InitStructure);       // PB3: SCK // PB4: MISO // PB5: MOSI   
+        
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN; 
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;    
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_6;         
+    GPIO_Init(GPIOB,&GPIO_InitStructure);       // PB6: NSS        
+//--------------------------------------------------------------//         
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;                     
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_DOWN;       
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_10 | GPIO_Pin_11;
+    GPIO_Init(GPIOB,&GPIO_InitStructure);       
+//--------------------------------------------------------------//     
+    GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;                     
+    GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_DOWN;       
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;          
+    GPIO_Init(GPIOB,&GPIO_InitStructure);       // DIO_0~3:下拉省电                                                                
+//------------------------------------------------------------------------------//                    
+#if 0    // 对低功耗没用
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1,         DISABLE);    
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,       DISABLE); 
+    
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3,       DISABLE);  
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1,           DISABLE);
+        
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB | RCC_AHBPeriph_GPIOC |
+                          RCC_AHBPeriph_GPIOD | RCC_AHBPeriph_GPIOE | RCC_AHBPeriph_GPIOF |
+                          RCC_AHBPeriph_GPIOG | RCC_AHBPeriph_GPIOH, DISABLE);    
+#endif    
+//------------------------------------------------------------------------------//     
+}
+
+
+void LowPowerSet(void)
+{
+#if 0  // 对低功耗没用（本来就没开）
+    //----------------------------------//     
+    LCD_Cmd(DISABLE);
+    COMP_Cmd(DISABLE);   
+    ADC_Cmd(ADC1,DISABLE);    
+    DAC_Cmd(DAC_Channel_1,DISABLE);
+    DAC_Cmd(DAC_Channel_2,DISABLE);
+    //----------------------------------//     
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1,         DISABLE);
+        
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_DAC,          DISABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_COMP,         DISABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_LCD,          DISABLE); 
+#endif    
+    //----------------------------------//                            
+    /*
+    1.电源管理器为range1:1.8v; 
+    2.电源管理器为range2:1.5v; 
+    3.电源管理器为range3:1.2v                     
+    */
+    PWR_VoltageScalingConfig(PWR_VoltageScaling_Range2);       
+    while(PWR_GetFlagStatus(PWR_FLAG_VOS) != RESET) {
+    }
+    //----------------------------------//     
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR , ENABLE);       
+    //----------------------------------//     
+    PWR_PVDCmd(DISABLE);                // 禁用PVD
+    PWR_UltraLowPowerCmd(ENABLE);       // 关闭Vref
+    PWR_FastWakeUpCmd(ENABLE);          // 加快启动速度
+    //----------------------------------//    
+    DBGMCU_Config(DBGMCU_STOP,DISABLE); // 禁用调试接口                 
+}
+
+
+void To_enter_Stop(void)
+{
+    Gpio_LpCfg();
+    //----------------------------------------------------------//
+    RTC_AlartSet();                     // 设置闹钟唤醒
+    //RtcWakeUpConfig(20);              // RTC定时唤醒  
+    //----------------------------------------------------------//       
+#if 0 // PWR_EnterSTOPMode 已包含了下述寄存器设置     
+    PWR->CR &= ~(3<<0);		        // 清除 PDDS和LPDSR
+    PWR->CR |= PWR_CR_LPSDSR;	        // set LPDSR     
+#endif 
+    /* Enter Stop Mode */     
+    PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);           
+    //----------------------------------------------------------//       
+    bsp_Init();
+    //----------------------------------------------------------//      
+}
+
+
+
+void bsp_Init(void)
+{ 
+     /* 
+    1.优先级分组设置为4，可配置0-15级抢占式优先级,0级子优先级，即不存在子优先级。    
+    */
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4); 
+    //-------------------------//
+    Gpio_Cfg();     
+    RtcInit();      
+    //-------------------------//        
+    //USART3_Config();     
+    SX1276BoardInit();           
+    //-------------------------//          
+    EXTI_Cfg();      
+    RTC_EXIT();    
+    //TIM_Config();    
+    //-------------------------//  
+    /*
+    1.放在初始化的最后面，
+    2.可以防止没有考虑的情况（节约2ua）
+    */
+    LowPowerSet();   
+    //-------------------------//     
+}
+
+
+/******************************************************************************/
