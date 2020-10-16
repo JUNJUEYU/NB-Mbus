@@ -14,7 +14,7 @@ void EXTI0_IRQHandler(void)
     if(EXTI_GetITStatus(EXTI_Line0) != RESET) 
     {           
         EXTI_ClearFlag(EXTI_Line0);                 //清除标志中断位
-        EXTI_ClearITPendingBit( EXTI_Line0 );  
+        EXTI_ClearITPendingBit(EXTI_Line0);  
 
         printf("setup.\r\n");                   
     }
@@ -30,7 +30,7 @@ void EXTI15_10_IRQHandler(void)
         if(GPIO_ReadInputDataBit( BL_STA_PORT, BL_STA_PIN ) != 0)           
         {
             gstuFlag.mBlueF = 1;                    //蓝牙触发
-			gstuFlag.mbWorkF =	CONFIGING;			
+			gstuFlag.mbWorkF = CONFIG;			
         }
     }    
 }
@@ -40,18 +40,18 @@ void EXTI9_5_IRQHandler(void)
     if(EXTI_GetITStatus(EXTI_Line8) != RESET) 
     {                    
         EXTI_ClearFlag(EXTI_Line8);             	//清除标志中断位
-        EXTI_ClearITPendingBit( EXTI_Line8 );
+        EXTI_ClearITPendingBit(EXTI_Line8);
         
         if(GPIO_ReadInputDataBit( EX_KEY_PORT, EX_KEY_PIN ) == 0)         
         {   
 			gstuFlag.mbAlmF = 1;                	//触发唤醒
 			if(addrcache.addrEn)
 			{
-				gstuFlag.mbWorkF =	READING;		//有地址，去读表	
+				gstuFlag.mbWorkF = READ;		//有地址，去读表	
 			}
 			else
 			{
-				gstuFlag.mbWorkF =	IDLING;			//没地址，空闲等待配置
+				gstuFlag.mbWorkF = IDLE;			//没地址，空闲等待配置
 			}
         }        
     }
@@ -67,7 +67,7 @@ static void CheckBlueSta(void)	//检查蓝牙连接
         {                    
             gu2BlueCnt = 5;
             gstuFlag.mBlueF = 1;              
-			gstuFlag.mbWorkF = CONFIGING;
+			gstuFlag.mbWorkF = CONFIG;
         }
     }
     else
@@ -78,9 +78,9 @@ static void CheckBlueSta(void)	//检查蓝牙连接
 		else 
 		{        
             gstuFlag.mBlueF = 0;            
-			if(gstuFlag.mbWorkF == CONFIGING)
+			if(gstuFlag.mbWorkF == CONFIG)
 			{
-				gstuFlag.mbWorkF = IDLING;
+				gstuFlag.mbWorkF = IDLE;
 			}
         }
     }  
@@ -129,15 +129,15 @@ int main( void )
 	if(GPIO_ReadInputDataBit( BL_STA_PORT, BL_STA_PIN ) != 0)           
 	{
 		gstuFlag.mBlueF = 1;           	//蓝牙触发      
-		gstuFlag.mbWorkF =	CONFIGING;			
+		gstuFlag.mbWorkF =	CONFIG;			
 	}
 	
 	else if(addrcache.addrEn){	
-		gstuFlag.mbWorkF =	READING;
+		gstuFlag.mbWorkF =	READ;
 	} 
    	
 	else{
-		gstuFlag.mbWorkF =  IDLING;
+		gstuFlag.mbWorkF =  IDLE;
 	}
 
 //-----------------------------//        
@@ -153,7 +153,7 @@ int main( void )
 			InitUserConfig();
 			if(addrcache.addrEn)
 			{
-				gstuFlag.mbWorkF =	READING;
+				gstuFlag.mbWorkF = READ;
 				MBUS_ON();
 				MbusFlow.flownumber = 0;
 				Delay_ms(500); 
@@ -163,24 +163,24 @@ int main( void )
 		{				
 			CheckBlueSta();
 				
-			if((gstuFlag.mbWorkF != CONFIGING) & (gstuFlag.mbWorkF != READING) & (gstuFlag.mbWorkF != COMPLETE))
+			if((gstuFlag.mbWorkF != CONFIG) & (gstuFlag.mbWorkF != READ) & (gstuFlag.mbWorkF != TRANS))
 			{
-				gstuFlag.mbWorkF = IDLING;
+				gstuFlag.mbWorkF = IDLE;
 			}
 			
-			if(gstuFlag.mbWorkF == CONFIGING)
+			if(gstuFlag.mbWorkF == CONFIG)
 			{
 				ProcBlueData();
 				Delay_ms(400);
 			}
 			
-			else if(gstuFlag.mbWorkF == READING)
+			else if(gstuFlag.mbWorkF == READ)
 			{		
 				if(Timer >= 1000)		//2000*15ms=30S抄表间隔
 				{
 					Timer = 0;								
 #if DBGMODE            
-					printf("Now is reading NO.%d.\r\n", (MbusFlow.flownumber + 1));
+					printf("Now is READ NO.%d.\r\n", (MbusFlow.flownumber + 1));
 #endif   
 					flow_read( MbusFlow.flownumber);	//抄表成功
 					MbusFlow.flownumber += 1;
@@ -189,7 +189,7 @@ int main( void )
 				if(MbusFlow.flownumber > (MbusFlow.nummax - 1))	//超过最大表号，抄表工作结束
 				{			
 					MbusFlow.flownumber = 0;
-					gstuFlag.mbWorkF = COMPLETE;
+					gstuFlag.mbWorkF = TRANS;
 					gstuFlag.mbNbEn = 1;
 					SleepTimer = 0;
 					mbus_shutdown();
@@ -198,7 +198,7 @@ int main( void )
 				}
 			}
 				 
-			else if(gstuFlag.mbWorkF == COMPLETE) //完成抄表工作，上传数据
+			else if(gstuFlag.mbWorkF == TRANS) //完成抄表工作，上传数据
 			{ 
 				ProcNbComRec();                    // 处理UART2接收  
 				NB_Connect();                      // 建立连接                                                      
@@ -212,7 +212,7 @@ int main( void )
 				}
 			}	
 			
-			else if(gstuFlag.mbWorkF == IDLING)	//系统空闲
+			else if(gstuFlag.mbWorkF == IDLE)	//系统空闲
 			{
 				gu2IdlCnt += 1;
 				if(gu2IdlCnt > 100)				   //空闲超时，进入睡眠

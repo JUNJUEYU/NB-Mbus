@@ -11,9 +11,7 @@
 */
 #include "bsp.h"
 #include "app_MBUS.h"
-//#define CONFIGING			((uint8_t)0x03)
-//#define COMPLETE			((uint8_t)0x01)
-//#define SLEEP					((uint8_t)0x04)
+
 uint32_t  Timer = 0 ;
 uint32_t  SleepTimer = 0 ;
 uint32_t  ledtimer = 0 ;
@@ -28,7 +26,7 @@ void TIM2_IRQHandler(void)
         gstuFlag.mbTimF = 1;
 		Timer += 1;
 		ledtimer += 1;
-		if(gstuFlag.mbWorkF == CONFIGING)
+		if(gstuFlag.mbWorkF == CONFIG)
 		{
 			if(ledtimer >= 100)
 			{
@@ -36,7 +34,7 @@ void TIM2_IRQHandler(void)
 				ledtimer = 0;
 			}
 		}
-		else if(gstuFlag.mbWorkF == COMPLETE)
+		else if(gstuFlag.mbWorkF == TRANS)
 		{
 //			SleepTimer ++;
 			if(sleeping != 1)

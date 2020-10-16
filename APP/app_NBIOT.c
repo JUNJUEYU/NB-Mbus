@@ -643,29 +643,29 @@ uint8_t NB_DataUpload(void)
 //            if(*pw == 0)                //首次进入
 //            {                                                
 //                u4id = ReadRecord(&tstuNbFlowData);   
-////                FillFlowTail(&tstuNbFlowData);
+// //                FillFlowTail(&tstuNbFlowData);
 //                if(u4id == 0)           // 记录空
 //                {
 //                    ret = 1;            // 进入下一步
 //                    break;              
 //                }
 //            }         
-//            
+           
 //            ret = Nb_SendAsc((uint8_t *)&tstuNbFlowData,   sizeof(STUNBFLOWDATA),   pw,     NBTR_DELAY3); 
 //            if(gstuNbSta.nbrxd)         // 应答成功
 //            {   
 //                gstuNbSta.nbrxd = 0;                                            
 //                ChgRcdHead(u4id);    // 删除该条记录  
-//				u4id = ReadRecord(&tstuNbFlowData);
-//				if(u4id == 0)
-//				{
-//					ret = 1;
-//				}
-//				else
-//				{
-//					ret = 0;
-//				}
-//                 
+// 				u4id = ReadRecord(&tstuNbFlowData);
+// 				if(u4id == 0)
+// 				{
+// 					ret = 1;
+// 				}
+// 				else
+// 				{
+// 					ret = 0;
+// 				}
+                
 //            }                 
             break;   
           
