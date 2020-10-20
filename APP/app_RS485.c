@@ -13,8 +13,8 @@
 #include "includes.h"
 
 
-#define     HAIFENG             (1)                 // 娴峰嘲娴侀噺璁�  
-#define     FLOW_INVAL          (0xffffffffUL)      // 鏃犳晥娴侀噺
+#define     HAIFENG             (1)                 // 濞村嘲鍢插ù渚€鍣虹拋锟�  
+#define     FLOW_INVAL          (0xffffffffUL)      // 閺冪姵鏅ュù渚€鍣�
 
 
 const uint8_t auchCRCHi[]=
@@ -104,13 +104,13 @@ STUNBFLOWDATA           gstuNbFlowData;
 STUSERCOMDATA           gstuMbusFlowData; 
 //----------------------------------------------------------------------------//
 static  STUSERCOMDATA   gstuSerComData;
-//static  uint32_t        gu4FlowTot      = 0;    // 鍑€娴侀噺    
+//static  uint32_t        gu4FlowTot      = 0;    // 閸戔偓濞翠線鍣�    
 static  uint8_t         gucUartBuf[256] = {0};  
 static  uint16_t        uart3_len1,uart3_len2;
 //----------------------------------------------------------------------------//
 /*******************************************************************************
 * Function Name  : GetFlowRecord
-* Description    : 寰楀埌姝ｃ€佽礋銆佸噣娴侀噺鍊�
+* Description    : 瀵版鍩屽锝冣偓浣界閵嗕礁鍣ｅù渚€鍣洪崐锟�
 * Input          : None
 * Output         : None
 * Return         : None
@@ -119,49 +119,49 @@ static  uint16_t        uart3_len1,uart3_len2;
 //{    
 //    uint32_t ultmp = 0;
 //#if HAIFENG == 1 
-//    // wubo: 妗冨北浜屾娆¤〃瀵瑰簲鐨勫崗璁€�
-//    // 灏忕妯″紡:楂樺湴浣嶄氦鎹�
-//    if(id == 1)         // 姝� 绱娴侀噺
+//    // wubo: 濡楀啫鍖楁禍灞绢偧濞喡ゃ€冪€电懓绨查惃鍕礂鐠侇喓鈧拷
+//    // 鐏忓繒顏Ο鈥崇础:妤傛ê婀存担宥勬唉閹癸拷
+//    if(id == 1)         // 濮濓拷 缁鳖垵顓稿ù渚€鍣�
 //    {
-//        ultmp = gstuSerComData.u2Reg10;     // 楂�16浣�
+//        ultmp = gstuSerComData.u2Reg10;     // 妤傦拷16娴ｏ拷
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg09;    // 浣�16浣�   
+//        ultmp += gstuSerComData.u2Reg09;    // 娴ｏ拷16娴ｏ拷   
 //    }  
-//    else if(id == 2)    // 璐� 绱娴侀噺
+//    else if(id == 2)    // 鐠愶拷 缁鳖垵顓稿ù渚€鍣�
 //    {
-//        ultmp = gstuSerComData.u2Reg14;     // 楂�16浣�
+//        ultmp = gstuSerComData.u2Reg14;     // 妤傦拷16娴ｏ拷
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg13;    // 浣�16浣�   
+//        ultmp += gstuSerComData.u2Reg13;    // 娴ｏ拷16娴ｏ拷   
 //    }
-//    else if(id == 3)    // 鍑€ 绱娴侀噺
+//    else if(id == 3)    // 閸戔偓 缁鳖垵顓稿ù渚€鍣�
 //    {
-//        ultmp = gstuSerComData.u2Reg26;     // 楂�16浣�
+//        ultmp = gstuSerComData.u2Reg26;     // 妤傦拷16娴ｏ拷
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg25;    // 浣�16浣�      
+//        ultmp += gstuSerComData.u2Reg25;    // 娴ｏ拷16娴ｏ拷      
 //    }
 //    else
 //    {
 //    }    
 //#else
-//    // wubo: 妗冨北涓€娆¤〃瀵瑰簲鐨勫崗璁€�
-//    // 澶х妯″紡锛氶珮鍦颁綅涓嶇敤浜ゆ崲
-//    if(id == 1)         // 姝� 绱娴侀噺
+//    // wubo: 濡楀啫鍖楁稉鈧▎陇銆冪€电懓绨查惃鍕礂鐠侇喓鈧拷
+//    // 婢堆咁伂濡€崇础閿涙岸鐝崷棰佺秴娑撳秶鏁ゆ禍銈嗗床
+//    if(id == 1)         // 濮濓拷 缁鳖垵顓稿ù渚€鍣�
 //    {
-//        ultmp = gstuSerComData.u2Reg09;     // 楂�16浣�
+//        ultmp = gstuSerComData.u2Reg09;     // 妤傦拷16娴ｏ拷
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg10;    // 浣�16浣�   
+//        ultmp += gstuSerComData.u2Reg10;    // 娴ｏ拷16娴ｏ拷   
 //    }  
-//    else if(id == 2)    // 璐� 绱娴侀噺
+//    else if(id == 2)    // 鐠愶拷 缁鳖垵顓稿ù渚€鍣�
 //    {
-//        ultmp = gstuSerComData.u2Reg13;     // 楂�16浣�
+//        ultmp = gstuSerComData.u2Reg13;     // 妤傦拷16娴ｏ拷
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg14;    // 浣�16浣�   
+//        ultmp += gstuSerComData.u2Reg14;    // 娴ｏ拷16娴ｏ拷   
 //    }
-//    else if(id == 3)    // 鍑€ 绱娴侀噺(鐩存帴鐢ㄦ 娴侀噺鍙栦唬)
+//    else if(id == 3)    // 閸戔偓 缁鳖垵顓稿ù渚€鍣�(閻╁瓨甯撮悽銊︻劀 濞翠線鍣洪崣鏍﹀敩)
 //    {
-//        ultmp = gstuSerComData.u2Reg09;     // 楂�16浣�
+//        ultmp = gstuSerComData.u2Reg09;     // 妤傦拷16娴ｏ拷
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg10;    // 浣�16浣�     
+//        ultmp += gstuSerComData.u2Reg10;    // 娴ｏ拷16娴ｏ拷     
 //    }
 //    else
 //    {
@@ -173,7 +173,7 @@ static  uint16_t        uart3_len1,uart3_len2;
 
 /*******************************************************************************
 * Function Name  : FillFlowData
-* Description    : 濉厖娴侀噺闃熷垪鏁版嵁
+* Description    : 婵夘偄鍘栧ù渚€鍣洪梼鐔峰灙閺佺増宓�
 * Input          : None
 * Output         : None
 * Return         : None
@@ -212,7 +212,7 @@ void FillFlowData(STUNBFLOWDATA *pstu)
     //----------------------------------------------//    
     pstu->mu4WaterNum = DEF_WM_NUM; //gstuWmPara.mu4WaterNum;   
     //----------------------------------------------//    
-    ReadRtcTime(&mRtc);     // 鏃堕挓鏁版嵁         
+    ReadRtcTime(&mRtc);     // 閺冨爼鎸撻弫鐗堝祦         
     pstu->mu1Rtc[0] = mRtc.year;  
     pstu->mu1Rtc[1] = mRtc.month;  
     pstu->mu1Rtc[2] = mRtc.day;  
@@ -220,19 +220,19 @@ void FillFlowData(STUNBFLOWDATA *pstu)
     pstu->mu1Rtc[4] = mRtc.minutes;  
     pstu->mu1Rtc[5] = mRtc.seconds;  
 
-	pstu->mu1DevTyp   = 0x85;                         // Mbus鎬荤嚎琛�
+	pstu->mu1DevTyp   = 0x85;                         // Mbus閹崵鍤庣悰锟�
     //----------------------------------------------//        
 	for(i=0; i<20; i++)
 	{
-		pstu->mu1DevBat    = CalBatPer();                  // 鐢甸噺鐧惧垎锟�
+		pstu->mu1DevBat    = CalBatPer();                  // 閻㈢敻鍣洪惂鎯у瀻閿燂拷
 		Delay_ms(5);
 	}
     //----------------------------------------------//        
-    // 24灏忔椂娴侀噺璁板綍  
+    // 24鐏忓繑妞傚ù渚€鍣虹拋鏉跨秿  
 
     //----------------------------------------------//    
     for(i = 0; i < 8; i++) {
-        pstu->mu1Hold[i] = 0;                         // 淇濈暀瀛楄妭
+        pstu->mu1Hold[i] = 0;                         // 娣囨繄鏆€鐎涙濡�
     }
     //----------------------------------------------//
 
@@ -240,7 +240,7 @@ void FillFlowData(STUNBFLOWDATA *pstu)
 
 /*******************************************************************************
 * Function Name  : FillFlowTail
-* Description    : 濉厖娴侀噺闃熷垪鏁版嵁
+* Description    : 婵夘偄鍘栧ù渚€鍣洪梼鐔峰灙閺佺増宓�
 * Input          : None
 * Output         : None
 * Return         : None
@@ -254,15 +254,15 @@ void FillFlowTail(STUNBFLOWDATA *pstu)
 
 
 /*******************************************************************************
-*	鍑� 鏁� 鍚�: InitFlowData
-*	鍔熻兘璇存槑: 鍒濆鍖栨椂锛屾祦閲忔暟鎹棤鏁�
-*	褰�    鍙�: 鏃�
-*	杩� 鍥� 鍊�: 鏃�  
+*	閸戯拷 閺侊拷 閸氾拷: InitFlowData
+*	閸旂喕鍏樼拠瀛樻: 閸掓繂顫愰崠鏍ㄦ閿涘本绁﹂柌蹇旀殶閹诡喗妫ら弫锟�
+*	瑜帮拷    閸欙拷: 閺冿拷
+*	鏉╋拷 閸ワ拷 閸婏拷: 閺冿拷  
 *******************************************************************************/
 //void InitFlowData(void)
 //{
 //    uint16_t i ,j;
-//    // 娴侀噺鍒濆€煎叏閮芥棤鏁�
+//    // 濞翠線鍣洪崚婵嗏偓鐓庡弿闁姤妫ら弫锟�
 //    for(i = 0; i < MEMBER_MAX; i++) 
 //	{        
 //        gstuNbFlowData.mu1AddrNData[i][7] = 0x75;    
@@ -273,12 +273,12 @@ void FillFlowTail(STUNBFLOWDATA *pstu)
 //    }
 //    
 
-//    FillFlowData(&gstuNbFlowData);  // 濉厖娴侀噺鏁版嵁   
+//    FillFlowData(&gstuNbFlowData);  // 婵夘偄鍘栧ù渚€鍣洪弫鐗堝祦   
 //}  
 
 /*******************************************************************************
 * Function Name  : MODBUS_CRC16
-* Description    : modbus 鏍￠獙
+* Description    : modbus 閺嶏繝鐛�
 * Input          : None
 * Output         : None
 * Return         : None
@@ -302,7 +302,7 @@ static uint16_t MODBUS_CRC16(uint8_t *updata,uint16_t len)
 
 /*******************************************************************************
 * Function Name  : Modbus_3
-* Description    : modbus 璇昏繑鍥�
+* Description    : modbus 鐠囨槒绻戦崶锟�
 * Input          : None
 * Output         : None
 * Return         : None
@@ -312,20 +312,20 @@ int16_t Modbus_3(void)
     uint16_t    i,reg_num;            
     uint8_t     *pchar;
     
-    // 瓒呰繃鏈€澶�125涓瘎瀛樺櫒    
+    // 鐡掑懓绻冮張鈧径锟�125娑擃亜鐦庣€涙ê娅�    
     reg_num = gucUartBuf[2];          
        
     if(reg_num == 0 || reg_num > 250) {
         return(-1);
     }
-    // 瓒呰繃鎺ユ敹缁撴瀯浣撶殑闀垮害 
+    // 鐡掑懓绻冮幒銉︽暪缂佹挻鐎担鎾舵畱闂€鍨 
     if(reg_num > sizeof(STUSERCOMDATA)) {
         return(-1);
     } 
 
     pchar = (uint8_t *)&gstuSerComData;    		
   
-    // 楂樹綆浣嶄氦鎹�(瑙ｇ爜鎺ユ敹鐨勬暟鎹�) 
+    // 妤傛ü缍嗘担宥勬唉閹癸拷(鐟欙絿鐖滈幒銉︽暪閻ㄥ嫭鏆熼幑锟�) 
     for(i = 0; i < reg_num; i += 2)
     {	
         pchar[i]      = gucUartBuf[i + 4];
@@ -345,7 +345,7 @@ static uint16_t gucTxd3Cnt = 0;
 static uint16_t gucRxd3Cnt = 0;
 /*******************************************************************************
 * Function Name  : Flow_Data_Rec
-* Description    : 澶勭悊浠嶤OM3鍥炰紶鐨勬暟鎹�
+* Description    : 婢跺嫮鎮婃禒宥M3閸ョ偘绱堕惃鍕殶閹癸拷
 * Input          : None
 * Output         : None
 * Return         : None
@@ -354,18 +354,18 @@ void Flow_Data_Rec(void)
 {
     uint16_t    ret = 0;    	
     uint16_t    cnt = 0;  
-    // 鎷疯礉涓插彛鎺ユ敹鐨勬暟鎹�
+    // 閹风柉绀夋稉鎻掑經閹恒儲鏁归惃鍕殶閹癸拷
     cnt =  comMemCpy(COM3,(uint8_t *)gucUartBuf);                                        
-    // 璇�2涓瘎瀛樺櫒杩斿洖鐨勯暱搴�
+    // 鐠囷拷2娑擃亜鐦庣€涙ê娅掓潻鏂挎礀閻ㄥ嫰鏆辨惔锟�
     if(cnt >= 15)                           
     {     		
         ret = MODBUS_CRC16((uint8_t *)gucUartBuf, cnt);  
-        if(ret == 0)    // 鏍￠獙姝ｇ‘
+        if(ret == 0)    // 閺嶏繝鐛欏锝団€�
         {           
             if(gucUartBuf[0] == 0x68 && gucUartBuf[34] == 0x16)
             {            
                 ret = Modbus_3();     
-                if(ret == 0)        // 璇绘垚鍔�
+                if(ret == 0)        // 鐠囩粯鍨氶崝锟�
                 {                  
                     gucRxd3Cnt += 1;                        
                 }
@@ -376,7 +376,7 @@ void Flow_Data_Rec(void)
 
 /*******************************************************************************
 * Function Name  : ProcUart3Rec
-* Description    : 澶勭悊浠嶤OM3鍥炰紶鐨勬暟鎹�
+* Description    : 婢跺嫮鎮婃禒宥M3閸ョ偘绱堕惃鍕殶閹癸拷
 * Input          : None
 * Output         : None
 * Return         : None
@@ -386,7 +386,7 @@ void ProcUart3Rec(void)
     uart3_len2 = GetRxCount(COM3);                           
     if((uart3_len1 > 0) && (uart3_len1 == uart3_len2))	    
     {									
-        if(uart3_len1 <= UART3_RX_BUF_SIZE)         // 瀛楃涓查暱搴﹂檺鍒�
+        if(uart3_len1 <= UART3_RX_BUF_SIZE)         // 鐎涙顑佹稉鏌ユ毐鎼达箓妾洪崚锟�
         {	                      
             Flow_Data_Rec();									           
         }													
@@ -395,17 +395,17 @@ void ProcUart3Rec(void)
 }
 
 
-// 璇绘祦閲忓€�
-#if HAIFENG == 1    // Mbus鎬荤嚎琛�
+// 鐠囩粯绁﹂柌蹇撯偓锟�
+#if HAIFENG == 1    // Mbus閹崵鍤庣悰锟�
 static uint8_t TxdBuf3[22] = {0xFE,0xFE,0xFE,0xFE,0xFE,0xFE
                                 ,0X68,0X10,0X10,0X01,0X40,0X30,0X01,0X33,0X78,0X01,0x03,0x1F,0X90,0X00,0X58,0X16};
-#else               // 澶╀俊鐢电浠〃
+#else               // 婢垛晙淇婇悽鐢殿梿娴狀亣銆�
 static uint8_t TxdBuf3[16] = {0x08, 0x04, 0x10, 0x18, 0x00, 0x14, 0x74, 0x5B};
 #endif
 
 /*******************************************************************************
 * Function Name  : FlowConnect
-* Description    : 璇绘祦閲忚鏁版嵁(01 03 00 08 00 14 C4 07)  
+* Description    : 鐠囩粯绁﹂柌蹇氼吀閺佺増宓�(01 03 00 08 00 14 C4 07)  
 * Input          : None
 * Output         : None
 * Return         : None
@@ -417,14 +417,14 @@ uint8_t FlowConnect(void)
     uint8_t     i; 
     uint8_t     cnt;    
     //-----------------------------------------//     
-    // 濡傛灉闂归挓鏍囧織琚浣嶏紝璇存槑鍙互杩涘叆寰呮満鐘舵€佷簡锛屼笉瑕佹墽琛屾绋嬪簭浜�;
+    // 婵″倹鐏夐梻褰掓寭閺嶅洤绻旂悮顐㈩槻娴ｅ稄绱濈拠瀛樻閸欘垯浜掓潻娑樺弳瀵板懏婧€閻樿埖鈧椒绨￠敍灞肩瑝鐟曚焦澧界悰灞绢劃缁嬪绨禍锟�;
     if(gstuFlag.mbAlmF == 0) 
     {
         gucTxd3Cnt = 0;
         gucRxd3Cnt = 0;
         return 0;
     }   
-    // 濡傛灉宸茬粡浣胯兘NB鍙戦€侊紝璇存槑485鎬荤嚎鏁版嵁宸茶鍙栦簡,涓嶈鎵ц姝ょ▼搴忎簡;
+    // 婵″倹鐏夊鑼病娴ｈ儻鍏楴B閸欐垿鈧緤绱濈拠瀛樻485閹崵鍤庨弫鐗堝祦瀹歌尪顕伴崣鏍︾啊,娑撳秷顩﹂幍褑顢戝銈団柤鎼村繋绨�;
     if(gstuFlag.mbNbEn > 0) 
     {
         gucTxd3Cnt = 0;
@@ -433,14 +433,14 @@ uint8_t FlowConnect(void)
     }  
     //-----------------------------------------//       
   
-    if(gucRxd3Cnt > 0)          // 鍙鎺ユ敹鎴愬姛1娆★紝鍗冲彲閫€鍑�
+    if(gucRxd3Cnt > 0)          // 閸欘亣顩﹂幒銉︽暪閹存劕濮�1濞嗏槄绱濋崡鍐插讲闁偓閸戯拷
     {
         ret = 1;
     }
     else
     {
         gucTxd3Cnt += 1;        
-        if(gucTxd3Cnt <= 3)     // 鏈€澶氬彂閫�3娆�
+        if(gucTxd3Cnt <= 3)     // 閺堚偓婢舵艾褰傞柅锟�3濞嗭拷
         {
             gucRxd3Cnt = 0;
             cnt = gstuMbusFlowData.flow_cnt;
@@ -453,16 +453,16 @@ uint8_t FlowConnect(void)
         else
         {   
             ret = 1;            
-//            gu4FlowTot = FLOW_INVAL;    // 鏃犳晥鏁版嵁                    
+//            gu4FlowTot = FLOW_INVAL;    // 閺冪姵鏅ラ弫鐗堝祦                    
         }
     }
     //-----------------------------------------//
-    if(ret > 0)                 // 鎺ユ敹瀹屾瘯
+    if(ret > 0)                 // 閹恒儲鏁圭€瑰本鐦�
     {               
         gucTxd3Cnt = 0;
         gucRxd3Cnt = 0;
         gstuMbusFlowData.flow_cnt += 1;
-        // 濉厖鏁版嵁
+        // 婵夘偄鍘栭弫鐗堝祦
         FillFlowData(&gstuNbFlowData);    
     }   
         

@@ -33,7 +33,7 @@ FLOWADDRSET		addrcache;
 void SaveHead(uint32_t pageaddr,STRRCDHEAD *pstu)
 {
     uint32_t addr;      
-	 addr = ADDR_PAGE0;   
+	addr = ADDR_PAGE0;   
 //============================================================================//       
     pstu->mu1Mark  = MARK_RCRD;           
 //----------------------------------------------------------------------------//      
@@ -53,32 +53,32 @@ void SaveHead(uint32_t pageaddr,STRRCDHEAD *pstu)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void ReadRcdHead(void)
+uint8_t ReadRcdHead(void)
 {    
-      
-
 	uint32_t    addr;  
 	uint8_t  i;
 
     if(isEEPRomOK>0)
     {    
 		addr = ADDR_PAGE0; 
-		EepRd(addr + sizeof(STRRCDHEAD) - 1,(uint8_t *)erom,1);   
+		EepRd(addr + sizeof(STRRCDHEAD) - 1, (uint8_t *)erom, 1);   
         if(erom[0] == MARK_RCRD)        // 读取记录标记
         {   
-            EepRd(addr,(uint8_t *)erom,sizeof(STRRCDHEAD));                                        
-            memcpy((uint8_t *)&gstuRcdHead, erom, sizeof(STRRCDHEAD));                     
+            EepRd(addr, (uint8_t *)erom, sizeof(STRRCDHEAD));                                        
+            memcpy((uint8_t *)&gstuRcdHead, erom, sizeof(STRRCDHEAD));    
+			return 0;                 
         }
 		else
 		{
 			gstuRcdHead.mu1PageIn = 0;
-			for(i=0;i<11;i++)
+			for(i=0;i<8;i++)
 			{
 				gstuRcdHead.mu1Rsv[i] = 0;
 			}
+			return 1;
 		}
-    }
-    
+    } 
+	return 1;  
 }    
 
 /*******************************************************************************
@@ -111,22 +111,20 @@ void SaveRcdHead(STRRCDHEAD *pstu)
 void SaveRecord(STUNBFLOWDATA *pstu)
 {
     uint32_t    addr = 0;
-
     uint16_t    len = 0;
-
    //--------------------------//      
     ReadRcdHead(); 
 	gstuRcdHead.mu1PageIn += 1;
-	if(gstuRcdHead.mu1PageIn > 11)
+	if(gstuRcdHead.mu1PageIn > 8)
 	{
-		gstuRcdHead.mu1PageIn = 1;
+		gstuRcdHead.mu1PageIn = 8;
 	}
-	gstuRcdHead.mu1Rsv[gstuRcdHead.mu1PageIn] = 1;
+	gstuRcdHead.mu1Rsv[gstuRcdHead.mu1PageIn - 1] = 1;
 	SaveRcdHead(&gstuRcdHead);
 	len = sizeof(STUNBFLOWDATA);
-	memcpy(erom,(uint8_t *)pstu,len);  
-	addr = RCRD_ADR2 + (gstuRcdHead.mu1PageIn*256);
-	EepWr(addr,(uint8_t *)erom,len);    // 写入eep
+	memcpy(erom,(uint8_t *)pstu, len);  
+	addr = RCRD_ADR2 + ((gstuRcdHead.mu1PageIn - 1)*256);
+	EepWr(addr, (uint8_t *)erom, len);    // 写入eep
 }
 
 /*
@@ -134,34 +132,31 @@ void SaveRecord(STUNBFLOWDATA *pstu)
 脉冲采集板数据读取
 ********************************************************************************
 */
-uint32_t ReadRecord(STUNBFLOWDATA *pstu)
+uint8_t ReadRecord(STUNBFLOWDATA *pstu)
 {
     uint32_t    addr = 0;
     uint8_t     i = 0;
     
-    ReadRcdHead();
-    for(i=1;i<11;i++)
+    // ReadRcdHead();
+    for(i=8; i>0; i--)
 	{
-		if(gstuRcdHead.mu1Rsv[i] == 1)
+		if(gstuRcdHead.mu1Rsv[i - 1] == 1)
 		{
-			addr = RCRD_ADR2 + (i*256);
+			addr = RCRD_ADR2 + ((i - 1)*256);
 			EepRd(addr,(uint8_t *)erom,sizeof(STUNBFLOWDATA));                                        
             memcpy((uint8_t *)&gstuNbFlowData, erom, sizeof(STUNBFLOWDATA));        
-			 return i; 
+			return i; 
 		}
 	}    
     return 0;                           // 有记录
 }   
 
 // 读取成功后，修正记录总量
-void ChgRcdHead(uint32_t u4id)
+void ChgRcdHead(uint8_t u4id)
 {
-
-    gstuRcdHead.mu1Rsv[u4id] = 0;
-	SaveRcdHead(&gstuRcdHead);     
-
-
-		
+    gstuRcdHead.mu1Rsv[u4id - 1] = 0;
+	gstuRcdHead.mu1PageIn -= 1;
+	SaveRcdHead(&gstuRcdHead);     		
 }  
 
 

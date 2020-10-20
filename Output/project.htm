@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\Output\project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\Output\project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050169: Last Updated: Fri Oct 16 09:50:08 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050169: Last Updated: Tue Oct 20 16:05:32 2020
 <BR><P>
 <H3>Maximum Stack Usage =        640 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1535,7 +1535,7 @@ Global Symbols
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_GetFlagStatus
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_SendData
 </UL>
-<BR>[Called By]<UL><LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Modbus_3
+<BR>[Called By]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Modbus_3
 </UL>
 
 <P><STRONG><a name="[bd]"></a>ComToUart</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, bsp_uart_fifo.o(.text))
@@ -1555,7 +1555,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcNbComRec
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcBlueData
-<LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcUart3Rec
+<LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcUart3Rec
 </UL>
 
 <P><STRONG><a name="[be]"></a>myMemCpy</STRONG> (Thumb, 170 bytes, Stack size 32 bytes, bsp_uart_fifo.o(.text))
@@ -1564,7 +1564,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_PRIMASK
 </UL>
-<BR>[Called By]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Nb_Data_Rec
+<BR>[Called By]<UL><LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Nb_Data_Rec
 </UL>
 
 <P><STRONG><a name="[c0]"></a>comMemCpy</STRONG> (Thumb, 90 bytes, Stack size 24 bytes, bsp_uart_fifo.o(.text))
@@ -1574,8 +1574,8 @@ Global Symbols
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_PRIMASK
 </UL>
 <BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcBlueData
-<LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowRec
-<LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flow_Data_Rec
+<LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowRec
+<LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flow_Data_Rec
 </UL>
 
 <P><STRONG><a name="[a6]"></a>bsp_InitUart</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, bsp_uart_fifo.o(.text))
@@ -1601,9 +1601,9 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flow_read
 <LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RS485_SendBuf
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendChar
-<LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
-<LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowConnect
-<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Nb_Data_Rec
+<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
+<LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowConnect
+<LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Nb_Data_Rec
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_SendHex
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_AT_NSOCO
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;At_SendStr
@@ -1868,7 +1868,7 @@ Global Symbols
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_SetTime
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWR_RTCAccessCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GerNbClock
+<BR>[Called By]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GerNbClock
 </UL>
 
 <P><STRONG><a name="[26]"></a>TIM2_IRQHandler</STRONG> (Thumb, 232 bytes, Stack size 8 bytes, tim.o(.text))
@@ -2038,9 +2038,9 @@ Global Symbols
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_EE_WriteBytes
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;To_Enter_Wait
 </UL>
-<BR>[Called By]<UL><LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRecord
-<LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveHead
-<LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveFlowAddr
+<BR>[Called By]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRecord
+<LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveHead
+<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveFlowAddr
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveWMPara
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckWmPara2
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveFlow
@@ -2053,8 +2053,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_EE_ReadBytes
 </UL>
-<BR>[Called By]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRecord
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRcdHead
+<BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRecord
+<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRcdHead
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadFlowAddr
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadUserConfig
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckWmPara2
@@ -2076,8 +2076,8 @@ Global Symbols
 <P><STRONG><a name="[112]"></a>CheckSum</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, app_eeprom.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = CheckSum
 </UL>
-<BR>[Called By]<UL><LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
-<LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetCardImsi
+<BR>[Called By]<UL><LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
+<LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetCardImsi
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FillFlowTail
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveWMPara
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckWmPara2
@@ -2147,7 +2147,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckSum
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EepWr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
+<BR>[Called By]<UL><LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
 </UL>
 
 <P><STRONG><a name="[11b]"></a>ReadUserConfig</STRONG> (Thumb, 126 bytes, Stack size 272 bytes, app_eeprom.o(.text), UNUSED)
@@ -2236,12 +2236,15 @@ Global Symbols
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
 
-<P><STRONG><a name="[5d]"></a>NB_DataUpload</STRONG> (Thumb, 220 bytes, Stack size 16 bytes, app_nbiot.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 164<LI>Call Chain = NB_DataUpload &rArr; Nb_SendAsc &rArr; NbSendStr &rArr; comHex2Str &rArr; comSendBuf &rArr; UartSend &rArr; USART_ITConfig
+<P><STRONG><a name="[5d]"></a>NB_DataUpload</STRONG> (Thumb, 290 bytes, Stack size 24 bytes, app_nbiot.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 172<LI>Call Chain = NB_DataUpload &rArr; Nb_SendAsc &rArr; NbSendStr &rArr; comHex2Str &rArr; comSendBuf &rArr; UartSend &rArr; USART_ITConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_ms
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRecord
+<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRcdHead
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FillFlowTail
 <LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FillFlowData
+<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChgRcdHead
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;At_SendStr
 <LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Nb_SendAsc
 </UL>
@@ -2256,39 +2259,39 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[12c]"></a>Asc2Hex</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, app_nbrsv.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GerNbClock
-<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AscReConv
-<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgDecode
+<P><STRONG><a name="[12f]"></a>Asc2Hex</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, app_nbrsv.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GerNbClock
+<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AscReConv
+<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgDecode
 </UL>
 
-<P><STRONG><a name="[12b]"></a>AscReConv</STRONG> (Thumb, 228 bytes, Stack size 36 bytes, app_nbrsv.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Asc2Hex
+<P><STRONG><a name="[12e]"></a>AscReConv</STRONG> (Thumb, 228 bytes, Stack size 36 bytes, app_nbrsv.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Asc2Hex
 </UL>
 
-<P><STRONG><a name="[12d]"></a>GerNbClock</STRONG> (Thumb, 236 bytes, Stack size 32 bytes, app_nbrsv.o(.text))
+<P><STRONG><a name="[130]"></a>GerNbClock</STRONG> (Thumb, 236 bytes, Stack size 32 bytes, app_nbrsv.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = GerNbClock &rArr; Set_Time &rArr; CorrectRtc
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_Time
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Asc2Hex
+<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Asc2Hex
 </UL>
-<BR>[Called By]<UL><LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgDecode
+<BR>[Called By]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgDecode
 </UL>
 
-<P><STRONG><a name="[130]"></a>GetCardImsi</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, app_nbrsv.o(.text))
+<P><STRONG><a name="[133]"></a>GetCardImsi</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, app_nbrsv.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = GetCardImsi &rArr; CheckSum
 </UL>
 <BR>[Calls]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckSum
 </UL>
-<BR>[Called By]<UL><LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
+<BR>[Called By]<UL><LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
 </UL>
 
-<P><STRONG><a name="[131]"></a>Nb_Data_Rec</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, app_nbrsv.o(.text))
+<P><STRONG><a name="[134]"></a>Nb_Data_Rec</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, app_nbrsv.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 180<LI>Call Chain = Nb_Data_Rec &rArr; MsgDecode &rArr; GerNbClock &rArr; Set_Time &rArr; CorrectRtc
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendBuf
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;myMemCpy
-<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgDecode
+<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgDecode
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcNbComRec
 </UL>
@@ -2297,7 +2300,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 188<LI>Call Chain = ProcNbComRec &rArr; Nb_Data_Rec &rArr; MsgDecode &rArr; GerNbClock &rArr; Set_Time &rArr; CorrectRtc
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetRxCount
-<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Nb_Data_Rec
+<LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Nb_Data_Rec
 </UL>
 <BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -2310,7 +2313,7 @@ Global Symbols
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CalBatPer
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_DataUpload
-<LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowConnect
+<LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowConnect
 </UL>
 
 <P><STRONG><a name="[12a]"></a>FillFlowTail</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, app_rs485.o(.text))
@@ -2321,26 +2324,26 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_DataUpload
 </UL>
 
-<P><STRONG><a name="[132]"></a>Modbus_3</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, app_rs485.o(.text), UNUSED)
+<P><STRONG><a name="[135]"></a>Modbus_3</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, app_rs485.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartTxd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flow_Data_Rec
+<BR>[Called By]<UL><LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flow_Data_Rec
 </UL>
 
-<P><STRONG><a name="[133]"></a>Flow_Data_Rec</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, app_rs485.o(.text), UNUSED)
+<P><STRONG><a name="[136]"></a>Flow_Data_Rec</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, app_rs485.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comMemCpy
-<LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Modbus_3
-<LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MODBUS_CRC16
+<LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Modbus_3
+<LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MODBUS_CRC16
 </UL>
-<BR>[Called By]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcUart3Rec
+<BR>[Called By]<UL><LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcUart3Rec
 </UL>
 
-<P><STRONG><a name="[135]"></a>ProcUart3Rec</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, app_rs485.o(.text), UNUSED)
+<P><STRONG><a name="[138]"></a>ProcUart3Rec</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, app_rs485.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetRxCount
-<LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flow_Data_Rec
+<LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flow_Data_Rec
 </UL>
 
-<P><STRONG><a name="[136]"></a>FlowConnect</STRONG> (Thumb, 178 bytes, Stack size 16 bytes, app_rs485.o(.text), UNUSED)
+<P><STRONG><a name="[139]"></a>FlowConnect</STRONG> (Thumb, 178 bytes, Stack size 16 bytes, app_rs485.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendBuf
 <LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FillFlowData
 </UL>
@@ -2350,16 +2353,16 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comMemCpy
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetRxCount
-<LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
+<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
 </UL>
 <BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[139]"></a>FlowRec</STRONG> (Thumb, 220 bytes, Stack size 544 bytes, app_mbus.o(.text))
+<P><STRONG><a name="[13c]"></a>FlowRec</STRONG> (Thumb, 220 bytes, Stack size 544 bytes, app_mbus.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 568<LI>Call Chain = FlowRec &rArr; comMemCpy
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comMemCpy
-<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flow_read
 </UL>
@@ -2371,48 +2374,60 @@ Global Symbols
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendBuf
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Init
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
-<LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowRec
+<LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+<LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowRec
 </UL>
 <BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[13c]"></a>SaveHead</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, app_record.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EepWr
+<P><STRONG><a name="[13f]"></a>SaveHead</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, app_record.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = SaveHead &rArr; EepWr &rArr; BSP_EE_WriteBytes &rArr; i2c_SendByte &rArr; i2c_Delay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRcdHead
+<BR>[Calls]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EepWr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRcdHead
 </UL>
 
-<P><STRONG><a name="[13d]"></a>ReadRcdHead</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, app_record.o(.text), UNUSED)
+<P><STRONG><a name="[12b]"></a>ReadRcdHead</STRONG> (Thumb, 96 bytes, Stack size 16 bytes, app_record.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = ReadRcdHead &rArr; EepRd &rArr; BSP_EE_ReadBytes &rArr; i2c_SendByte &rArr; i2c_Delay
+</UL>
+<BR>[Calls]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EepRd
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_DataUpload
+<LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRecord
+</UL>
+
+<P><STRONG><a name="[140]"></a>SaveRcdHead</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, app_record.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = SaveRcdHead &rArr; SaveHead &rArr; EepWr &rArr; BSP_EE_WriteBytes &rArr; i2c_SendByte &rArr; i2c_Delay
+</UL>
+<BR>[Calls]<UL><LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveHead
+</UL>
+<BR>[Called By]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRecord
+<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChgRcdHead
+</UL>
+
+<P><STRONG><a name="[141]"></a>SaveRecord</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, app_record.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EepRd
-</UL>
-<BR>[Called By]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRecord
-<LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRecord
-</UL>
-
-<P><STRONG><a name="[13e]"></a>SaveRcdHead</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, app_record.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveHead
-</UL>
-<BR>[Called By]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChgRcdHead
-<LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRecord
-</UL>
-
-<P><STRONG><a name="[13f]"></a>SaveRecord</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, app_record.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRcdHead
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRcdHead
+<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRcdHead
+<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRcdHead
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EepWr
 </UL>
 
-<P><STRONG><a name="[140]"></a>ReadRecord</STRONG> (Thumb, 68 bytes, Stack size 16 bytes, app_record.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRcdHead
+<P><STRONG><a name="[12c]"></a>ReadRecord</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, app_record.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = ReadRecord &rArr; EepRd &rArr; BSP_EE_ReadBytes &rArr; i2c_SendByte &rArr; i2c_Delay
+</UL>
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EepRd
 </UL>
+<BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_DataUpload
+</UL>
 
-<P><STRONG><a name="[141]"></a>ChgRcdHead</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, app_record.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRcdHead
+<P><STRONG><a name="[12d]"></a>ChgRcdHead</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, app_record.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = ChgRcdHead &rArr; SaveRcdHead &rArr; SaveHead &rArr; EepWr &rArr; BSP_EE_WriteBytes &rArr; i2c_SendByte &rArr; i2c_Delay
+</UL>
+<BR>[Calls]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRcdHead
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_DataUpload
 </UL>
 
 <P><STRONG><a name="[11d]"></a>ReadFlowAddr</STRONG> (Thumb, 120 bytes, Stack size 272 bytes, app_record.o(.text))
@@ -2424,19 +2439,19 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitUserConfig
 <LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitFlowAddr
-<LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
+<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
 </UL>
 
 <P><STRONG><a name="[142]"></a>InitFlowAddr</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, app_record.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadFlowAddr
 </UL>
 
-<P><STRONG><a name="[138]"></a>SaveFlowAddr</STRONG> (Thumb, 72 bytes, Stack size 280 bytes, app_record.o(.text))
+<P><STRONG><a name="[13b]"></a>SaveFlowAddr</STRONG> (Thumb, 72 bytes, Stack size 280 bytes, app_record.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 360<LI>Call Chain = SaveFlowAddr &rArr; EepWr &rArr; BSP_EE_WriteBytes &rArr; i2c_SendByte &rArr; i2c_Delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EepWr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
+<BR>[Called By]<UL><LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
 </UL>
 
 <P><STRONG><a name="[4f]"></a>rand</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, rand.o(.text))
@@ -2448,10 +2463,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[116]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRecord
-<LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRecord
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRcdHead
-<LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
+<BR><BR>[Called By]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRecord
+<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NbSetPara
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRecord
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveTotFlow
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadUserConfig
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckWmPara2
@@ -2460,7 +2474,7 @@ Global Symbols
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadTotFlow1
 </UL>
 
-<P><STRONG><a name="[13b]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text))
+<P><STRONG><a name="[13e]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flow_read
 </UL>
 
@@ -2484,8 +2498,8 @@ Global Symbols
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_Reset
 </UL>
 
-<P><STRONG><a name="[13a]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowRec
+<P><STRONG><a name="[13d]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowRec
 </UL>
 
 <P><STRONG><a name="[21c]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
@@ -2496,7 +2510,7 @@ Global Symbols
 
 <P><STRONG><a name="[d6]"></a>strlen</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, strlen.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RS485_SendStr
-<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgDecode
+<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgDecode
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_SendHex
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;At_SendStr
 </UL>
@@ -2735,32 +2749,32 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_DataUpload
 </UL>
 
-<P><STRONG><a name="[12e]"></a>MsgDecode</STRONG> (Thumb, 462 bytes, Stack size 40 bytes, app_nbrsv.o(.text))
+<P><STRONG><a name="[131]"></a>MsgDecode</STRONG> (Thumb, 462 bytes, Stack size 40 bytes, app_nbrsv.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 164<LI>Call Chain = MsgDecode &rArr; GerNbClock &rArr; Set_Time &rArr; CorrectRtc
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
-<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GerNbClock
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Asc2Hex
-<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_PRIMASK
+<LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GerNbClock
+<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Asc2Hex
+<LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_PRIMASK
 </UL>
-<BR>[Called By]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Nb_Data_Rec
-</UL>
-
-<P><STRONG><a name="[12f]"></a>__set_PRIMASK</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, app_nbrsv.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgDecode
+<BR>[Called By]<UL><LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Nb_Data_Rec
 </UL>
 
-<P><STRONG><a name="[134]"></a>MODBUS_CRC16</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, app_rs485.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flow_Data_Rec
+<P><STRONG><a name="[132]"></a>__set_PRIMASK</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, app_nbrsv.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgDecode
 </UL>
 
-<P><STRONG><a name="[137]"></a>NbSetPara</STRONG> (Thumb, 540 bytes, Stack size 120 bytes, app_uart1.o(.text))
+<P><STRONG><a name="[137]"></a>MODBUS_CRC16</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, app_rs485.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flow_Data_Rec
+</UL>
+
+<P><STRONG><a name="[13a]"></a>NbSetPara</STRONG> (Thumb, 540 bytes, Stack size 120 bytes, app_uart1.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 480<LI>Call Chain = NbSetPara &rArr; SaveFlowAddr &rArr; EepWr &rArr; BSP_EE_WriteBytes &rArr; i2c_SendByte &rArr; i2c_Delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendBuf
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveFlowAddr
-<LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetCardImsi
+<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveFlowAddr
+<LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetCardImsi
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadFlowAddr
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveWMPara
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckSum

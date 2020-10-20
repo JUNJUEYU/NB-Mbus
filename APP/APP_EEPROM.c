@@ -366,14 +366,13 @@ uint8_t CheckWmPara1(void)
 //----------------------------------------------------------------------------//               
     addr = ADDR_PAGE3;                   // page3??    
     // ???????????
-    EepRd(addr + sizeof(STRWMPARA) - 1,(uint8_t *)urom,1);
+    EepRd(addr + sizeof(STRWMPARA) - 1, (uint8_t *)urom, 1);
     if(urom[0] == MARK_CODE)
     {
-        EepRd(addr,(uint8_t *)urom,sizeof(STRWMPARA));
-        CheckSum(urom,(sizeof(STRWMPARA)-1)); 
+        EepRd(addr, (uint8_t *)urom, sizeof(STRWMPARA));
+        CheckSum(urom, (sizeof(STRWMPARA)-1)); 
 		memcpy((uint8_t *)&gstuWmPara, (uint8_t *)urom,  sizeof(STRWMPARA));            
 		return 1;              
-
     }  
 //----------------------------------------------------------------------------//
 //    addr = ADDR_PAGE7;                   // page7??    
@@ -537,11 +536,7 @@ void SaveTotFlow(STRWMTOT *pstu)
 void InitUserConfig(void)
 {
 	uint8_t i;
-//    uint8_t status1 = 0;
-//    uint8_t status2 = 0;
-//    
-//    status1 = status1;
-//    status2 = status2;
+
     //-----------------------------------------//     
  
     isEEPRomOK = 0;
@@ -556,8 +551,7 @@ void InitUserConfig(void)
     if(isEEPRomOK > 0)
     {  
         //--------------------------// 读取设置参数
-        CheckWmPara1();    
-//        status2 = CheckWmPara2();        
+        CheckWmPara1();          
 		ReadFlowAddr();
         //--------------------------//               
         gstuNbPara.IP_ADDR[0] = gstuWmPara.IP_ADDR[0];

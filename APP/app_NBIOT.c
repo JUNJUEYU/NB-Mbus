@@ -611,7 +611,7 @@ uint8_t NB_SendHex(uint8_t *pch,uint16_t *pw,uint16_t dly)
 *******************************************************************************/
 uint8_t NB_DataUpload(void)
 {
-//    uint32_t    u4id    = 0;
+    uint8_t     record_point = 0;
     uint16_t    *pw = NULL;   
     uint8_t     uct = 0;  
     uint8_t     ret = 0;
@@ -639,34 +639,29 @@ uint8_t NB_DataUpload(void)
           
        
         case NBTRANS_STEP+1:            // 上传存储数据
-			ret = 1;
-//            if(*pw == 0)                //首次进入
-//            {                                                
-//                u4id = ReadRecord(&tstuNbFlowData);   
-// //                FillFlowTail(&tstuNbFlowData);
-//                if(u4id == 0)           // 记录空
-//                {
-//                    ret = 1;            // 进入下一步
-//                    break;              
-//                }
-//            }         
-           
-//            ret = Nb_SendAsc((uint8_t *)&tstuNbFlowData,   sizeof(STUNBFLOWDATA),   pw,     NBTR_DELAY3); 
-//            if(gstuNbSta.nbrxd)         // 应答成功
-//            {   
-//                gstuNbSta.nbrxd = 0;                                            
-//                ChgRcdHead(u4id);    // 删除该条记录  
-// 				u4id = ReadRecord(&tstuNbFlowData);
-// 				if(u4id == 0)
-// 				{
-// 					ret = 1;
-// 				}
-// 				else
-// 				{
-// 					ret = 0;
-// 				}
-                
-//            }                 
+            if(*pw == 0)
+            {
+                if(ReadRcdHead())
+                {
+                    ret = 1;
+                    break;
+                }
+                record_point = ReadRecord(&gstuNbFlowData);
+                if (record_point == 0)
+                {
+                    ret = 1;
+                    break;
+                }
+            }
+
+			
+            Nb_SendAsc((uint8_t *)&gstuNbFlowData,    sizeof(STUNBFLOWDATA),  pw,     NBTR_DELAY3);
+            if(gstuNbSta.nbrxd)
+            {
+                ChgRcdHead(record_point);
+                gstuNbSta.nbrxd = 0;
+                *pw = 0;
+            }   
             break;   
           
         case NBTRANS_STEP+2:        // 延时等待                               

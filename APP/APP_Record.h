@@ -11,12 +11,9 @@
 // 记录头
 typedef struct 
 {                             
-
-    uint8_t    mu1PageIn;              // 记录序号
-      
-    uint8_t     mu1Rsv[11];              // 记录标记
+    uint8_t    mu1PageIn;              // 记录序号     
+    uint8_t     mu1Rsv[8];              // 记录标记
 	uint8_t     mu1Mark;              // 记录标记
-
 }STRRCDHEAD;                            // 16bytes
 
 typedef struct
@@ -33,9 +30,9 @@ void SaveRecord(STUNBFLOWDATA *pstu);
 void InitFlowAddr(void);
 uint8_t ReadFlowAddr(void);
 void SaveFlowAddr(uint8_t *pnbrsv); 
-
-uint32_t ReadRecord(STUNBFLOWDATA *pstu);
-void ChgRcdHead(uint32_t u4id);
+uint8_t ReadRcdHead(void);
+uint8_t ReadRecord(STUNBFLOWDATA *pstu);
+void ChgRcdHead(uint8_t u4id);
 
 #endif
 

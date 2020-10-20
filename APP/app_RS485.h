@@ -15,43 +15,43 @@
 #define APP_RS485_H_
 /*typedef struct
 {
-    uint16_t    u2Reg09;            // Õı ÀÛ¼ÆÁ÷Á¿£¨µÍ16bit)   
-    uint16_t    u2Reg10;            // Õı ÀÛ¼ÆÁ÷Á¿£¨¸ß16bit)   
-    uint16_t    u2Reg11;            // Õı ÀÛ¼ÆÁ÷Á¿µÄĞ¡Êı²¿·Ö£¨µÍ16bit)
-    uint16_t    u2Reg12;            // Õı ÀÛ¼ÆÁ÷Á¿µÄĞ¡Êı²¿·Ö£¨¸ß16bit)
+    uint16_t    u2Reg09;            // æ­£ ç´¯è®¡æµé‡ï¼ˆä½16bit)   
+    uint16_t    u2Reg10;            // æ­£ ç´¯è®¡æµé‡ï¼ˆé«˜16bit)   
+    uint16_t    u2Reg11;            // æ­£ ç´¯è®¡æµé‡çš„å°æ•°éƒ¨åˆ†ï¼ˆä½16bit)
+    uint16_t    u2Reg12;            // æ­£ ç´¯è®¡æµé‡çš„å°æ•°éƒ¨åˆ†ï¼ˆé«˜16bit)
     
-    uint16_t    u2Reg13;            // ¸º ÀÛ¼ÆÁ÷Á¿£¨µÍ16bit)
-    uint16_t    u2Reg14;            // ¸º ÀÛ¼ÆÁ÷Á¿£¨¸ß16bit)
-    uint16_t    u2Reg15;            // ¸º ÀÛ¼ÆÁ÷Á¿µÄĞ¡Êı²¿·Ö£¨µÍ16bit)
-    uint16_t    u2Reg16;            // ¸º ÀÛ¼ÆÁ÷Á¿µÄĞ¡Êı²¿·Ö£¨¸ß16bit)
+    uint16_t    u2Reg13;            // è´Ÿ ç´¯è®¡æµé‡ï¼ˆä½16bit)
+    uint16_t    u2Reg14;            // è´Ÿ ç´¯è®¡æµé‡ï¼ˆé«˜16bit)
+    uint16_t    u2Reg15;            // è´Ÿ ç´¯è®¡æµé‡çš„å°æ•°éƒ¨åˆ†ï¼ˆä½16bit)
+    uint16_t    u2Reg16;            // è´Ÿ ç´¯è®¡æµé‡çš„å°æ•°éƒ¨åˆ†ï¼ˆé«˜16bit)
     
-    uint16_t    u2Reg[8];           // ÈÈÁ¿Öµ(²»ĞèÒª )
+    uint16_t    u2Reg[8];           // çƒ­é‡å€¼(ä¸éœ€è¦ )
    
-    uint16_t    u2Reg25;		    // ¾»ÀÛ¼ÆÁ÷Á¿£¨µÍ16bit): µÚ25¸ö¼Ä´æÆ÷,µØÖ·:0x18
-    uint16_t    u2Reg26;	        // ¾»ÀÛ¼ÆÁ÷Á¿£¨¸ß16bit): µÚ26¸ö¼Ä´æÆ÷,µØÖ·:0x19
+    uint16_t    u2Reg25;		    // å‡€ç´¯è®¡æµé‡ï¼ˆä½16bit): ç¬¬25ä¸ªå¯„å­˜å™¨,åœ°å€:0x18
+    uint16_t    u2Reg26;	        // å‡€ç´¯è®¡æµé‡ï¼ˆé«˜16bit): ç¬¬26ä¸ªå¯„å­˜å™¨,åœ°å€:0x19
     
-	uint16_t    u2Reg_Rsv[107];     // 107 = (125 - 18)¸ö¼Ä´æÆ÷
-}STUSERCOMDATA;                     // ×Ü¹²125¸ö¼Ä´æÆ÷  */
-// modbus¶Á·µ»Ø ¼Ä´æÆ÷¶¨Òå
+	uint16_t    u2Reg_Rsv[107];     // 107 = (125 - 18)ä¸ªå¯„å­˜å™¨
+}STUSERCOMDATA;                     // æ€»å…±125ä¸ªå¯„å­˜å™¨  */
+// modbusè¯»è¿”å› å¯„å­˜å™¨å®šä¹‰
 typedef struct
 {
-    uint16_t    flow_addr[10][7];            // Ë®±íµØÖ·
-    uint16_t    flow_data[10][5];            // Ë®±íÊı¾İ 
-    uint16_t    flow_date[7];                // ³­±íÈÕÆÚ
-    uint16_t    flow_cnt ;                    // ³­±í¼ÆÊıÆ÷
-    uint16_t    flow_max ;                    // ×î´óË®±íºÅ
+    uint16_t    flow_addr[10][7];            // æ°´è¡¨åœ°å€
+    uint16_t    flow_data[10][5];            // æ°´è¡¨æ•°æ® 
+    uint16_t    flow_date[7];                // æŠ„è¡¨æ—¥æœŸ
+    uint16_t    flow_cnt ;                    // æŠ„è¡¨è®¡æ•°å™¨
+    uint16_t    flow_max ;                    // æœ€å¤§æ°´è¡¨å·
     
-}STUSERCOMDATA;                     // ×Ü¹²125¸ö¼Ä´æÆ÷       	
+}STUSERCOMDATA;                     // æ€»å…±125ä¸ªå¯„å­˜å™¨       	
 
 
 
-#define     MEMBER_MAX             10     // ³ÉÔ±×ÜÊı
-#define     MEMBER_SIZE            12      // µ¥¸ö³ÉÔ±Õ¼ÓÃ×Ö½ÚÊı
-// nbÉÏ´«µÄÁ÷Á¿Êı¾İ
+#define     MEMBER_MAX             10     // æˆå‘˜æ€»æ•°
+#define     MEMBER_SIZE            12      // å•ä¸ªæˆå‘˜å ç”¨å­—èŠ‚æ•°
+// nbä¸Šä¼ çš„æµé‡æ•°æ®
 typedef struct
 {  
     uint8_t     mu1Apart[4];
-    uint32_t    mu4StuCnt;          // ½á¹¹Ìå×Ü³¤¶È     
+    uint32_t    mu4StuCnt;          // ç»“æ„ä½“æ€»é•¿åº¦     
 //----------------------------------//     
     uint32_t    mu4WaterNum;
     uint16_t    mu2DtuID;
@@ -73,7 +73,7 @@ typedef struct
 	uint8_t    mu1DevBat;
     uint8_t     mu1Check;           
     uint8_t     mu1Tail;         
-}STUNBFLOWDATA;                     // Í¨¹ıNBÉÏ´«µÄÁ÷Á¿Êı¾İ
+}STUNBFLOWDATA;                     // é€šè¿‡NBä¸Šä¼ çš„æµé‡æ•°æ®
 
 extern STUNBFLOWDATA    gstuNbFlowData;   
 extern STUSERCOMDATA    gstuMbusFlowData; 
