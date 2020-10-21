@@ -3,11 +3,11 @@
         {
             "name": "Win32",
             "includePath": [
-                "D:\\项目列表\\嵌入式开发\\STM32\\NB总线表\\APP",
-                "D:\\项目列表\\嵌入式开发\\STM32\\NB总线表\\BSP",
-                "D:\\项目列表\\嵌入式开发\\STM32\\NB总线表\\CMSIS",
-                "D:\\项目列表\\嵌入式开发\\STM32\\NB总线表\\FWlib\\inc",
-                "D:\\项目列表\\嵌入式开发\\STM32\\NB总线表\\User"
+                "E:\\工作内容\\NB_Mbus\\NB-Mbus\\APP",
+                "E:\\工作内容\\NB_Mbus\\NB-Mbus\\BSP",
+                "E:\\工作内容\\NB_Mbus\\NB-Mbus\\CMSIS",
+                "E:\\工作内容\\NB_Mbus\\NB-Mbus\\FWlib\\inc",
+                "E:\\工作内容\\NB_Mbus\\NB-Mbus\\User"
             ],
             "defines": [
                 "_DEBUG",
