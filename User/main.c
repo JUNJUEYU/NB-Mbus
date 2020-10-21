@@ -194,7 +194,7 @@ int main( void )
 			}
 			else if((addrcache.addrEn))
 			{
-				gstuFlag.mbWorkF = TRANS
+				gstuFlag.mbWorkF = TRANS;
 			}
         }         
         else
