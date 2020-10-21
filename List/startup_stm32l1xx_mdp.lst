@@ -533,11 +533,10 @@ ARM Macro Assembler    Page 9
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=..\output\startup_stm32l1xx_mdp.d -o..\output\startup_stm32l1xx_md
-p.o -ID:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE -IC:\Keil_v5\ARM\PACK\Keil
-\STM32L1xx_DFP\1.2.0\Device\Include -IC:\Keil_v5\ARM\CMSIS\Include --predefine=
-"__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 515" --predefine="STM32
-L151xB SETA 1" --list=..\list\startup_stm32l1xx_mdp.lst ..\CMSIS\startup_stm32l
-1xx_mdp.s
+p.o -IE:\工作内容\NB_Mbus\NB-Mbus\User\RTE -IG:\Keil_v5\ARM\PACK\Keil\STM32L1xx
+_DFP\1.2.0\Device\Include -IG:\Keil_v5\ARM\CMSIS\Include --predefine="__MICROLI
+B SETA 1" --predefine="__UVISION_VERSION SETA 516" --predefine="STM32L151xB SET
+A 1" --list=..\list\startup_stm32l1xx_mdp.lst ..\CMSIS\startup_stm32l1xx_mdp.s
 
 
 

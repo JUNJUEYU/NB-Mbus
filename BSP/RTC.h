@@ -6,7 +6,7 @@
 #include "stdio.h"
 
 /*
-ʱ������
+鏃堕棿璁剧疆
 */
 typedef struct {
   uint8_t year, month, day, hours, minutes, seconds;
@@ -14,16 +14,16 @@ typedef struct {
 
 
 
-#pragma pack (1)			                // �ֽڶ���		
+#pragma pack (1)			                // 瀛楄妭瀵归綈		
 typedef struct 
 {
       uint8_t 	mu1Head1;                               // 0x68
       uint8_t 	mu1Head2; 			                    // 0x10
 
-      TTime     mRtcTime;                               // ʵʱʱ��
+      TTime     mRtcTime;                               // 瀹炴椂鏃堕挓
       //---------------------------------------------------------//  33bytes		
       uint8_t 	mu1Check; 			                    // sum 	
-      uint8_t 	mu1Tail; 			                    // β
+      uint8_t 	mu1Tail; 			                    // 灏�
       //---------------------------------------------------------//  35bytes
 }STRWMACK;
 #pragma pack ()

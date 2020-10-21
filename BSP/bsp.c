@@ -16,7 +16,7 @@ void Gpio_Cfg(void)
 {   
     GPIO_InitTypeDef   GPIO_InitStructure;     
  
-#if 1   // ¶Ô¹¦ºÄºÜ¹Ø¼ü,²»ÒªÒÅÂ©(Ê¡µç50ua)    
+#if 1   // å¯¹åŠŸè€—å¾ˆå…³é”®,ä¸è¦é—æ¼(çœç”µ50ua)    
     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOH, ENABLE); 
     GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;
     GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_DOWN;
@@ -26,7 +26,7 @@ void Gpio_Cfg(void)
     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOH, DISABLE);        
 #endif  
     
-#if 1   // ¶Ô¹¦ºÄºÜ¹Ø¼ü,²»ÒªÒÅÂ©(Ê¡µç40ua)
+#if 1   // å¯¹åŠŸè€—å¾ˆå…³é”®,ä¸è¦é—æ¼(çœç”µ40ua)
     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE); 
     GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;
     GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_DOWN;
@@ -40,7 +40,7 @@ void Gpio_Cfg(void)
     
     GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;   
     GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_DOWN;      
-    GPIO_InitStructure.GPIO_Pin         = 0x9fff;               // PA13.PA14ÎªSWD½Ó¿Ú
+    GPIO_InitStructure.GPIO_Pin         = 0x9fff;               // PA13.PA14ä¸ºSWDæ¥å£
     GPIO_Init(GPIOA,&GPIO_InitStructure);  
 #if 1
     GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;   
@@ -56,8 +56,8 @@ void Gpio_Cfg(void)
     GPIO_InitStructure.GPIO_Pin         = 0xffff;          
     GPIO_Init(GPIOB,&GPIO_InitStructure);  
     
-    // µçÂ·°åÉÏÓĞÉÏÀ­µç×è£¬ËùÒÔÒªÓÃCPUµÄÄÚ²¿ÉÏÀ­¡¢»ò²»À­;
-    // ÒòÎªpb10/pb11Íâ½Ó485Ğ¾Æ¬£¬Òò´Ë£¬²»ÒªÀ­µç×è£¬ÒÔ·À¶îÍâ·Ñµç¡£
+    // ç”µè·¯æ¿ä¸Šæœ‰ä¸Šæ‹‰ç”µé˜»ï¼Œæ‰€ä»¥è¦ç”¨CPUçš„å†…éƒ¨ä¸Šæ‹‰ã€æˆ–ä¸æ‹‰;
+    // å› ä¸ºpb10/pb11å¤–æ¥485èŠ¯ç‰‡ï¼Œå› æ­¤ï¼Œä¸è¦æ‹‰ç”µé˜»ï¼Œä»¥é˜²é¢å¤–è´¹ç”µã€‚
     GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;                     
     GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_NOPULL;          
     GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_10 | GPIO_Pin_11;
@@ -68,25 +68,25 @@ void Gpio_Cfg(void)
     GPIO_InitStructure.GPIO_OType       = GPIO_OType_PP;
     GPIO_InitStructure.GPIO_Speed       = GPIO_Speed_400KHz;      
 
-    NBRESET_OFF();      // ÖÃµÍ
+    NBRESET_OFF();      // ç½®ä½
     GPIO_InitStructure.GPIO_Pin         = NBRESET_PIN;
     GPIO_Init(NBRESET_PORT, &GPIO_InitStructure);               // PA1:nbiot_rst
     
 #if 0    
-    LRRESET_ON();       // ÖÃ¸ß
+    LRRESET_ON();       // ç½®é«˜
     GPIO_InitStructure.GPIO_Pin         = RESET_PIN;
     GPIO_Init( RESET_IOPORT, &GPIO_InitStructure );             // PA8:lora_rst    
 #endif    
                  
-    POWER_OFF();        // ÖÃµÍ(²»¸øµç)
+    POWER_OFF();        // ç½®ä½(ä¸ç»™ç”µ)
     GPIO_InitStructure.GPIO_Pin         = POWER_PIN;        
     GPIO_Init(POWER_PORT,&GPIO_InitStructure);                  //PB7:nbiot_pwr      
 	
-	LED_OFF();        // ÖÃµÍ(²»¸øµç)
+	LED_OFF();        // ç½®ä½(ä¸ç»™ç”µ)
     GPIO_InitStructure.GPIO_Pin         = LED_PIN;        
     GPIO_Init(LED_PORT,&GPIO_InitStructure);                  //PB7:nbiot_pwr    
 	
-	MBUS_OFF() ;        // ÖÃµÍ(²»¸øµç)
+	MBUS_OFF() ;        // ç½®ä½(ä¸ç»™ç”µ)
     GPIO_InitStructure.GPIO_Pin         = MBUS_PIN;        
     GPIO_Init(MBUS_PORT,&GPIO_InitStructure);                  //PB7:nbiot_pwr   
 //--------------------------------------------------------------//    
@@ -153,7 +153,7 @@ void Gpio_WkCfg(void)
 //--------------------------------------------------------------//  
 }
 /*
-µÍ¹¦ºÄ¹Ü½ÅÅäÖÃ
+ä½åŠŸè€—ç®¡è„šé…ç½®
 */
 void Gpio_LpCfg(void)
 {  
@@ -190,7 +190,7 @@ void Gpio_LpCfg(void)
     GPIO_Init(GPIOA,&GPIO_InitStructure); 
     
     
-    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_8;           // PA8:°´¼ü
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_8;           // PA8:æŒ‰é”®
     GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;     
     GPIO_Init(GPIOA, &GPIO_InitStructure);    
  
@@ -221,7 +221,7 @@ void Gpio_LpCfg(void)
     GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_UP;     
     GPIO_Init(GPIOA, &GPIO_InitStructure);       
 
-    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_7;              // ×ÓµçÔ´
+    GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_7;              // å­ç”µæº
     GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_NOPULL;     
     GPIO_Init(GPIOA, &GPIO_InitStructure);    
 }
@@ -232,7 +232,7 @@ void mbus_shutdown(void)
 	
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);  
 	GPIO_InitStructure.GPIO_Mode        = GPIO_Mode_IN;
-	GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_7;              // ×ÓµçÔ´
+	GPIO_InitStructure.GPIO_Pin         = GPIO_Pin_7;              // å­ç”µæº
 	GPIO_InitStructure.GPIO_Speed       = GPIO_Speed_400KHz;
     GPIO_InitStructure.GPIO_PuPd        = GPIO_PuPd_NOPULL;     
     GPIO_Init(GPIOA, &GPIO_InitStructure);  
@@ -242,9 +242,9 @@ void LowPowerSet(void)
 
     //----------------------------------//                                    
     /*
-    1.µçÔ´¹ÜÀíÆ÷Îªrange1:1.8v; 
-    2.µçÔ´¹ÜÀíÆ÷Îªrange2:1.5v; 
-    3.µçÔ´¹ÜÀíÆ÷Îªrange3:1.2v                     
+    1.ç”µæºç®¡ç†å™¨ä¸ºrange1:1.8v; 
+    2.ç”µæºç®¡ç†å™¨ä¸ºrange2:1.5v; 
+    3.ç”µæºç®¡ç†å™¨ä¸ºrange3:1.2v                     
     */
     PWR_VoltageScalingConfig(PWR_VoltageScaling_Range3);       
     while(PWR_GetFlagStatus(PWR_FLAG_VOS) != RESET) {
@@ -252,11 +252,11 @@ void LowPowerSet(void)
     //----------------------------------//   
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR , ENABLE);       
     //----------------------------------//   
-    PWR_PVDCmd(DISABLE);                // ½ûÓÃPVD
-    PWR_UltraLowPowerCmd(ENABLE);       // ¹Ø±ÕVref
-    PWR_FastWakeUpCmd(ENABLE);          // ¼Ó¿ìÆô¶¯ËÙ¶È
+    PWR_PVDCmd(DISABLE);                // ç¦ç”¨PVD
+    PWR_UltraLowPowerCmd(ENABLE);       // å…³é—­Vref
+    PWR_FastWakeUpCmd(ENABLE);          // åŠ å¿«å¯åŠ¨é€Ÿåº¦
     //----------------------------------//    
-    DBGMCU_Config(DBGMCU_STOP,DISABLE); // ½ûÓÃµ÷ÊÔ½Ó¿Ú                 
+    DBGMCU_Config(DBGMCU_STOP,DISABLE); // ç¦ç”¨è°ƒè¯•æ¥å£                 
 }
 
 
@@ -265,7 +265,7 @@ void To_Enter_Stop(void)
     Gpio_LpCfg();
 //    LowPowerSet();
     //----------------------------------------------------------//
-    RTC_AlartSet();                     // ÉèÖÃÄÖÖÓ»½ĞÑ
+    RTC_AlartSet();                     // è®¾ç½®é—¹é’Ÿå”¤é†’
     //----------------------------------------------------------//       
 //	DBGMCU_Config(DBGMCU_STOP, ENABLE);
 //	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR , ENABLE);    
@@ -282,7 +282,7 @@ void To_Enter_Wait(uint32_t n)
 #if 1
     Delay_ms(n); 
 #else
-    RtcWakeUp_ms(n);                   // RTC¶¨Ê±»½ĞÑ
+    RtcWakeUp_ms(n);                   // RTCå®šæ—¶å”¤é†’
     PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);   
 #endif  
 }    
@@ -291,15 +291,15 @@ void To_Enter_Wait(uint32_t n)
 
 void Exit_Ctrl(uint8_t En)
 {  
-    if(En == 0)         // ÆÁ±ÎPB10/PB11ÖĞ¶Ï
+    if(En == 0)         // å±è”½PB10/PB11ä¸­æ–­
     {   
-        EXTI->IMR &= (uint32_t)(~EXTI_Line10);      // ÆÁ±Î#10ÖĞ¶Ï
-        EXTI->IMR &= (uint32_t)(~EXTI_Line11);      // ÆÁ±Î#11ÖĞ¶Ï
+        EXTI->IMR &= (uint32_t)(~EXTI_Line10);      // å±è”½#10ä¸­æ–­
+        EXTI->IMR &= (uint32_t)(~EXTI_Line11);      // å±è”½#11ä¸­æ–­
         
-        EXTI->EMR &= (uint32_t)(~EXTI_Line10);      // ÆÁ±Î#10ÊÂ¼ş
-        EXTI->EMR &= (uint32_t)(~EXTI_Line11);      // ÆÁ±Î#11ÊÂ¼ş
+        EXTI->EMR &= (uint32_t)(~EXTI_Line10);      // å±è”½#10äº‹ä»¶
+        EXTI->EMR &= (uint32_t)(~EXTI_Line11);      // å±è”½#11äº‹ä»¶
     }
-    else                // È¡ÏûÆÁ±ÎÎ»
+    else                // å–æ¶ˆå±è”½ä½
     { 
         EXTI->IMR |= (uint32_t)(EXTI_Line10);    
         EXTI->EMR |= (uint32_t)(EXTI_Line10);    
@@ -316,7 +316,7 @@ void EXTI_Cfg(void)
     EXTI_InitTypeDef EXTI_InitStructure;
     	    
     /* Enable SYSCFG clock */
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);              // Íâ²¿ÖĞ¶ÏĞèÒªÊ¹ÄÜ
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);              // å¤–éƒ¨ä¸­æ–­éœ€è¦ä½¿èƒ½
                
 	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource8);               //??????  
     
@@ -334,35 +334,35 @@ void EXTI_Cfg(void)
 	
 	
 	
-//    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource10);      // Á¬½ÓÍâ²¿ÖĞ¶Ï
-//    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource11);      // Á¬½ÓÍâ²¿ÖĞ¶Ï
-//    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource12);      // Á¬½ÓÍâ²¿ÖĞ¶Ï
+//    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource10);      // è¿æ¥å¤–éƒ¨ä¸­æ–­
+//    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource11);      // è¿æ¥å¤–éƒ¨ä¸­æ–­
+//    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource12);      // è¿æ¥å¤–éƒ¨ä¸­æ–­
 //    /* Connect EXTI15 Line to Pb15 pin */    
-//    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource15);      // DIO_0:Á¬½ÓÍâ²¿ÖĞ¶Ï   
+//    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource15);      // DIO_0:è¿æ¥å¤–éƒ¨ä¸­æ–­   
 //       
 //#if UART3_FIFO_EN == 0
-//    EXTI_InitStructure.EXTI_Line        = EXTI_Line10;                  //ÖĞ¶ÏÏß10      
+//    EXTI_InitStructure.EXTI_Line        = EXTI_Line10;                  //ä¸­æ–­çº¿10      
 //    EXTI_InitStructure.EXTI_Trigger     = EXTI_Trigger_Falling;
 //    EXTI_InitStructure.EXTI_LineCmd     = ENABLE;      
-//    EXTI_Init(&EXTI_InitStructure);                                     //³õÊ¼»¯       
+//    EXTI_Init(&EXTI_InitStructure);                                     //åˆå§‹åŒ–       
 //    
-//    EXTI_InitStructure.EXTI_Line        = EXTI_Line11;                  //ÖĞ¶ÏÏß11          
+//    EXTI_InitStructure.EXTI_Line        = EXTI_Line11;                  //ä¸­æ–­çº¿11          
 //    EXTI_InitStructure.EXTI_Trigger     = EXTI_Trigger_Falling;
 //    EXTI_InitStructure.EXTI_LineCmd     = ENABLE;  
-//    EXTI_Init(&EXTI_InitStructure);                                     //³õÊ¼»¯    
+//    EXTI_Init(&EXTI_InitStructure);                                     //åˆå§‹åŒ–    
 //#endif  
 //    
 //	
-//    EXTI_InitStructure.EXTI_Line        = EXTI_Line12;                  //ÖĞ¶ÏÏß12          
+//    EXTI_InitStructure.EXTI_Line        = EXTI_Line12;                  //ä¸­æ–­çº¿12          
 //    EXTI_InitStructure.EXTI_Trigger     = EXTI_Trigger_Falling;
 //    EXTI_InitStructure.EXTI_LineCmd     = ENABLE;  
 //    EXTI_Init(&EXTI_InitStructure);     
 //    
 //  
-//    EXTI_InitStructure.EXTI_Line        = EXTI_Line15;                  //ÖĞ¶ÏÏß15
-//    EXTI_InitStructure.EXTI_Trigger     = EXTI_Trigger_Rising;          //ÉÏÉıÑØ´¥·¢ 
+//    EXTI_InitStructure.EXTI_Line        = EXTI_Line15;                  //ä¸­æ–­çº¿15
+//    EXTI_InitStructure.EXTI_Trigger     = EXTI_Trigger_Rising;          //ä¸Šå‡æ²¿è§¦å‘ 
 //    EXTI_InitStructure.EXTI_LineCmd     = ENABLE;                       
-//    EXTI_Init(&EXTI_InitStructure);                                     //³õÊ¼»¯   
+//    EXTI_Init(&EXTI_InitStructure);                                     //åˆå§‹åŒ–   
 //      
 //    
 //    NVIC_InitStructure.NVIC_IRQChannel = EXTI15_10_IRQn;  
@@ -394,16 +394,16 @@ void RTC_EXIT(void)
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
     //-----------------------------------------------------//   
-    /*Alarm±ØĞëÅäÖÃEXTI_Line17ÖĞ¶Ï*/
+    /*Alarmå¿…é¡»é…ç½®EXTI_Line17ä¸­æ–­*/
     EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt; 
     EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
     EXTI_InitStructure.EXTI_LineCmd = ENABLE; 
     EXTI_InitStructure.EXTI_Line = EXTI_Line17; 
     EXTI_Init(&EXTI_InitStructure); 
         
-    /*Ê¹ÄÜ RTC Alarm Interrupt */
+    /*ä½¿èƒ½ RTC Alarm Interrupt */
     NVIC_InitStructure.NVIC_IRQChannel = RTC_Alarm_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 9;      // Òª¸ßÓÚWakeupÖĞ¶Ï
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 9;      // è¦é«˜äºWakeupä¸­æ–­
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
@@ -415,7 +415,7 @@ void RTC_EXIT(void)
 void bsp_Init(void)
 { 
      /* 
-    1.ÓÅÏÈ¼¶·Ö×éÉèÖÃÎª4£¬¿ÉÅäÖÃ0-15¼¶ÇÀÕ¼Ê½ÓÅÏÈ¼¶,0¼¶×ÓÓÅÏÈ¼¶£¬¼´²»´æÔÚ×ÓÓÅÏÈ¼¶¡£    
+    1.ä¼˜å…ˆçº§åˆ†ç»„è®¾ç½®ä¸º4ï¼Œå¯é…ç½®0-15çº§æŠ¢å å¼ä¼˜å…ˆçº§,0çº§å­ä¼˜å…ˆçº§ï¼Œå³ä¸å­˜åœ¨å­ä¼˜å…ˆçº§ã€‚    
     */
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4); 
     //-------------------------//
@@ -436,8 +436,8 @@ void bsp_Init(void)
     RTC_EXIT();        
     //-------------------------//  
     /*
-    1.·ÅÔÚ³õÊ¼»¯µÄ×îºóÃæ£¬
-    2.¿ÉÒÔ·ÀÖ¹Ã»ÓĞ¿¼ÂÇµÄÇé¿ö£¨½ÚÔ¼2ua£©
+    1.æ”¾åœ¨åˆå§‹åŒ–çš„æœ€åé¢ï¼Œ
+    2.å¯ä»¥é˜²æ­¢æ²¡æœ‰è€ƒè™‘çš„æƒ…å†µï¼ˆèŠ‚çº¦2uaï¼‰
     */
     LowPowerSet();   
     //-------------------------//     

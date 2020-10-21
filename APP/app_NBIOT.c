@@ -18,7 +18,7 @@
 #define     NBTR_DELAY3                 300             // NB上传延时3
 //------------------------------------------------------------------------------//
 #define     NBERRCNT_MAX                15              // nb模块错误次数
-#define     NBRECONN_MAX                3               // nb重新连接次数
+#define     NBRECONN_MAX                2               // nb重新连接次数
 #define     USENDMAX                    320             // NB上传的字符数  
 //------------------------------------------------------------------------------//  
 __IO        uint32_t    gulNBTransRtc   = 0;            // NB上传时间备份
@@ -317,7 +317,8 @@ uint8_t NB_Connect(void)
         if(gucLoopCnt >= NBRECONN_MAX)          
         {
             gucLoopCnt = NBRECONN_MAX;
-            if (trans_history_date == 0)
+            retrans_cnt += 1;
+            if ((trans_history_date == 0) & (retrans_cnt > RETRANS_MAX))
             {
                 SaveRecord(&gstuNbFlowData);
             }
@@ -686,6 +687,7 @@ uint8_t NB_DataUpload(void)
 			gstuFlag.mbNbEn     = 0;    // 使能NB标志                      
 			gstuNbSta.steps     = 0;
 			gstuNbSta.errcnt    = 0;        
+            retrans_cnt         = 0;
             break;              
         default:
             break;        

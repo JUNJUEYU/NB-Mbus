@@ -2,7 +2,7 @@
 ..\output\delay.o: ..\BSP\delay.h
 ..\output\delay.o: ..\CMSIS\stm32l1xx.h
 ..\output\delay.o: ..\CMSIS\core_cm3.h
-..\output\delay.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\delay.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\delay.o: ..\CMSIS\core_cmInstr.h
 ..\output\delay.o: ..\CMSIS\core_cmFunc.h
 ..\output\delay.o: ..\CMSIS\system_stm32l1xx.h

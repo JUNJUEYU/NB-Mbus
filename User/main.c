@@ -4,7 +4,8 @@
 #define	SYSTEM_SPEED 20								//系统运行速率
 
 __IO	uint16_t    gu2BlueCnt = 0;                 //蓝牙触发计数器
-__IO    uint16_t    gu2IdlCnt = 0;                 	//空闲时间计数器         
+__IO    uint16_t    gu2IdlCnt = 0;                 	//空闲时间计数器
+__IO 	uint8_t		retrans_cnt = 0;				//重传计数器         
 __IO    STRFLAG     gstuFlag;                       //标志结构体
 uint32_t uid[3];									//处理器ID		
 	
@@ -86,27 +87,55 @@ static void CheckBlueSta(void)	//检查蓝牙连接
     }  
 } 
 
-void SleepTime(void)
+void SleepTime(uint8_t cnt)
 {
 	uint8_t time = 0;
 	uint32_t seed = 0;
 	uint32_t *id = (uint32_t *)0x1FF80050;
-	
-	seed = id[2];	//取ID低32位
+	TTime	mRtc;
 
-	srand(seed);
-	time= rand()%59; 
-	gstuWmPara.mu1Tr_Mi = time;
+	if(cnt == 0)	
+	{
+		seed = id[2];	//取ID低32位
+
+		srand(seed);
+		time= rand()%59; 
+		gstuWmPara.mu1Tr_Mi = time;
+		
+		seed = seed - time;
+		srand(seed);
+		time= rand()%59; 
+		gstuWmPara.mu1Tr_Se = time;
+		
+		seed = seed - time;
+		srand(seed);
+		time= rand()%23; 
+		gstuWmPara.mu1Tr_Ho = time;
+	}
 	
-	seed = seed - time;
-	srand(seed);
-	time= rand()%59; 
-	gstuWmPara.mu1Tr_Se = time;
-	
-	seed = seed - time;
-	srand(seed);
-	time= rand()%23; 
-	gstuWmPara.mu1Tr_Ho = time;
+	else if(cnt ==1)
+	{
+		ReadRtcTime(&mRtc);
+		gstuWmPara.mu1Tr_Ho = mRtc.hours + 2;
+		gstuWmPara.mu1Tr_Mi = mRtc.minutes;
+		gstuWmPara.mu1Tr_Se = mRtc.seconds;
+		if(gstuWmPara.mu1Tr_Ho > 23)
+		{
+			gstuWmPara.mu1Tr_Ho -= 24;
+		}
+	}
+
+	else if(cnt == 2)
+	{
+		ReadRtcTime(&mRtc);
+		gstuWmPara.mu1Tr_Ho = mRtc.hours + 8;
+		gstuWmPara.mu1Tr_Mi = mRtc.minutes;
+		gstuWmPara.mu1Tr_Se = mRtc.seconds;
+		if(gstuWmPara.mu1Tr_Ho > 23)
+		{
+			gstuWmPara.mu1Tr_Ho -= 24;
+		}		
+	}
 }
 
 
@@ -124,7 +153,7 @@ int main( void )
 	          
     gstuFlag.mbAlmF = 1;                //闹钟唤醒标志
 
-	SleepTime();						//设置唤醒时间
+	SleepTime(0);						//设置唤醒时间
 	
 	if(GPIO_ReadInputDataBit( BL_STA_PORT, BL_STA_PIN ) != 0)           
 	{
@@ -148,7 +177,12 @@ int main( void )
 			gstuFlag.mbNbEn = 0;
 			NB_Close();                       //清除所有NB标志位   
 			LED_OFF();
-			SleepTime();					  //设置唤醒时间
+			if(retrans_cnt > RETRANS_MAX)
+			{
+				retrans_cnt = 0;
+			}
+			SleepTime(retrans_cnt);					  //设置唤醒时间
+
             To_Enter_Stop(); 				  //进入休眠
 			InitUserConfig();
 			if(addrcache.addrEn)

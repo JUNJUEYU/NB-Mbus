@@ -2,7 +2,7 @@
 ..\output\misc.o: ..\FWlib\inc\misc.h
 ..\output\misc.o: ..\CMSIS\stm32l1xx.h
 ..\output\misc.o: ..\CMSIS\core_cm3.h
-..\output\misc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\misc.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\misc.o: ..\CMSIS\core_cmInstr.h
 ..\output\misc.o: ..\CMSIS\core_cmFunc.h
 ..\output\misc.o: ..\CMSIS\system_stm32l1xx.h

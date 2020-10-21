@@ -15,7 +15,7 @@
 
 
 #define     NBTRANS_STEP                16              // NB????ID
-
+#define     RETRANS_MAX                 2               //重传最大次数
 
 #pragma pack (1)
 typedef struct {
@@ -96,7 +96,7 @@ typedef struct
 //}NBTRANSDATA;
 //#pragma pack ()
 	
-
+extern __IO     uint8_t     retrans_cnt;
 extern __IO     uint8_t     gucCsqValue;
 extern __IO     uint32_t    gulNBTransRtc;
 
