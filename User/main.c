@@ -94,7 +94,7 @@ void SleepTime(uint8_t cnt)
 	uint32_t *id = (uint32_t *)0x1FF80050;
 	TTime	mRtc;
 
-	if(cnt == 0)	
+	if(cnt == 0)	//不重传
 	{
 		seed = id[2];	//取ID低32位
 
@@ -113,10 +113,10 @@ void SleepTime(uint8_t cnt)
 		gstuWmPara.mu1Tr_Ho = time;
 	}
 	
-	else if(cnt ==1)
+	else if(cnt ==1)		//第一次重传
 	{
 		ReadRtcTime(&mRtc);
-		gstuWmPara.mu1Tr_Ho = mRtc.hours + 2;
+		gstuWmPara.mu1Tr_Ho = mRtc.hours + 2;  //2小时后唤醒
 		gstuWmPara.mu1Tr_Mi = mRtc.minutes;
 		gstuWmPara.mu1Tr_Se = mRtc.seconds;
 		if(gstuWmPara.mu1Tr_Ho > 23)
@@ -125,10 +125,10 @@ void SleepTime(uint8_t cnt)
 		}
 	}
 
-	else if(cnt == 2)
+	else if(cnt == 2)		//第二次重传
 	{
 		ReadRtcTime(&mRtc);
-		gstuWmPara.mu1Tr_Ho = mRtc.hours + 8;
+		gstuWmPara.mu1Tr_Ho = mRtc.hours + 6; //6小时后唤醒
 		gstuWmPara.mu1Tr_Mi = mRtc.minutes;
 		gstuWmPara.mu1Tr_Se = mRtc.seconds;
 		if(gstuWmPara.mu1Tr_Ho > 23)
@@ -172,25 +172,29 @@ int main( void )
 //-----------------------------//        
     while(1)
     {       
-		if(gstuFlag.mbAlmF == 0)              //休眠时间    		
+		if(gstuFlag.mbAlmF == 0)				//休眠时间    		
         {              
 			gstuFlag.mbNbEn = 0;
-			NB_Close();                       //清除所有NB标志位   
+			NB_Close();							//清除所有NB标志位   
 			LED_OFF();
-			if(retrans_cnt > RETRANS_MAX)
+			if(retrans_cnt > RETRANS_MAX)		//超过重传最大次数
 			{
 				retrans_cnt = 0;
 			}
-			SleepTime(retrans_cnt);					  //设置唤醒时间
+			SleepTime(retrans_cnt);				//根据重传次数设置唤醒时间
 
-            To_Enter_Stop(); 				  //进入休眠
+            To_Enter_Stop();					//进入休眠
 			InitUserConfig();
-			if(addrcache.addrEn)
+			if((addrcache.addrEn) & (retrans_cnt == 0))
 			{
 				gstuFlag.mbWorkF = READ;
 				MBUS_ON();
 				MbusFlow.flownumber = 0;
 				Delay_ms(500); 
+			}
+			else if((addrcache.addrEn))
+			{
+				gstuFlag.mbWorkF = TRANS
 			}
         }         
         else
