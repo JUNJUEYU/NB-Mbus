@@ -19,6 +19,7 @@
 //-------------------------------------------------------------//
 static      uint8_t             erom[256]       = {0};
 static      STRRCDHEAD          gstuRcdHead;    // 数据记录头
+
 FLOWADDRSET		addrcache;
 
 //-------------------------------------------------------------//
@@ -93,14 +94,12 @@ void SaveRcdHead(STRRCDHEAD *pstu)
     uint32_t    addr = 0;        
     if(isEEPRomOK > 0)
     {
-        //--------------------------//  
         addr = ADDR_PAGE0;
         SaveHead(addr,pstu);        // 记录区
-        
     }
 }  
 
-#define SetBit(x)           (uint32_t)(1UL<<(x&0x1f))
+// #define SetBit(x)           (uint32_t)(1UL<<(x&0x1f))
 
 
 /*
@@ -163,7 +162,7 @@ void ChgRcdHead(uint8_t u4id)
 uint8_t ReadFlowAddr(void)
 {
 	uint8_t i,len ;
-	uint32_t    addr;
+	uint32_t	addr;
 	uint8_t buf[256];
 	
 	addr = ADDR_PAGE5;
@@ -200,9 +199,7 @@ uint8_t ReadFlowAddr(void)
 
 void InitFlowAddr(void)
 {
-
 	ReadFlowAddr();
-	
 }
 
 void SaveFlowAddr(uint8_t *pnbrsv)
@@ -221,8 +218,7 @@ void SaveFlowAddr(uint8_t *pnbrsv)
 		buf[i +2] = addrcache.addrFlow[i] = pnbrsv[i +1];
 	}
 	
-	EepWr(addr ,(uint8_t *)buf,len);
-	
+	EepWr(addr ,(uint8_t *)buf,len);	
 }
 
 /*******************************(END OF FILE)**********************************/

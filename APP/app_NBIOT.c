@@ -26,6 +26,7 @@ __IO        uint32_t    gulNBTransRtc   = 0;            // NB上传时间备份
 static  uint16_t    guNBConDlyCnt       = 0;            // NB联网延时计数
 static  uint16_t    guUpLoadDlyCnt      = 0;            // NB上传延时计数
 static  uint8_t     gucLoopCnt          = 0;            // 重新连接次数
+static  uint8_t 	trans_history_date	= 0;            // 正在传输历史数据
 //------------------------------------------------------------------------------//
 extern uint16_t	sleeping ;
 
@@ -316,6 +317,10 @@ uint8_t NB_Connect(void)
         if(gucLoopCnt >= NBRECONN_MAX)          
         {
             gucLoopCnt = NBRECONN_MAX;
+            if (trans_history_date == 0)
+            {
+                SaveRecord(&gstuNbFlowData);
+            }
             gstuFlag.mbNbEn = 0;    // 清楚NB使能标志           
 #if DBGMODE 
             printf("NB Connect 3 Times.\r\n");               
@@ -639,6 +644,7 @@ uint8_t NB_DataUpload(void)
           
        
         case NBTRANS_STEP+1:            // 上传存储数据
+            trans_history_date = 1;
             if(*pw == 0)
             {
                 if(ReadRcdHead())
@@ -664,7 +670,8 @@ uint8_t NB_DataUpload(void)
             }   
             break;   
           
-        case NBTRANS_STEP+2:        // 延时等待                               
+        case NBTRANS_STEP+2:        // 延时等待    
+            trans_history_date = 0;                           
             ret = At_SendStr((uint8_t *)"AT\r\n",           &gstuNbSta.ackok,   pw,     NBTR_DELAY1);                     
             break;
             
