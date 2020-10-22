@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\Output\project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\Output\project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060020: Last Updated: Wed Oct 21 22:13:07 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050169: Last Updated: Thu Oct 22 08:58:49 2020
 <BR><P>
 <H3>Maximum Stack Usage =        640 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -144,7 +144,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32l1xx_mdp.o(RESET)
 </UL>
-<P><STRONG><a name="[4d]"></a>SleepTime</STRONG> (Thumb, 202 bytes, Stack size 32 bytes, main.o(.text))
+<P><STRONG><a name="[4d]"></a>SleepTime</STRONG> (Thumb, 242 bytes, Stack size 32 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = SleepTime &rArr; ReadRtcTime &rArr; RTC_GetDate
 </UL>
 <BR>[Calls]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRtcTime
@@ -154,7 +154,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[40]"></a>main</STRONG> (Thumb, 738 bytes, Stack size 0 bytes, main.o(.text))
+<P><STRONG><a name="[40]"></a>main</STRONG> (Thumb, 770 bytes, Stack size 0 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 640<LI>Call Chain = main &rArr; flow_read &rArr; FlowRec &rArr; comMemCpy
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbus_shutdown
@@ -1782,7 +1782,7 @@ Global Symbols
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWR_RTCAccessCmd
 </UL>
 
-<P><STRONG><a name="[a9]"></a>RTC_AlartSet</STRONG> (Thumb, 156 bytes, Stack size 24 bytes, rtc.o(.text))
+<P><STRONG><a name="[a9]"></a>RTC_AlartSet</STRONG> (Thumb, 166 bytes, Stack size 24 bytes, rtc.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = RTC_AlartSet &rArr; RTC_SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_ClearITPendingBit
@@ -1848,13 +1848,13 @@ Global Symbols
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FillFlowData
 </UL>
 
-<P><STRONG><a name="[f5]"></a>RTC_TimeShow</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, rtc.o(.text), UNUSED)
+<P><STRONG><a name="[f5]"></a>RTC_TimeShow</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, rtc.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_GetTime
 <LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
-<P><STRONG><a name="[f7]"></a>RTC_DateShow</STRONG> (Thumb, 102 bytes, Stack size 16 bytes, rtc.o(.text), UNUSED)
+<P><STRONG><a name="[f7]"></a>RTC_DateShow</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, rtc.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_GetDate
 <LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf

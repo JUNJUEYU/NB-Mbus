@@ -2,7 +2,7 @@
 ..\output\bsp.o: ..\BSP\bsp.h
 ..\output\bsp.o: ..\CMSIS\stm32l1xx.h
 ..\output\bsp.o: ..\CMSIS\core_cm3.h
-..\output\bsp.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\bsp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\bsp.o: ..\CMSIS\core_cmInstr.h
 ..\output\bsp.o: ..\CMSIS\core_cmFunc.h
 ..\output\bsp.o: ..\CMSIS\system_stm32l1xx.h
@@ -33,9 +33,9 @@
 ..\output\bsp.o: ..\FWlib\inc\stm32l1xx_usart.h
 ..\output\bsp.o: ..\FWlib\inc\stm32l1xx_wwdg.h
 ..\output\bsp.o: ..\FWlib\inc\misc.h
-..\output\bsp.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-..\output\bsp.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-..\output\bsp.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\bsp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\output\bsp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\output\bsp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\output\bsp.o: ..\BSP\delay.h
 ..\output\bsp.o: ..\BSP\TIM.h
 ..\output\bsp.o: ..\BSP\RTC.h

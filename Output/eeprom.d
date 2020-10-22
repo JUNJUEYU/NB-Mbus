@@ -2,7 +2,7 @@
 ..\output\eeprom.o: ..\BSP\EEPROM.h
 ..\output\eeprom.o: ..\CMSIS\stm32l1xx.h
 ..\output\eeprom.o: ..\CMSIS\core_cm3.h
-..\output\eeprom.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\eeprom.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\eeprom.o: ..\CMSIS\core_cmInstr.h
 ..\output\eeprom.o: ..\CMSIS\core_cmFunc.h
 ..\output\eeprom.o: ..\CMSIS\system_stm32l1xx.h

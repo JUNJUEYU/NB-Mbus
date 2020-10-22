@@ -2,7 +2,7 @@
 ..\output\stm32l1xx_adc.o: ..\FWlib\inc\stm32l1xx_adc.h
 ..\output\stm32l1xx_adc.o: ..\CMSIS\stm32l1xx.h
 ..\output\stm32l1xx_adc.o: ..\CMSIS\core_cm3.h
-..\output\stm32l1xx_adc.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\stm32l1xx_adc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\stm32l1xx_adc.o: ..\CMSIS\core_cmInstr.h
 ..\output\stm32l1xx_adc.o: ..\CMSIS\core_cmFunc.h
 ..\output\stm32l1xx_adc.o: ..\CMSIS\system_stm32l1xx.h

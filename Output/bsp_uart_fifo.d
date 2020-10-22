@@ -2,7 +2,7 @@
 ..\output\bsp_uart_fifo.o: ..\BSP\bsp.h
 ..\output\bsp_uart_fifo.o: ..\CMSIS\stm32l1xx.h
 ..\output\bsp_uart_fifo.o: ..\CMSIS\core_cm3.h
-..\output\bsp_uart_fifo.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\bsp_uart_fifo.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\bsp_uart_fifo.o: ..\CMSIS\core_cmInstr.h
 ..\output\bsp_uart_fifo.o: ..\CMSIS\core_cmFunc.h
 ..\output\bsp_uart_fifo.o: ..\CMSIS\system_stm32l1xx.h
@@ -33,9 +33,9 @@
 ..\output\bsp_uart_fifo.o: ..\FWlib\inc\stm32l1xx_usart.h
 ..\output\bsp_uart_fifo.o: ..\FWlib\inc\stm32l1xx_wwdg.h
 ..\output\bsp_uart_fifo.o: ..\FWlib\inc\misc.h
-..\output\bsp_uart_fifo.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-..\output\bsp_uart_fifo.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-..\output\bsp_uart_fifo.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\bsp_uart_fifo.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\output\bsp_uart_fifo.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\output\bsp_uart_fifo.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\output\bsp_uart_fifo.o: ..\BSP\delay.h
 ..\output\bsp_uart_fifo.o: ..\BSP\TIM.h
 ..\output\bsp_uart_fifo.o: ..\BSP\RTC.h

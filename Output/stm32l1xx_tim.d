@@ -2,7 +2,7 @@
 ..\output\stm32l1xx_tim.o: ..\FWlib\inc\stm32l1xx_tim.h
 ..\output\stm32l1xx_tim.o: ..\CMSIS\stm32l1xx.h
 ..\output\stm32l1xx_tim.o: ..\CMSIS\core_cm3.h
-..\output\stm32l1xx_tim.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\stm32l1xx_tim.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\stm32l1xx_tim.o: ..\CMSIS\core_cmInstr.h
 ..\output\stm32l1xx_tim.o: ..\CMSIS\core_cmFunc.h
 ..\output\stm32l1xx_tim.o: ..\CMSIS\system_stm32l1xx.h

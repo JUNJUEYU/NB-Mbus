@@ -113,15 +113,19 @@ void SleepTime(uint8_t cnt)
 		gstuWmPara.mu1Tr_Ho = time;
 	}
 	
-	else if(cnt ==1)		//第一次重传
+	else if(cnt == 1)		//第一次重传
 	{
 		ReadRtcTime(&mRtc);
 		gstuWmPara.mu1Tr_Ho = mRtc.hours + 2;  //2小时后唤醒
-		gstuWmPara.mu1Tr_Mi = mRtc.minutes;
+		gstuWmPara.mu1Tr_Mi = mRtc.minutes + 2;
 		gstuWmPara.mu1Tr_Se = mRtc.seconds;
 		if(gstuWmPara.mu1Tr_Ho > 23)
 		{
 			gstuWmPara.mu1Tr_Ho -= 24;
+		}
+		if(gstuWmPara.mu1Tr_Mi > 59)
+		{
+			gstuWmPara.mu1Tr_Mi -= 60;
 		}
 	}
 
@@ -129,12 +133,16 @@ void SleepTime(uint8_t cnt)
 	{
 		ReadRtcTime(&mRtc);
 		gstuWmPara.mu1Tr_Ho = mRtc.hours + 6; //6小时后唤醒
-		gstuWmPara.mu1Tr_Mi = mRtc.minutes;
+		gstuWmPara.mu1Tr_Mi = mRtc.minutes + 6;
 		gstuWmPara.mu1Tr_Se = mRtc.seconds;
 		if(gstuWmPara.mu1Tr_Ho > 23)
 		{
 			gstuWmPara.mu1Tr_Ho -= 24;
-		}		
+		}	
+		if(gstuWmPara.mu1Tr_Mi > 59)
+		{
+			gstuWmPara.mu1Tr_Mi -= 60;
+		}	
 	}
 }
 
