@@ -267,7 +267,7 @@ void To_Enter_Stop(void)
     //----------------------------------------------------------//
     RTC_AlartSet();                     // 设置闹钟唤醒
     //----------------------------------------------------------//       
-//	DBGMCU_Config(DBGMCU_STOP, ENABLE);
+	DBGMCU_Config(DBGMCU_STOP, ENABLE);
 //	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR , ENABLE);    
     /* Enter Stop Mode */     
     PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);           

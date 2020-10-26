@@ -33,6 +33,7 @@ void SaveFlowAddr(uint8_t *pnbrsv);
 uint8_t ReadRcdHead(void);
 uint8_t ReadRecord(STUNBFLOWDATA *pstu);
 void ChgRcdHead(uint8_t u4id);
+void SaveRcdHead(STRRCDHEAD *pstu);
 
 #endif
 

@@ -17,7 +17,7 @@
 #define     NBTR_DELAY2                 200             // NB上传延时2
 #define     NBTR_DELAY3                 300             // NB上传延时3
 //------------------------------------------------------------------------------//
-#define     NBERRCNT_MAX                15              // nb模块错误次数
+#define     NBERRCNT_MAX                3              // nb模块错误次数
 #define     NBRECONN_MAX                2               // nb重新连接次数
 #define     USENDMAX                    320             // NB上传的字符数  
 //------------------------------------------------------------------------------//  
@@ -29,7 +29,7 @@ static  uint8_t     gucLoopCnt          = 0;            // 重新连接次数
 static  uint8_t 	trans_history_date	= 0;            // 正在传输历史数据
 //------------------------------------------------------------------------------//
 extern uint16_t	sleeping ;
-
+extern	__IO		uint8_t     record_point;
 static uint8_t  Nb_SendAsc(uint8_t *pch, uint16_t len, uint16_t *pw, uint16_t dly);
 //------------------------------------------------------------------------------// 
 
@@ -85,8 +85,9 @@ void TransErrCnt(void)
     if(gstuNbSta.errcnt >= NBERRCNT_MAX)
     {           
         gstuNbSta.errcnt -= 1;        
-        gucLoopCnt = NBRECONN_MAX;          // 直接设最大循环次数     
-        gstuFlag.mbNbEn = 0;                // 清除NB使能标志       
+        gucLoopCnt = NBRECONN_MAX;          // 直接设最大循环次数    
+		gstuNbSta.nsocl = 1; 		
+//        gstuFlag.mbNbEn = 0;                // 清除NB使能标志       
 #if DBGMODE 
         printf("NB Regist Fail.\r\n");
 #endif          
@@ -316,7 +317,8 @@ uint8_t NB_Connect(void)
         gucLoopCnt += 1;             // 重联次数+1
         if(gucLoopCnt >= NBRECONN_MAX)          
         {
-            gucLoopCnt = NBRECONN_MAX;
+//            gucLoopCnt = NBRECONN_MAX;
+			gucLoopCnt = 0;
             retrans_cnt += 1;
             if ((trans_history_date == 0) & (retrans_cnt > RETRANS_MAX))
             {
@@ -400,7 +402,7 @@ uint8_t NB_Connect(void)
             ret = 0;
             if(gucCsqValue < 40)    // 判断信号强度
             {  
-                if(gucCsqValue > 0) {
+                if(gucCsqValue > 10) {
                     ret = 1;              
                 }
             }                                                       
@@ -617,7 +619,7 @@ uint8_t NB_SendHex(uint8_t *pch,uint16_t *pw,uint16_t dly)
 *******************************************************************************/
 uint8_t NB_DataUpload(void)
 {
-    uint8_t     record_point = 0;
+    
     uint16_t    *pw = NULL;   
     uint8_t     uct = 0;  
     uint8_t     ret = 0;
@@ -628,18 +630,17 @@ uint8_t NB_DataUpload(void)
     switch(uct)
     {    
         case NBTRANS_STEP:               //上传实时数据                                            
-			if(*pw == 0)
-			{
-				FillFlowData(&gstuNbFlowData);
-				FillFlowTail(&gstuNbFlowData);
-			}
+//			if(*pw == 0)
+//			{
+//				FillFlowData(&gstuNbFlowData);
+//				FillFlowTail(&gstuNbFlowData);
+//			}
 			
 			ret = Nb_SendAsc((uint8_t *)&gstuNbFlowData,    sizeof(STUNBFLOWDATA),  pw,     NBTR_DELAY3);   
 			if(gstuNbSta.nbrxd)         // 成功标志
 			{
 				ret = 1;
 				gstuNbSta.nbrxd = 0;
-
 			}                           
             break;    
           
@@ -651,28 +652,30 @@ uint8_t NB_DataUpload(void)
                 if(ReadRcdHead())
                 {
                     ret = 1;
+					trans_history_date = 0;   
                     break;
                 }
                 record_point = ReadRecord(&gstuNbFlowData);
                 if (record_point == 0)
                 {
                     ret = 1;
+					trans_history_date = 0;   
                     break;
                 }
             }
 
 			
-            Nb_SendAsc((uint8_t *)&gstuNbFlowData,    sizeof(STUNBFLOWDATA),  pw,     NBTR_DELAY3);
+            ret = Nb_SendAsc((uint8_t *)&gstuNbFlowData,    sizeof(STUNBFLOWDATA),  pw,     NBTR_DELAY3);
             if(gstuNbSta.nbrxd)
             {
                 ChgRcdHead(record_point);
                 gstuNbSta.nbrxd = 0;
+//				ret = 1;
                 *pw = 0;
             }   
             break;   
           
-        case NBTRANS_STEP+2:        // 延时等待    
-            trans_history_date = 0;                           
+        case NBTRANS_STEP+2:        // 延时等待                            
             ret = At_SendStr((uint8_t *)"AT\r\n",           &gstuNbSta.ackok,   pw,     NBTR_DELAY1);                     
             break;
             

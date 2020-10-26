@@ -1,20 +1,24 @@
 
 #include	"includes.h"
 
-#define	SYSTEM_SPEED 20								//Á≥ªÁªüËøêË°åÈÄüÁéá
+#define	SYSTEM_SPEED	20								//œµÕ≥‘À––ÀŸ¬ 
+#define	IDLE_CYCLE		100								//œµÕ≥ø’œ–µ»¥˝÷‹∆⁄
 
-__IO	uint16_t    gu2BlueCnt = 0;                 //ËìùÁâôËß¶ÂèëËÆ°Êï∞Âô®
-__IO    uint16_t    gu2IdlCnt = 0;                 	//Á©∫Èó≤Êó∂Èó¥ËÆ°Êï∞Âô®
-__IO 	uint8_t		retrans_cnt = 0;				//Èáç‰º†ËÆ°Êï∞Âô®         
-__IO    STRFLAG     gstuFlag;                       //Ê†áÂøóÁªìÊûÑ‰Ωì
-uint32_t uid[3];									//Â§ÑÁêÜÂô®ID		
+__IO	uint16_t    gu2BlueCnt = 0;                 //¿∂—¿¥•∑¢º∆ ˝∆˜
+__IO    uint16_t    gu2IdlCnt = 0;                 	//ø’œ– ±º‰º∆ ˝∆˜
+__IO 	uint8_t		retrans_cnt = 0;				//÷ÿ¥´º∆ ˝∆˜         
+__IO    STRFLAG     gstuFlag;                       //±Í÷æΩ·ππÃÂ
+__IO	uint8_t     record_point = 0;
+	STRRCDHEAD          gstuRcdHead1;
+
+uint32_t uid[3];									//¥¶¿Ì∆˜ID		
 	
 	
 void EXTI0_IRQHandler(void)
 {   
     if(EXTI_GetITStatus(EXTI_Line0) != RESET) 
     {           
-        EXTI_ClearFlag(EXTI_Line0);                 //Ê∏ÖÈô§Ê†áÂøó‰∏≠Êñ≠‰Ωç
+        EXTI_ClearFlag(EXTI_Line0);					//«Â≥˝±Í÷æ÷–∂œŒª
         EXTI_ClearITPendingBit(EXTI_Line0);  
 
         printf("setup.\r\n");                   
@@ -25,12 +29,12 @@ void EXTI15_10_IRQHandler(void)
 {               
     if(EXTI_GetITStatus(EXTI_Line11) != RESET) 
     {                    
-        EXTI_ClearFlag(EXTI_Line11);                //Ê∏ÖÈô§Ê†áÂøó‰∏≠Êñ≠‰Ωç             
-        EXTI_ClearITPendingBit( EXTI_Line11);                
+        EXTI_ClearFlag(EXTI_Line11);				//«Â≥˝±Í÷æ÷–∂œŒª             
+        EXTI_ClearITPendingBit(EXTI_Line11);                
           
         if(GPIO_ReadInputDataBit( BL_STA_PORT, BL_STA_PIN ) != 0)           
         {
-            gstuFlag.mBlueF = 1;                    //ËìùÁâôËß¶Âèë
+            gstuFlag.mBlueF = 1;					//¿∂—¿¥•∑¢
 			gstuFlag.mbWorkF = CONFIG;			
         }
     }    
@@ -40,26 +44,26 @@ void EXTI9_5_IRQHandler(void)
 {                
     if(EXTI_GetITStatus(EXTI_Line8) != RESET) 
     {                    
-        EXTI_ClearFlag(EXTI_Line8);             	//Ê∏ÖÈô§Ê†áÂøó‰∏≠Êñ≠‰Ωç
+        EXTI_ClearFlag(EXTI_Line8);					//«Â≥˝±Í÷æ÷–∂œŒª
         EXTI_ClearITPendingBit(EXTI_Line8);
         
         if(GPIO_ReadInputDataBit( EX_KEY_PORT, EX_KEY_PIN ) == 0)         
         {   
-			gstuFlag.mbAlmF = 1;                	//Ëß¶ÂèëÂî§ÈÜí
+			gstuFlag.mbAlmF = 1;                	//¥•∑¢ªΩ–—
 			if(addrcache.addrEn)
 			{
-				gstuFlag.mbWorkF = READ;		//ÊúâÂú∞ÂùÄÔºåÂéªËØªË°®	
+				gstuFlag.mbWorkF = READ;			//”–µÿ÷∑£¨»•∂¡±Ì	
 			}
 			else
 			{
-				gstuFlag.mbWorkF = IDLE;			//Ê≤°Âú∞ÂùÄÔºåÁ©∫Èó≤Á≠âÂæÖÈÖçÁΩÆ
+				gstuFlag.mbWorkF = IDLE;			//√ªµÿ÷∑£¨ø’œ–µ»¥˝≈‰÷√
 			}
         }        
     }
 }
 
 
-static void CheckBlueSta(void)	//Ê£ÄÊü•ËìùÁâôËøûÊé•
+static void CheckBlueSta(void)	//ºÏ≤È¿∂—¿¡¨Ω”
 {
     if(GPIO_ReadInputDataBit( BL_STA_PORT, BL_STA_PIN) != 0)
     {
@@ -94,9 +98,9 @@ void SleepTime(uint8_t cnt)
 	uint32_t *id = (uint32_t *)0x1FF80050;
 	TTime	mRtc;
 
-	if(cnt == 0)	//‰∏çÈáç‰º†
+	if(cnt == 0)	//≤ª÷ÿ¥´
 	{
-		seed = id[2];	//ÂèñID‰Ωé32‰Ωç
+		seed = id[2];	//»°IDµÕ32Œª
 
 		srand(seed);
 		time= rand()%59; 
@@ -113,11 +117,11 @@ void SleepTime(uint8_t cnt)
 		gstuWmPara.mu1Tr_Ho = time;
 	}
 	
-	else if(cnt == 1)		//Á¨¨‰∏ÄÊ¨°Èáç‰º†
+	else if(cnt == 1)		//µ⁄“ª¥Œ÷ÿ¥´
 	{
 		ReadRtcTime(&mRtc);
-		gstuWmPara.mu1Tr_Ho = mRtc.hours + 2;  //2Â∞èÊó∂ÂêéÂî§ÈÜí
-		gstuWmPara.mu1Tr_Mi = mRtc.minutes + 2;
+		gstuWmPara.mu1Tr_Ho = mRtc.hours + 2;  //2–° ±∫ÛªΩ–—
+		gstuWmPara.mu1Tr_Mi = mRtc.minutes + 1;
 		gstuWmPara.mu1Tr_Se = mRtc.seconds;
 		if(gstuWmPara.mu1Tr_Ho > 23)
 		{
@@ -129,11 +133,11 @@ void SleepTime(uint8_t cnt)
 		}
 	}
 
-	else if(cnt == 2)		//Á¨¨‰∫åÊ¨°Èáç‰º†
+	else if(cnt == 2)		//µ⁄∂˛¥Œ÷ÿ¥´
 	{
 		ReadRtcTime(&mRtc);
-		gstuWmPara.mu1Tr_Ho = mRtc.hours + 6; //6Â∞èÊó∂ÂêéÂî§ÈÜí
-		gstuWmPara.mu1Tr_Mi = mRtc.minutes + 6;
+		gstuWmPara.mu1Tr_Ho = mRtc.hours + 6; //6–° ±∫ÛªΩ–—
+		gstuWmPara.mu1Tr_Mi = mRtc.minutes + 1;
 		gstuWmPara.mu1Tr_Se = mRtc.seconds;
 		if(gstuWmPara.mu1Tr_Ho > 23)
 		{
@@ -149,7 +153,7 @@ void SleepTime(uint8_t cnt)
 
 int main( void )
 {             
-    RCC_MSIRangeConfig(RCC_MSIRange_3);  //524k Á≥ªÁªüÊó∂Èíü  
+    RCC_MSIRangeConfig(RCC_MSIRange_3);  //524k œµÕ≥ ±÷”  
     SystemCoreClockUpdate();           
     Delay_ms(100);                                            
     bsp_Init();                         
@@ -158,14 +162,23 @@ int main( void )
 	InitUserConfig();
     gstuMbusFlowData.flow_addr[1][0] = 0X10;
 	LED_ON();
-	          
-    gstuFlag.mbAlmF = 1;                //ÈóπÈíüÂî§ÈÜíÊ†áÂøó
+	         
+#if 0
 
-	SleepTime(0);						//ËÆæÁΩÆÂî§ÈÜíÊó∂Èó¥
+	gstuRcdHead1.mu1PageIn = 0;
+	gstuRcdHead1.mu1Mark = 0;
+	gstuRcdHead1.mu1Rsv[0] = 0;
+	gstuRcdHead1.mu1Rsv[1] = 0;
+	SaveRcdHead(&gstuRcdHead1);
+#endif
+	
+    gstuFlag.mbAlmF = 1;                //ƒ÷÷”ªΩ–—±Í÷æ
+
+	SleepTime(0);						//…Ë÷√ªΩ–— ±º‰
 	
 	if(GPIO_ReadInputDataBit( BL_STA_PORT, BL_STA_PIN ) != 0)           
 	{
-		gstuFlag.mBlueF = 1;           	//ËìùÁâôËß¶Âèë      
+		gstuFlag.mBlueF = 1;           	//¿∂—¿¥•∑¢      
 		gstuFlag.mbWorkF =	CONFIG;			
 	}
 	
@@ -180,18 +193,18 @@ int main( void )
 //-----------------------------//        
     while(1)
     {       
-		if(gstuFlag.mbAlmF == 0)				//‰ºëÁú†Êó∂Èó¥    		
+		if(gstuFlag.mbAlmF == 0)				//–›√ﬂ ±º‰    		
         {              
 			gstuFlag.mbNbEn = 0;
-			NB_Close();							//Ê∏ÖÈô§ÊâÄÊúâNBÊ†áÂøó‰Ωç   
+			NB_Close();							//«Â≥˝À˘”–NB±Í÷æŒª    
 			LED_OFF();
-			if(retrans_cnt > RETRANS_MAX)		//Ë∂ÖËøáÈáç‰º†ÊúÄÂ§ßÊ¨°Êï∞
+			if(retrans_cnt > RETRANS_MAX)		//≥¨π˝÷ÿ¥´◊Ó¥Û¥Œ ˝
 			{
 				retrans_cnt = 0;
 			}
-			SleepTime(retrans_cnt);				//Ê†πÊçÆÈáç‰º†Ê¨°Êï∞ËÆæÁΩÆÂî§ÈÜíÊó∂Èó¥
+			SleepTime(retrans_cnt);				//∏˘æ›÷ÿ¥´¥Œ ˝…Ë÷√ªΩ–— ±º‰
 
-            To_Enter_Stop();					//ËøõÂÖ•‰ºëÁú†
+            To_Enter_Stop();					//Ω¯»Î–›√ﬂ
 			InitUserConfig();
 			if((addrcache.addrEn) & (retrans_cnt == 0))
 			{
@@ -203,6 +216,9 @@ int main( void )
 			else if((addrcache.addrEn))
 			{
 				gstuFlag.mbWorkF = TRANS;
+				gstuFlag.mbNbEn = 1;
+				NBPOWER_ON();
+				Delay_ms(100);
 			}
         }         
         else
@@ -222,34 +238,35 @@ int main( void )
 			
 			else if(gstuFlag.mbWorkF == READ)
 			{		
-				if(Timer >= 1000)		//2000*15ms=30SÊäÑË°®Èó¥Èöî
+				if(Timer >= 1000)		//2000*15ms=30S≥≠±Ìº‰∏Ù
 				{
 					Timer = 0;								
 #if DBGMODE            
 					printf("Now is READ NO.%d.\r\n", (MbusFlow.flownumber + 1));
 #endif   
-					flow_read( MbusFlow.flownumber);	//ÊäÑË°®ÊàêÂäü
+					flow_read( MbusFlow.flownumber);	//≥≠±Ì≥…π¶
 					MbusFlow.flownumber += 1;
 				}
 				
-				if(MbusFlow.flownumber > (MbusFlow.nummax - 1))	//Ë∂ÖËøáÊúÄÂ§ßË°®Âè∑ÔºåÊäÑË°®Â∑•‰ΩúÁªìÊùü
+				if(MbusFlow.flownumber > (MbusFlow.nummax - 1))	//≥¨π˝◊Ó¥Û±Ì∫≈£¨≥≠±Ìπ§◊˜Ω· ¯
 				{			
+					FillFlowData(&gstuNbFlowData);
+					FillFlowTail(&gstuNbFlowData);
 					MbusFlow.flownumber = 0;
 					gstuFlag.mbWorkF = TRANS;
 					gstuFlag.mbNbEn = 1;
-					SleepTimer = 0;
 					mbus_shutdown();
 					NBPOWER_ON();
 					Delay_ms(100);
 				}
 			}
 				 
-			else if(gstuFlag.mbWorkF == TRANS) //ÂÆåÊàêÊäÑË°®Â∑•‰ΩúÔºå‰∏ä‰º†Êï∞ÊçÆ
+			else if(gstuFlag.mbWorkF == TRANS) //ÕÍ≥…≥≠±Ìπ§◊˜£¨…œ¥´ ˝æ›
 			{ 
-				ProcNbComRec();                    // Â§ÑÁêÜUART2Êé•Êî∂  
-				NB_Connect();                      // Âª∫Á´ãËøûÊé•                                                      
-				NB_DataUpload();                   // Êï∞ÊçÆ‰∏ä‰º†				
-				NB_Close();                        // Ê∏ÖÈô§ÊâÄÊúâÊ†áÂøó‰Ωç    
+				ProcNbComRec();                    // ¥¶¿ÌUART2Ω” ’  
+				NB_Connect();                      // Ω®¡¢¡¨Ω”                                                      
+				NB_DataUpload();                   //  ˝æ›…œ¥´				
+				NB_Close();                        // «Â≥˝À˘”–±Í÷æŒª    
 				
 				if(gstuFlag.mbNbEn == 0)
 				{
@@ -258,10 +275,10 @@ int main( void )
 				}
 			}	
 			
-			else if(gstuFlag.mbWorkF == IDLE)	//Á≥ªÁªüÁ©∫Èó≤
+			else if(gstuFlag.mbWorkF == IDLE)	//œµÕ≥ø’œ–
 			{
 				gu2IdlCnt += 1;
-				if(gu2IdlCnt > 100)				   //Á©∫Èó≤Ë∂ÖÊó∂ÔºåËøõÂÖ•Áù°Áú†
+				if(gu2IdlCnt > IDLE_CYCLE)				   //ø’œ–≥¨ ±£¨Ω¯»ÎÀØ√ﬂ
 				{
 					gu2IdlCnt = 0;
 					gstuFlag.mbWorkF = SLEEP;
@@ -269,7 +286,7 @@ int main( void )
 				}			
 			}
 			//----------------------------------// 
-			Delay_ms(SYSTEM_SPEED);	//Á≥ªÁªüËøêË°åÂª∂Êó∂
+			Delay_ms(SYSTEM_SPEED);	//œµÕ≥‘À––—” ±
 			//----------------------------------// 
 		}
 	}

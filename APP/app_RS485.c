@@ -13,8 +13,8 @@
 #include "includes.h"
 
 
-#define     HAIFENG             (1)                 // 濞村嘲鍢插ù渚€鍣虹拋锟�  
-#define     FLOW_INVAL          (0xffffffffUL)      // 閺冪姵鏅ュù渚€鍣�
+#define     HAIFENG             (1)                 // 海峰流量计  
+#define     FLOW_INVAL          (0xffffffffUL)      // 无效流量
 
 
 const uint8_t auchCRCHi[]=
@@ -104,13 +104,13 @@ STUNBFLOWDATA           gstuNbFlowData;
 STUSERCOMDATA           gstuMbusFlowData; 
 //----------------------------------------------------------------------------//
 static  STUSERCOMDATA   gstuSerComData;
-//static  uint32_t        gu4FlowTot      = 0;    // 閸戔偓濞翠線鍣�    
+//static  uint32_t        gu4FlowTot      = 0;    // 净流量    
 static  uint8_t         gucUartBuf[256] = {0};  
 static  uint16_t        uart3_len1,uart3_len2;
 //----------------------------------------------------------------------------//
 /*******************************************************************************
 * Function Name  : GetFlowRecord
-* Description    : 瀵版鍩屽锝冣偓浣界閵嗕礁鍣ｅù渚€鍣洪崐锟�
+* Description    : 得到正、负、净流量值
 * Input          : None
 * Output         : None
 * Return         : None
@@ -119,49 +119,49 @@ static  uint16_t        uart3_len1,uart3_len2;
 //{    
 //    uint32_t ultmp = 0;
 //#if HAIFENG == 1 
-//    // wubo: 濡楀啫鍖楁禍灞绢偧濞喡ゃ€冪€电懓绨查惃鍕礂鐠侇喓鈧拷
-//    // 鐏忓繒顏Ο鈥崇础:妤傛ê婀存担宥勬唉閹癸拷
-//    if(id == 1)         // 濮濓拷 缁鳖垵顓稿ù渚€鍣�
+//    // wubo: 桃山二次次表对应的协议。
+//    // 小端模式:高地位交换
+//    if(id == 1)         // 正 累计流量
 //    {
-//        ultmp = gstuSerComData.u2Reg10;     // 妤傦拷16娴ｏ拷
+//        ultmp = gstuSerComData.u2Reg10;     // 高16位
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg09;    // 娴ｏ拷16娴ｏ拷   
+//        ultmp += gstuSerComData.u2Reg09;    // 低16位   
 //    }  
-//    else if(id == 2)    // 鐠愶拷 缁鳖垵顓稿ù渚€鍣�
+//    else if(id == 2)    // 负 累计流量
 //    {
-//        ultmp = gstuSerComData.u2Reg14;     // 妤傦拷16娴ｏ拷
+//        ultmp = gstuSerComData.u2Reg14;     // 高16位
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg13;    // 娴ｏ拷16娴ｏ拷   
+//        ultmp += gstuSerComData.u2Reg13;    // 低16位   
 //    }
-//    else if(id == 3)    // 閸戔偓 缁鳖垵顓稿ù渚€鍣�
+//    else if(id == 3)    // 净 累计流量
 //    {
-//        ultmp = gstuSerComData.u2Reg26;     // 妤傦拷16娴ｏ拷
+//        ultmp = gstuSerComData.u2Reg26;     // 高16位
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg25;    // 娴ｏ拷16娴ｏ拷      
+//        ultmp += gstuSerComData.u2Reg25;    // 低16位      
 //    }
 //    else
 //    {
 //    }    
 //#else
-//    // wubo: 濡楀啫鍖楁稉鈧▎陇銆冪€电懓绨查惃鍕礂鐠侇喓鈧拷
-//    // 婢堆咁伂濡€崇础閿涙岸鐝崷棰佺秴娑撳秶鏁ゆ禍銈嗗床
-//    if(id == 1)         // 濮濓拷 缁鳖垵顓稿ù渚€鍣�
+//    // wubo: 桃山一次表对应的协议。
+//    // 大端模式：高地位不用交换
+//    if(id == 1)         // 正 累计流量
 //    {
-//        ultmp = gstuSerComData.u2Reg09;     // 妤傦拷16娴ｏ拷
+//        ultmp = gstuSerComData.u2Reg09;     // 高16位
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg10;    // 娴ｏ拷16娴ｏ拷   
+//        ultmp += gstuSerComData.u2Reg10;    // 低16位   
 //    }  
-//    else if(id == 2)    // 鐠愶拷 缁鳖垵顓稿ù渚€鍣�
+//    else if(id == 2)    // 负 累计流量
 //    {
-//        ultmp = gstuSerComData.u2Reg13;     // 妤傦拷16娴ｏ拷
+//        ultmp = gstuSerComData.u2Reg13;     // 高16位
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg14;    // 娴ｏ拷16娴ｏ拷   
+//        ultmp += gstuSerComData.u2Reg14;    // 低16位   
 //    }
-//    else if(id == 3)    // 閸戔偓 缁鳖垵顓稿ù渚€鍣�(閻╁瓨甯撮悽銊︻劀 濞翠線鍣洪崣鏍﹀敩)
+//    else if(id == 3)    // 净 累计流量(直接用正 流量取代)
 //    {
-//        ultmp = gstuSerComData.u2Reg09;     // 妤傦拷16娴ｏ拷
+//        ultmp = gstuSerComData.u2Reg09;     // 高16位
 //        ultmp <<= 16;
-//        ultmp += gstuSerComData.u2Reg10;    // 娴ｏ拷16娴ｏ拷     
+//        ultmp += gstuSerComData.u2Reg10;    // 低16位     
 //    }
 //    else
 //    {
@@ -173,7 +173,7 @@ static  uint16_t        uart3_len1,uart3_len2;
 
 /*******************************************************************************
 * Function Name  : FillFlowData
-* Description    : 婵夘偄鍘栧ù渚€鍣洪梼鐔峰灙閺佺増宓�
+* Description    : 填充流量队列数据
 * Input          : None
 * Output         : None
 * Return         : None
@@ -212,7 +212,7 @@ void FillFlowData(STUNBFLOWDATA *pstu)
     //----------------------------------------------//    
     pstu->mu4WaterNum = DEF_WM_NUM; //gstuWmPara.mu4WaterNum;   
     //----------------------------------------------//    
-    ReadRtcTime(&mRtc);     // 閺冨爼鎸撻弫鐗堝祦         
+    ReadRtcTime(&mRtc);     // 时钟数据         
     pstu->mu1Rtc[0] = mRtc.year;  
     pstu->mu1Rtc[1] = mRtc.month;  
     pstu->mu1Rtc[2] = mRtc.day;  
@@ -220,19 +220,19 @@ void FillFlowData(STUNBFLOWDATA *pstu)
     pstu->mu1Rtc[4] = mRtc.minutes;  
     pstu->mu1Rtc[5] = mRtc.seconds;  
 
-	pstu->mu1DevTyp   = 0x85;                         // Mbus閹崵鍤庣悰锟�
+	pstu->mu1DevTyp   = 0x85;                         // Mbus总线表
     //----------------------------------------------//        
 	for(i=0; i<20; i++)
 	{
-		pstu->mu1DevBat    = CalBatPer();                  // 閻㈢敻鍣洪惂鎯у瀻閿燂拷
+		pstu->mu1DevBat    = CalBatPer();                  // 电量百分?
 		Delay_ms(5);
 	}
     //----------------------------------------------//        
-    // 24鐏忓繑妞傚ù渚€鍣虹拋鏉跨秿  
+    // 24小时流量记录  
 
     //----------------------------------------------//    
     for(i = 0; i < 8; i++) {
-        pstu->mu1Hold[i] = 0;                         // 娣囨繄鏆€鐎涙濡�
+        pstu->mu1Hold[i] = 0;                         // 保留字节
     }
     //----------------------------------------------//
 
@@ -240,7 +240,7 @@ void FillFlowData(STUNBFLOWDATA *pstu)
 
 /*******************************************************************************
 * Function Name  : FillFlowTail
-* Description    : 婵夘偄鍘栧ù渚€鍣洪梼鐔峰灙閺佺増宓�
+* Description    : 填充流量队列数据
 * Input          : None
 * Output         : None
 * Return         : None
@@ -254,15 +254,15 @@ void FillFlowTail(STUNBFLOWDATA *pstu)
 
 
 /*******************************************************************************
-*	閸戯拷 閺侊拷 閸氾拷: InitFlowData
-*	閸旂喕鍏樼拠瀛樻: 閸掓繂顫愰崠鏍ㄦ閿涘本绁﹂柌蹇旀殶閹诡喗妫ら弫锟�
-*	瑜帮拷    閸欙拷: 閺冿拷
-*	鏉╋拷 閸ワ拷 閸婏拷: 閺冿拷  
+*	函 数 名: InitFlowData
+*	功能说明: 初始化时，流量数据无效
+*	形    参: 无
+*	返 回 值: 无  
 *******************************************************************************/
 //void InitFlowData(void)
 //{
 //    uint16_t i ,j;
-//    // 濞翠線鍣洪崚婵嗏偓鐓庡弿闁姤妫ら弫锟�
+//    // 流量初值全都无效
 //    for(i = 0; i < MEMBER_MAX; i++) 
 //	{        
 //        gstuNbFlowData.mu1AddrNData[i][7] = 0x75;    
@@ -273,12 +273,12 @@ void FillFlowTail(STUNBFLOWDATA *pstu)
 //    }
 //    
 
-//    FillFlowData(&gstuNbFlowData);  // 婵夘偄鍘栧ù渚€鍣洪弫鐗堝祦   
+//    FillFlowData(&gstuNbFlowData);  // 填充流量数据   
 //}  
 
 /*******************************************************************************
 * Function Name  : MODBUS_CRC16
-* Description    : modbus 閺嶏繝鐛�
+* Description    : modbus 校验
 * Input          : None
 * Output         : None
 * Return         : None
@@ -302,7 +302,7 @@ static uint16_t MODBUS_CRC16(uint8_t *updata,uint16_t len)
 
 /*******************************************************************************
 * Function Name  : Modbus_3
-* Description    : modbus 鐠囨槒绻戦崶锟�
+* Description    : modbus 读返回
 * Input          : None
 * Output         : None
 * Return         : None
@@ -312,20 +312,20 @@ int16_t Modbus_3(void)
     uint16_t    i,reg_num;            
     uint8_t     *pchar;
     
-    // 鐡掑懓绻冮張鈧径锟�125娑擃亜鐦庣€涙ê娅�    
+    // 超过最大125个寄存器    
     reg_num = gucUartBuf[2];          
        
     if(reg_num == 0 || reg_num > 250) {
         return(-1);
     }
-    // 鐡掑懓绻冮幒銉︽暪缂佹挻鐎担鎾舵畱闂€鍨 
+    // 超过接收结构体的长度 
     if(reg_num > sizeof(STUSERCOMDATA)) {
         return(-1);
     } 
 
     pchar = (uint8_t *)&gstuSerComData;    		
   
-    // 妤傛ü缍嗘担宥勬唉閹癸拷(鐟欙絿鐖滈幒銉︽暪閻ㄥ嫭鏆熼幑锟�) 
+    // 高低位交换(解码接收的数据) 
     for(i = 0; i < reg_num; i += 2)
     {	
         pchar[i]      = gucUartBuf[i + 4];
@@ -345,7 +345,7 @@ static uint16_t gucTxd3Cnt = 0;
 static uint16_t gucRxd3Cnt = 0;
 /*******************************************************************************
 * Function Name  : Flow_Data_Rec
-* Description    : 婢跺嫮鎮婃禒宥M3閸ョ偘绱堕惃鍕殶閹癸拷
+* Description    : 处理从COM3回传的数据
 * Input          : None
 * Output         : None
 * Return         : None
@@ -354,18 +354,18 @@ void Flow_Data_Rec(void)
 {
     uint16_t    ret = 0;    	
     uint16_t    cnt = 0;  
-    // 閹风柉绀夋稉鎻掑經閹恒儲鏁归惃鍕殶閹癸拷
+    // 拷贝串口接收的数据
     cnt =  comMemCpy(COM3,(uint8_t *)gucUartBuf);                                        
-    // 鐠囷拷2娑擃亜鐦庣€涙ê娅掓潻鏂挎礀閻ㄥ嫰鏆辨惔锟�
+    // 读2个寄存器返回的长度
     if(cnt >= 15)                           
     {     		
         ret = MODBUS_CRC16((uint8_t *)gucUartBuf, cnt);  
-        if(ret == 0)    // 閺嶏繝鐛欏锝団€�
+        if(ret == 0)    // 校验正确
         {           
             if(gucUartBuf[0] == 0x68 && gucUartBuf[34] == 0x16)
             {            
                 ret = Modbus_3();     
-                if(ret == 0)        // 鐠囩粯鍨氶崝锟�
+                if(ret == 0)        // 读成功
                 {                  
                     gucRxd3Cnt += 1;                        
                 }
@@ -376,7 +376,7 @@ void Flow_Data_Rec(void)
 
 /*******************************************************************************
 * Function Name  : ProcUart3Rec
-* Description    : 婢跺嫮鎮婃禒宥M3閸ョ偘绱堕惃鍕殶閹癸拷
+* Description    : 处理从COM3回传的数据
 * Input          : None
 * Output         : None
 * Return         : None
@@ -386,7 +386,7 @@ void ProcUart3Rec(void)
     uart3_len2 = GetRxCount(COM3);                           
     if((uart3_len1 > 0) && (uart3_len1 == uart3_len2))	    
     {									
-        if(uart3_len1 <= UART3_RX_BUF_SIZE)         // 鐎涙顑佹稉鏌ユ毐鎼达箓妾洪崚锟�
+        if(uart3_len1 <= UART3_RX_BUF_SIZE)         // 字符串长度限制
         {	                      
             Flow_Data_Rec();									           
         }													
@@ -395,17 +395,17 @@ void ProcUart3Rec(void)
 }
 
 
-// 鐠囩粯绁﹂柌蹇撯偓锟�
-#if HAIFENG == 1    // Mbus閹崵鍤庣悰锟�
+// 读流量值
+#if HAIFENG == 1    // Mbus总线表
 static uint8_t TxdBuf3[22] = {0xFE,0xFE,0xFE,0xFE,0xFE,0xFE
                                 ,0X68,0X10,0X10,0X01,0X40,0X30,0X01,0X33,0X78,0X01,0x03,0x1F,0X90,0X00,0X58,0X16};
-#else               // 婢垛晙淇婇悽鐢殿梿娴狀亣銆�
+#else               // 天信电磁仪表
 static uint8_t TxdBuf3[16] = {0x08, 0x04, 0x10, 0x18, 0x00, 0x14, 0x74, 0x5B};
 #endif
 
 /*******************************************************************************
 * Function Name  : FlowConnect
-* Description    : 鐠囩粯绁﹂柌蹇氼吀閺佺増宓�(01 03 00 08 00 14 C4 07)  
+* Description    : 读流量计数据(01 03 00 08 00 14 C4 07)  
 * Input          : None
 * Output         : None
 * Return         : None
@@ -417,14 +417,14 @@ uint8_t FlowConnect(void)
     uint8_t     i; 
     uint8_t     cnt;    
     //-----------------------------------------//     
-    // 婵″倹鐏夐梻褰掓寭閺嶅洤绻旂悮顐㈩槻娴ｅ稄绱濈拠瀛樻閸欘垯浜掓潻娑樺弳瀵板懏婧€閻樿埖鈧椒绨￠敍灞肩瑝鐟曚焦澧界悰灞绢劃缁嬪绨禍锟�;
+    // 如果闹钟标志被复位，说明可以进入待机状态了，不要执行此程序了;
     if(gstuFlag.mbAlmF == 0) 
     {
         gucTxd3Cnt = 0;
         gucRxd3Cnt = 0;
         return 0;
     }   
-    // 婵″倹鐏夊鑼病娴ｈ儻鍏楴B閸欐垿鈧緤绱濈拠瀛樻485閹崵鍤庨弫鐗堝祦瀹歌尪顕伴崣鏍︾啊,娑撳秷顩﹂幍褑顢戝銈団柤鎼村繋绨�;
+    // 如果已经使能NB发送，说明485总线数据已读取了,不要执行此程序了;
     if(gstuFlag.mbNbEn > 0) 
     {
         gucTxd3Cnt = 0;
@@ -433,14 +433,14 @@ uint8_t FlowConnect(void)
     }  
     //-----------------------------------------//       
   
-    if(gucRxd3Cnt > 0)          // 閸欘亣顩﹂幒銉︽暪閹存劕濮�1濞嗏槄绱濋崡鍐插讲闁偓閸戯拷
+    if(gucRxd3Cnt > 0)          // 只要接收成功1次，即可退出
     {
         ret = 1;
     }
     else
     {
         gucTxd3Cnt += 1;        
-        if(gucTxd3Cnt <= 3)     // 閺堚偓婢舵艾褰傞柅锟�3濞嗭拷
+        if(gucTxd3Cnt <= 3)     // 最多发送3次
         {
             gucRxd3Cnt = 0;
             cnt = gstuMbusFlowData.flow_cnt;
@@ -453,16 +453,16 @@ uint8_t FlowConnect(void)
         else
         {   
             ret = 1;            
-//            gu4FlowTot = FLOW_INVAL;    // 閺冪姵鏅ラ弫鐗堝祦                    
+//            gu4FlowTot = FLOW_INVAL;    // 无效数据                    
         }
     }
     //-----------------------------------------//
-    if(ret > 0)                 // 閹恒儲鏁圭€瑰本鐦�
+    if(ret > 0)                 // 接收完毕
     {               
         gucTxd3Cnt = 0;
         gucRxd3Cnt = 0;
         gstuMbusFlowData.flow_cnt += 1;
-        // 婵夘偄鍘栭弫鐗堝祦
+        // 填充数据
         FillFlowData(&gstuNbFlowData);    
     }   
         
