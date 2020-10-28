@@ -1,5 +1,5 @@
 Dependencies for Project 'project', Target 'Target 1': (DO NOT MODIFY !)
-F (.\main.c)(0x5F96A3DD)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\main.o --omf_browse ..\output\main.crf --depend ..\output\main.d)
+F (.\main.c)(0x5F991600)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\main.o --omf_browse ..\output\main.crf --depend ..\output\main.d)
 I (includes.h)(0x5F86B1FA)
 I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
@@ -49,7 +49,7 @@ I (..\BSP\bsp_Adc.h)(0x5D0B1ADC)
 I (..\BSP\bsp_uart_fifo.h)(0x5F87C30F)
 I (main.h)(0x5F879EA9)
 I (..\APP\app_UART1.h)(0x5F87EABF)
-I (..\APP\app_NBIOT.h)(0x5F90D019)
+I (..\APP\app_NBIOT.h)(0x5F991527)
 I (..\APP\app_NBRSV.h)(0x5F9669A7)
 I (..\APP\app_RS485.h)(0x5F8E8BD6)
 I (..\BSP\APP_EEPROM.h)(0x5E1FF299)
@@ -651,7 +651,7 @@ I (..\FWlib\inc\stm32l1xx_tim.h)(0x4F54BBC1)
 I (..\FWlib\inc\stm32l1xx_usart.h)(0x4F54BBC1)
 I (..\FWlib\inc\stm32l1xx_wwdg.h)(0x4F54BBC1)
 I (..\FWlib\inc\misc.h)(0x4F54BBC0)
-F (..\FWlib\src\stm32l1xx_pwr.c)(0x5F96A5C9)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\stm32l1xx_pwr.o --omf_browse ..\output\stm32l1xx_pwr.crf --depend ..\output\stm32l1xx_pwr.d)
+F (..\FWlib\src\stm32l1xx_pwr.c)(0x5F990606)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\stm32l1xx_pwr.o --omf_browse ..\output\stm32l1xx_pwr.crf --depend ..\output\stm32l1xx_pwr.d)
 I (..\FWlib\inc\stm32l1xx_pwr.h)(0x4F54BBC1)
 I (..\CMSIS\stm32l1xx.h)(0x5F879EBB)
 I (..\CMSIS\core_cm3.h)(0x5534FBDB)
@@ -1186,7 +1186,7 @@ I (..\FWlib\inc\stm32l1xx_tim.h)(0x4F54BBC1)
 I (..\FWlib\inc\stm32l1xx_usart.h)(0x4F54BBC1)
 I (..\FWlib\inc\stm32l1xx_wwdg.h)(0x4F54BBC1)
 I (..\FWlib\inc\misc.h)(0x4F54BBC0)
-F (..\BSP\RTC.c)(0x5F90D820)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\rtc.o --omf_browse ..\output\rtc.crf --depend ..\output\rtc.d)
+F (..\BSP\RTC.c)(0x5F9915FF)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\rtc.o --omf_browse ..\output\rtc.crf --depend ..\output\rtc.d)
 I (..\BSP\bsp.h)(0x5F879B1E)
 I (..\CMSIS\stm32l1xx.h)(0x5F879EBB)
 I (..\CMSIS\core_cm3.h)(0x5534FBDB)
@@ -1328,7 +1328,7 @@ I (..\BSP\bsp_Adc.h)(0x5D0B1ADC)
 I (..\BSP\bsp_uart_fifo.h)(0x5F87C30F)
 I (..\User\main.h)(0x5F879EA9)
 I (..\APP\app_UART1.h)(0x5F87EABF)
-I (..\APP\app_NBIOT.h)(0x5F90D019)
+I (..\APP\app_NBIOT.h)(0x5F991527)
 I (..\APP\app_NBRSV.h)(0x5F9669A7)
 I (..\APP\app_RS485.h)(0x5F8E8BD6)
 I (..\BSP\APP_EEPROM.h)(0x5E1FF299)
@@ -1384,7 +1384,7 @@ I (..\BSP\bsp_Adc.h)(0x5D0B1ADC)
 I (..\BSP\bsp_uart_fifo.h)(0x5F87C30F)
 I (..\User\main.h)(0x5F879EA9)
 I (..\APP\app_UART1.h)(0x5F87EABF)
-I (..\APP\app_NBIOT.h)(0x5F90D019)
+I (..\APP\app_NBIOT.h)(0x5F991527)
 I (..\APP\app_NBRSV.h)(0x5F9669A7)
 I (..\APP\app_RS485.h)(0x5F8E8BD6)
 I (..\BSP\APP_EEPROM.h)(0x5E1FF299)
@@ -1440,13 +1440,13 @@ I (..\BSP\bsp_Adc.h)(0x5D0B1ADC)
 I (..\BSP\bsp_uart_fifo.h)(0x5F87C30F)
 I (..\User\main.h)(0x5F879EA9)
 I (..\APP\app_UART1.h)(0x5F87EABF)
-I (..\APP\app_NBIOT.h)(0x5F90D019)
+I (..\APP\app_NBIOT.h)(0x5F991527)
 I (..\APP\app_NBRSV.h)(0x5F9669A7)
 I (..\APP\app_RS485.h)(0x5F8E8BD6)
 I (..\BSP\APP_EEPROM.h)(0x5E1FF299)
 I (..\User\app_MBUS.h)(0x5F88FC9C)
 I (..\APP\APP_Record.h)(0x5F969A26)
-F (..\APP\app_NBIOT.c)(0x5F96A5BC)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\app_nbiot.o --omf_browse ..\output\app_nbiot.crf --depend ..\output\app_nbiot.d)
+F (..\APP\app_NBIOT.c)(0x5F99180B)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\app_nbiot.o --omf_browse ..\output\app_nbiot.crf --depend ..\output\app_nbiot.d)
 I (..\User\includes.h)(0x5F86B1FA)
 I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
@@ -1496,13 +1496,13 @@ I (..\BSP\bsp_Adc.h)(0x5D0B1ADC)
 I (..\BSP\bsp_uart_fifo.h)(0x5F87C30F)
 I (..\User\main.h)(0x5F879EA9)
 I (..\APP\app_UART1.h)(0x5F87EABF)
-I (..\APP\app_NBIOT.h)(0x5F90D019)
+I (..\APP\app_NBIOT.h)(0x5F991527)
 I (..\APP\app_NBRSV.h)(0x5F9669A7)
 I (..\APP\app_RS485.h)(0x5F8E8BD6)
 I (..\BSP\APP_EEPROM.h)(0x5E1FF299)
 I (..\User\app_MBUS.h)(0x5F88FC9C)
 I (..\APP\APP_Record.h)(0x5F969A26)
-F (..\APP\app_NBRSV.c)(0x5F966D3D)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\app_nbrsv.o --omf_browse ..\output\app_nbrsv.crf --depend ..\output\app_nbrsv.d)
+F (..\APP\app_NBRSV.c)(0x5F96AC8D)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\app_nbrsv.o --omf_browse ..\output\app_nbrsv.crf --depend ..\output\app_nbrsv.d)
 I (..\User\includes.h)(0x5F86B1FA)
 I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
@@ -1552,13 +1552,13 @@ I (..\BSP\bsp_Adc.h)(0x5D0B1ADC)
 I (..\BSP\bsp_uart_fifo.h)(0x5F87C30F)
 I (..\User\main.h)(0x5F879EA9)
 I (..\APP\app_UART1.h)(0x5F87EABF)
-I (..\APP\app_NBIOT.h)(0x5F90D019)
+I (..\APP\app_NBIOT.h)(0x5F991527)
 I (..\APP\app_NBRSV.h)(0x5F9669A7)
 I (..\APP\app_RS485.h)(0x5F8E8BD6)
 I (..\BSP\APP_EEPROM.h)(0x5E1FF299)
 I (..\User\app_MBUS.h)(0x5F88FC9C)
 I (..\APP\APP_Record.h)(0x5F969A26)
-F (..\APP\app_RS485.c)(0x5F9669B2)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\app_rs485.o --omf_browse ..\output\app_rs485.crf --depend ..\output\app_rs485.d)
+F (..\APP\app_RS485.c)(0x5F96AD3B)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\app_rs485.o --omf_browse ..\output\app_rs485.crf --depend ..\output\app_rs485.d)
 I (..\User\includes.h)(0x5F86B1FA)
 I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
@@ -1608,7 +1608,7 @@ I (..\BSP\bsp_Adc.h)(0x5D0B1ADC)
 I (..\BSP\bsp_uart_fifo.h)(0x5F87C30F)
 I (..\User\main.h)(0x5F879EA9)
 I (..\APP\app_UART1.h)(0x5F87EABF)
-I (..\APP\app_NBIOT.h)(0x5F90D019)
+I (..\APP\app_NBIOT.h)(0x5F991527)
 I (..\APP\app_NBRSV.h)(0x5F9669A7)
 I (..\APP\app_RS485.h)(0x5F8E8BD6)
 I (..\BSP\APP_EEPROM.h)(0x5E1FF299)
@@ -1664,7 +1664,7 @@ I (..\BSP\bsp_Adc.h)(0x5D0B1ADC)
 I (..\BSP\bsp_uart_fifo.h)(0x5F87C30F)
 I (..\User\main.h)(0x5F879EA9)
 I (..\APP\app_UART1.h)(0x5F87EABF)
-I (..\APP\app_NBIOT.h)(0x5F90D019)
+I (..\APP\app_NBIOT.h)(0x5F991527)
 I (..\APP\app_NBRSV.h)(0x5F9669A7)
 I (..\APP\app_RS485.h)(0x5F8E8BD6)
 I (..\BSP\APP_EEPROM.h)(0x5E1FF299)
@@ -1720,13 +1720,13 @@ I (..\BSP\bsp_Adc.h)(0x5D0B1ADC)
 I (..\BSP\bsp_uart_fifo.h)(0x5F87C30F)
 I (main.h)(0x5F879EA9)
 I (..\APP\app_UART1.h)(0x5F87EABF)
-I (..\APP\app_NBIOT.h)(0x5F90D019)
+I (..\APP\app_NBIOT.h)(0x5F991527)
 I (..\APP\app_NBRSV.h)(0x5F9669A7)
 I (..\APP\app_RS485.h)(0x5F8E8BD6)
 I (..\BSP\APP_EEPROM.h)(0x5E1FF299)
 I (app_MBUS.h)(0x5F88FC9C)
 I (..\APP\APP_Record.h)(0x5F969A26)
-F (..\APP\APP_Record.c)(0x5F8FDD35)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\app_record.o --omf_browse ..\output\app_record.crf --depend ..\output\app_record.d)
+F (..\APP\APP_Record.c)(0x5F99105E)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\User -I..\FWlib\inc -I..\FWlib\src -I..\CMSIS -I..\BSP -I..\APP-I D:\项目列表\嵌入式开发\STM32\NB总线表\User\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DSTM32LXX_HD-o ..\output\app_record.o --omf_browse ..\output\app_record.crf --depend ..\output\app_record.d)
 I (..\User\includes.h)(0x5F86B1FA)
 I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
@@ -1776,7 +1776,7 @@ I (..\BSP\bsp_Adc.h)(0x5D0B1ADC)
 I (..\BSP\bsp_uart_fifo.h)(0x5F87C30F)
 I (..\User\main.h)(0x5F879EA9)
 I (..\APP\app_UART1.h)(0x5F87EABF)
-I (..\APP\app_NBIOT.h)(0x5F90D019)
+I (..\APP\app_NBIOT.h)(0x5F991527)
 I (..\APP\app_NBRSV.h)(0x5F9669A7)
 I (..\APP\app_RS485.h)(0x5F8E8BD6)
 I (..\BSP\APP_EEPROM.h)(0x5E1FF299)

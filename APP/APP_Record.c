@@ -111,18 +111,28 @@ void SaveRecord(STUNBFLOWDATA *pstu)
 {
     uint32_t    addr = 0;
     uint16_t    len = 0;
+	uint8_t		i = 0;
    //--------------------------//      
     ReadRcdHead(); 
-	gstuRcdHead.mu1PageIn += 1;
-	if(gstuRcdHead.mu1PageIn > 8)
+//	gstuRcdHead.mu1PageIn += 1;
+//	if(gstuRcdHead.mu1PageIn > 8)
+//	{
+//		gstuRcdHead.mu1PageIn = 8;
+//	}
+	for(i=0; i < 8; i ++)
 	{
-		gstuRcdHead.mu1PageIn = 8;
+		if(gstuRcdHead.mu1Rsv[i] == 0)
+		{
+			gstuRcdHead.mu1Rsv[i] = 1;
+			SaveRcdHead(&gstuRcdHead);
+			len = sizeof(STUNBFLOWDATA);
+			memcpy(erom,(uint8_t *)pstu, len);  
+			addr = RCRD_ADR2 + (i*256);
+			break;
+		}
 	}
-	gstuRcdHead.mu1Rsv[gstuRcdHead.mu1PageIn - 1] = 1;
-	SaveRcdHead(&gstuRcdHead);
-	len = sizeof(STUNBFLOWDATA);
-	memcpy(erom,(uint8_t *)pstu, len);  
-	addr = RCRD_ADR2 + ((gstuRcdHead.mu1PageIn - 1)*256);
+	
+
 	EepWr(addr, (uint8_t *)erom, len);    // 写入eep
 }
 
@@ -154,7 +164,7 @@ uint8_t ReadRecord(STUNBFLOWDATA *pstu)
 void ChgRcdHead(uint8_t u4id)
 {
     gstuRcdHead.mu1Rsv[u4id - 1] = 0;
-	gstuRcdHead.mu1PageIn -= 1;
+	gstuRcdHead.mu1Mark = MARK_RCRD;
 	SaveRcdHead(&gstuRcdHead);     		
 }  
 

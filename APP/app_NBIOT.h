@@ -15,7 +15,7 @@
 
 
 #define     NBTRANS_STEP                16              // NB????ID
-#define     RETRANS_MAX                 2               //重传最大次数
+#define     RETRANS_MAX                 2              //重传最大次数
 
 #pragma pack (1)
 typedef struct {

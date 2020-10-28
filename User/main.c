@@ -121,7 +121,7 @@ void SleepTime(uint8_t cnt)
 	{
 		ReadRtcTime(&mRtc);
 		gstuWmPara.mu1Tr_Ho = mRtc.hours + 2;  //2小时后唤醒
-		gstuWmPara.mu1Tr_Mi = mRtc.minutes + 1;
+		gstuWmPara.mu1Tr_Mi = mRtc.minutes;
 		gstuWmPara.mu1Tr_Se = mRtc.seconds;
 		if(gstuWmPara.mu1Tr_Ho > 23)
 		{
@@ -137,7 +137,7 @@ void SleepTime(uint8_t cnt)
 	{
 		ReadRtcTime(&mRtc);
 		gstuWmPara.mu1Tr_Ho = mRtc.hours + 6; //6小时后唤醒
-		gstuWmPara.mu1Tr_Mi = mRtc.minutes + 1;
+		gstuWmPara.mu1Tr_Mi = mRtc.minutes;
 		gstuWmPara.mu1Tr_Se = mRtc.seconds;
 		if(gstuWmPara.mu1Tr_Ho > 23)
 		{

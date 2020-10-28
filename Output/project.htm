@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\Output\project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\Output\project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050169: Last Updated: Mon Oct 26 18:32:45 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050169: Last Updated: Wed Oct 28 15:04:45 2020
 <BR><P>
 <H3>Maximum Stack Usage =        640 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -144,7 +144,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32l1xx_mdp.o(RESET)
 </UL>
-<P><STRONG><a name="[4d]"></a>SleepTime</STRONG> (Thumb, 242 bytes, Stack size 32 bytes, main.o(.text))
+<P><STRONG><a name="[4d]"></a>SleepTime</STRONG> (Thumb, 238 bytes, Stack size 32 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = SleepTime &rArr; ReadRtcTime &rArr; RTC_GetDate
 </UL>
 <BR>[Calls]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadRtcTime
@@ -1786,7 +1786,7 @@ Global Symbols
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWR_RTCAccessCmd
 </UL>
 
-<P><STRONG><a name="[ab]"></a>RTC_AlartSet</STRONG> (Thumb, 166 bytes, Stack size 24 bytes, rtc.o(.text))
+<P><STRONG><a name="[ab]"></a>RTC_AlartSet</STRONG> (Thumb, 156 bytes, Stack size 24 bytes, rtc.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = RTC_AlartSet &rArr; RTC_SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_ClearITPendingBit
@@ -1852,13 +1852,13 @@ Global Symbols
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_Time
 </UL>
 
-<P><STRONG><a name="[f7]"></a>RTC_TimeShow</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, rtc.o(.text), UNUSED)
+<P><STRONG><a name="[f7]"></a>RTC_TimeShow</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, rtc.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_GetTime
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
-<P><STRONG><a name="[f9]"></a>RTC_DateShow</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, rtc.o(.text), UNUSED)
+<P><STRONG><a name="[f9]"></a>RTC_DateShow</STRONG> (Thumb, 102 bytes, Stack size 16 bytes, rtc.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_GetDate
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -2225,8 +2225,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_Connect
 </UL>
 
-<P><STRONG><a name="[5f]"></a>NB_Connect</STRONG> (Thumb, 844 bytes, Stack size 16 bytes, app_nbiot.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 148<LI>Call Chain = NB_Connect &rArr; NB_AT_NSOCO &rArr; comHex2Str &rArr; comSendBuf &rArr; UartSend &rArr; USART_ITConfig
+<P><STRONG><a name="[5f]"></a>NB_Connect</STRONG> (Thumb, 848 bytes, Stack size 16 bytes, app_nbiot.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = NB_Connect &rArr; SaveRecord &rArr; SaveRcdHead &rArr; SaveHead &rArr; EepWr &rArr; BSP_EE_WriteBytes &rArr; i2c_SendByte &rArr; i2c_Delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
@@ -2243,7 +2243,7 @@ Global Symbols
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
 
-<P><STRONG><a name="[60]"></a>NB_DataUpload</STRONG> (Thumb, 302 bytes, Stack size 16 bytes, app_nbiot.o(.text))
+<P><STRONG><a name="[60]"></a>NB_DataUpload</STRONG> (Thumb, 300 bytes, Stack size 16 bytes, app_nbiot.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 164<LI>Call Chain = NB_DataUpload &rArr; Nb_SendAsc &rArr; NbSendStr &rArr; comHex2Str &rArr; comSendBuf &rArr; UartSend &rArr; USART_ITConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_ms
@@ -2411,8 +2411,8 @@ Global Symbols
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ChgRcdHead
 </UL>
 
-<P><STRONG><a name="[127]"></a>SaveRecord</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, app_record.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = SaveRecord &rArr; SaveRcdHead &rArr; SaveHead &rArr; EepWr &rArr; BSP_EE_WriteBytes &rArr; i2c_SendByte &rArr; i2c_Delay
+<P><STRONG><a name="[127]"></a>SaveRecord</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, app_record.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = SaveRecord &rArr; SaveRcdHead &rArr; SaveHead &rArr; EepWr &rArr; BSP_EE_WriteBytes &rArr; i2c_SendByte &rArr; i2c_Delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRcdHead
@@ -2431,7 +2431,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NB_DataUpload
 </UL>
 
-<P><STRONG><a name="[12e]"></a>ChgRcdHead</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, app_record.o(.text))
+<P><STRONG><a name="[12e]"></a>ChgRcdHead</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, app_record.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = ChgRcdHead &rArr; SaveRcdHead &rArr; SaveHead &rArr; EepWr &rArr; BSP_EE_WriteBytes &rArr; i2c_SendByte &rArr; i2c_Delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveRcdHead

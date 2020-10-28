@@ -17,7 +17,7 @@
 #define     NBTR_DELAY2                 200             // NB上传延时2
 #define     NBTR_DELAY3                 300             // NB上传延时3
 //------------------------------------------------------------------------------//
-#define     NBERRCNT_MAX                3              // nb模块错误次数
+#define     NBERRCNT_MAX                10              // nb模块错误次数
 #define     NBRECONN_MAX                2               // nb重新连接次数
 #define     USENDMAX                    320             // NB上传的字符数  
 //------------------------------------------------------------------------------//  
@@ -326,7 +326,7 @@ uint8_t NB_Connect(void)
             }
             gstuFlag.mbNbEn = 0;    // 清楚NB使能标志           
 #if DBGMODE 
-            printf("NB Connect 3 Times.\r\n");               
+            printf("NB Connect %d Times.\r\n",NBRECONN_MAX);               
 #endif           
             return 0;
         }            
@@ -402,7 +402,7 @@ uint8_t NB_Connect(void)
             ret = 0;
             if(gucCsqValue < 40)    // 判断信号强度
             {  
-                if(gucCsqValue > 10) {
+                if(gucCsqValue > 0) {
                     ret = 1;              
                 }
             }                                                       
@@ -665,12 +665,11 @@ uint8_t NB_DataUpload(void)
             }
 
 			
-            ret = Nb_SendAsc((uint8_t *)&gstuNbFlowData,    sizeof(STUNBFLOWDATA),  pw,     NBTR_DELAY3);
+            Nb_SendAsc((uint8_t *)&gstuNbFlowData,    sizeof(STUNBFLOWDATA),  pw,     NBTR_DELAY3);
             if(gstuNbSta.nbrxd)
             {
                 ChgRcdHead(record_point);
                 gstuNbSta.nbrxd = 0;
-//				ret = 1;
                 *pw = 0;
             }   
             break;   

@@ -164,7 +164,7 @@ void RTC_AlartSet(void)
     RTC_AlarmStructure.RTC_AlarmDateWeekDaySel  = RTC_AlarmDateWeekDaySel_Date; // 按日期    
     
     RTC_AlarmStructure.RTC_AlarmMask    = RTC_AlarmMask_DateWeekDay;            // 日期不考虑匹配
-#if 1
+#if 0
     RTC_AlarmStructure.RTC_AlarmMask    |= RTC_AlarmMask_Hours;                 // 小时不考虑匹配
 #endif
      
